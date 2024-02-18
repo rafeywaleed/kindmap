@@ -1,0 +1,97 @@
+import 'dart:async';
+import 'notifier/dt_dir_dst_preview_post_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:kindmap/core/app_export.dart';
+import 'package:kindmap/widgets/app_bar/appbar_leading_image.dart';
+import 'package:kindmap/widgets/app_bar/appbar_subtitle_six.dart';
+import 'package:kindmap/widgets/app_bar/appbar_title_image.dart';
+import 'package:kindmap/widgets/app_bar/custom_app_bar.dart';
+
+class DtDirDstPreviewPostScreen extends ConsumerStatefulWidget {
+  const DtDirDstPreviewPostScreen({Key? key}) : super(key: key);
+
+  @override
+  DtDirDstPreviewPostScreenState createState() =>
+      DtDirDstPreviewPostScreenState();
+}
+
+// ignore_for_file: must_be_immutable
+class DtDirDstPreviewPostScreenState
+    extends ConsumerState<DtDirDstPreviewPostScreen> {
+  Completer<GoogleMapController> googleMapController = Completer();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+            backgroundColor: appTheme.blueGray90001,
+            appBar: _buildAppBar(context),
+            body: SizedBox(
+                height: 749.v,
+                width: double.maxFinite,
+                child: Stack(alignment: Alignment.center, children: [
+                  CustomImageView(
+                      imagePath: ImageConstant.imgDbg750x375,
+                      height: 750.v,
+                      width: 375.h,
+                      alignment: Alignment.center),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.h),
+                          child:
+                              Column(mainAxisSize: MainAxisSize.min, children: [
+                            _buildMap(context),
+                            SizedBox(height: 54.v),
+                            Align(
+                                alignment: Alignment.centerRight,
+                                child: Text("lbl_report".tr,
+                                    style: CustomTextStyles.bodyLargeGray40004))
+                          ])))
+                ]))));
+  }
+
+  /// Section Widget
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return CustomAppBar(
+        leadingWidth: 34.h,
+        leading: AppbarLeadingImage(
+            imagePath: ImageConstant.imgArrowLeftGray40003,
+            margin: EdgeInsets.only(left: 14.h, top: 10.v, bottom: 16.v),
+            onTap: () {
+              onTapArrowLeft(context);
+            }),
+        centerTitle: true,
+        title: Row(children: [
+          AppbarTitleImage(imagePath: ImageConstant.imgKindmapJustLogo),
+          AppbarSubtitleSix(
+              text: "lbl_kindmap".tr,
+              margin: EdgeInsets.only(top: 7.v, bottom: 1.v))
+        ]));
+  }
+
+  /// Section Widget
+  Widget _buildMap(BuildContext context) {
+    return SizedBox(
+        height: 657.v,
+        width: 358.h,
+        child: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: CameraPosition(
+                target: LatLng(37.43296265331129, -122.08832357078792),
+                zoom: 14.4746),
+            onMapCreated: (GoogleMapController controller) {
+              googleMapController.complete(controller);
+            },
+            zoomControlsEnabled: false,
+            zoomGesturesEnabled: false,
+            myLocationButtonEnabled: false,
+            myLocationEnabled: false));
+  }
+
+  /// Navigates back to the previous screen.
+  onTapArrowLeft(BuildContext context) {
+    NavigatorService.goBack();
+  }
+}

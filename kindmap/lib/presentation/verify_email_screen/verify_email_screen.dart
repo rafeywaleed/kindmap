@@ -74,6 +74,7 @@ class VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                                     controller: ref
                                         .watch(verifyEmailNotifier)
                                         .emailController,
+                                    hintText: "E-mail address",
                                     textInputAction: TextInputAction.done);
                               })),
                           SizedBox(height: 41.v),

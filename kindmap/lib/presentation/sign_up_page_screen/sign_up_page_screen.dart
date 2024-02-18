@@ -74,19 +74,21 @@ class SignUpPageScreenState extends ConsumerState<SignUpPageScreen> {
                       SizedBox(height: 12.v),
                       _buildFullName(context),
                       SizedBox(height: 23.v),
-                      Container(
-                          height: 48.v,
-                          width: 326.h,
-                          decoration: BoxDecoration(
-                              color: appTheme.whiteA70001,
-                              borderRadius: BorderRadius.circular(20.h),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: theme.colorScheme.primary,
-                                    spreadRadius: 2.h,
-                                    blurRadius: 2.h,
-                                    offset: Offset(10, 10))
-                              ])),
+                      _buildEmail(context),
+
+                      // Container(
+                      //     height: 48.v,
+                      //     width: 326.h,
+                      //     decoration: BoxDecoration(
+                      //         color: appTheme.whiteA70001,
+                      //         borderRadius: BorderRadius.circular(20.h),
+                      //         boxShadow: [
+                      //           BoxShadow(
+                      //               color: theme.colorScheme.primary,
+                      //               spreadRadius: 2.h,
+                      //               blurRadius: 2.h,
+                      //               offset: Offset(10, 10))
+                      //         ])),
                       SizedBox(height: 23.v),
                       _buildPassword(context),
                       SizedBox(height: 35.v),
@@ -107,7 +109,21 @@ class SignUpPageScreenState extends ConsumerState<SignUpPageScreen> {
         padding: EdgeInsets.only(left: 7.h),
         child: Consumer(builder: (context, ref, _) {
           return CustomTextFormField(
-              controller: ref.watch(signUpPageNotifier).fullNameController);
+            controller: ref.watch(signUpPageNotifier).fullNameController,
+            hintText: "Full Name",
+          );
+        }));
+  }
+
+  /// Section Widget
+  Widget _buildEmail(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(left: 7.h),
+        child: Consumer(builder: (context, ref, _) {
+          return CustomTextFormField(
+            controller: ref.watch(signUpPageNotifier).emailController,
+            hintText: "Email",
+          );
         }));
   }
 
@@ -119,6 +135,7 @@ class SignUpPageScreenState extends ConsumerState<SignUpPageScreen> {
           return CustomTextFormField(
               controller: ref.watch(signUpPageNotifier).passwordController,
               textInputAction: TextInputAction.done,
+              hintText: "Password",
               obscureText: true);
         }));
   }

@@ -68,9 +68,11 @@ class NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
                               padding: EdgeInsets.only(right: 5.h),
                               child: Consumer(builder: (context, ref, _) {
                                 return CustomTextFormField(
-                                    controller: ref
-                                        .watch(newPasswordNotifier)
-                                        .newPasswordAgainController);
+                                  controller: ref
+                                      .watch(newPasswordNotifier)
+                                      .newPasswordAgainController,
+                                  hintText: "New Password",
+                                );
                               })),
                           SizedBox(height: 29.v),
                           Padding(
@@ -80,6 +82,7 @@ class NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
                                     controller: ref
                                         .watch(newPasswordNotifier)
                                         .newPasswordController,
+                                    hintText: "Confirm Password",
                                     textInputAction: TextInputAction.done,
                                     obscureText: true);
                               })),

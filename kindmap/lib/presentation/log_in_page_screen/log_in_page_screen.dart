@@ -102,7 +102,9 @@ class LogInPageScreenState extends ConsumerState<LogInPageScreen> {
         padding: EdgeInsets.only(left: 5.h, right: 10.h),
         child: Consumer(builder: (context, ref, _) {
           return CustomTextFormField(
-              controller: ref.watch(logInPageNotifier).emailFieldController);
+            controller: ref.watch(logInPageNotifier).emailFieldController,
+            hintText: "E-mail",
+          );
         }));
   }
 
@@ -113,6 +115,7 @@ class LogInPageScreenState extends ConsumerState<LogInPageScreen> {
         child: Consumer(builder: (context, ref, _) {
           return CustomTextFormField(
               controller: ref.watch(logInPageNotifier).passwordFieldController,
+              hintText: "Password",
               textInputAction: TextInputAction.done,
               obscureText: true);
         }));

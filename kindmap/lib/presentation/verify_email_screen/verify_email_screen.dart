@@ -94,7 +94,7 @@ class VerifyEmailScreenState extends ConsumerState<VerifyEmailScreen> {
                                   textAlign: TextAlign.center,
                                   style: CustomTextStyles
                                       .headlineSmallDeeporangeA400))
-                        ])))));
+                        ],),),),),);
   }
 
   /// Navigates to the newPasswordScreen when the action is triggered.

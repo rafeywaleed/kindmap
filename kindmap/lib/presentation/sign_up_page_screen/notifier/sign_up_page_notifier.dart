@@ -8,6 +8,7 @@ final signUpPageNotifier =
     StateNotifierProvider<SignUpPageNotifier, SignUpPageState>((ref) =>
         SignUpPageNotifier(SignUpPageState(
             fullNameController: TextEditingController(),
+            emailController: TextEditingController(),
             passwordController: TextEditingController(),
             signUpPageModelObj: SignUpPageModel())));
 

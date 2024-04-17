@@ -1,4 +1,6 @@
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
+import 'package:kindmap/new_Auth/nAuth.dart';
+import 'package:kindmap/new_Auth/user.dart';
 import 'package:kindmap/themes/kmTheme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,8 +20,17 @@ import 'package:provider/provider.dart';
 //import 'package:km/IntroScreens/Introscreen.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: 'AIzaSyBBIuwNrITwg_fmeIkMGz2CZbkoNVKvP4g',
+      appId: '1:403643543889:android:d9f0b2bf35c12e2d3ae370',
+      messagingSenderId: '403643543889',
+      projectId: 'kindmap-999d3',
+    ),
+  );
+
   runApp(ChangeNotifierProvider(
     create: (_) => ThemeProvider(),
     child: MyApp(),
@@ -50,7 +61,22 @@ class _MyAppState extends State<MyApp> {
       // home: (FirebaseAuth.instance.currentUser != null)
       //     ? HomePage()
       //     : AuthenticationPage(),
-      home: AuthenticationPage(),
+
+      // home: AuthenticationPage(),
+
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            // User is logged in, navigate to the home page or another screen.
+            return HomePage();
+          } else {
+            // User is not logged in, show the login form or onboarding screen.
+            return LoginForm();
+          }
+        },
+      ),
+
       // themeMode: ThemeMode.dark,
       // darkTheme: CustomTheme.darkBase,
       // theme: CustomTheme.lightBase,

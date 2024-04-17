@@ -1,0 +1,134 @@
+{
+  "project_info": {
+    "project_number": "403643543889",
+    "project_id": "kindmap-999d3",
+    "storage_bucket": "kindmap-999d3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403643543889:android:d9f0b2bf35c12e2d3ae370",
+        "android_client_info": {
+          "package_name": "com.example.google_maps_in_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403643543889-fq8kntns902i68jkjhfsklgi7232e09u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBIuwNrITwg_fmeIkMGz2CZbkoNVKvP4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403643543889-4kfm4fnhafv7sgil3aoggv7n16bljiv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403643543889-2ut3fdkup7dguqstr6hgmcsda6lmv4v3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.googleMapsInFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403643543889:android:1305182e5a9ca9593ae370",
+        "android_client_info": {
+          "package_name": "com.example.kindmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403643543889-jhqrmo86qep0sjurdctelui62e14f111.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kindmap",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "403643543889-fq8kntns902i68jkjhfsklgi7232e09u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBIuwNrITwg_fmeIkMGz2CZbkoNVKvP4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403643543889-4kfm4fnhafv7sgil3aoggv7n16bljiv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403643543889-2ut3fdkup7dguqstr6hgmcsda6lmv4v3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.googleMapsInFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403643543889:android:df921bc8fa3c8a3a3ae370",
+        "android_client_info": {
+          "package_name": "com.mycompany.kindmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403643543889-jmt8pti90c45b09oj23vacr1c5mfuarp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.kindmap",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "403643543889-fq8kntns902i68jkjhfsklgi7232e09u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBIuwNrITwg_fmeIkMGz2CZbkoNVKvP4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403643543889-4kfm4fnhafv7sgil3aoggv7n16bljiv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "403643543889-2ut3fdkup7dguqstr6hgmcsda6lmv4v3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.googleMapsInFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

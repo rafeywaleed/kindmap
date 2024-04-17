@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindmap/Auth/Authentication.dart';
+import 'package:kindmap/new_Auth/user.dart';
 import 'package:provider/provider.dart';
 
 import 'Model_Settings.dart';
@@ -369,6 +370,6 @@ class _SettingsPageState extends State<SettingsPage> {
     await FirebaseAuth.instance.signOut();
     Navigator.popUntil(context as BuildContext, (route) => route.isFirst);
     Navigator.pushReplacement(context as BuildContext,
-        MaterialPageRoute(builder: (context) => AuthenticationPage()));
+        MaterialPageRoute(builder: (context) => LoginForm()));
   }
 }

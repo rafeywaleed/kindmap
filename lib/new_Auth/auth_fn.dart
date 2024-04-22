@@ -59,6 +59,9 @@ class AuthServices {
       await FirestoreServices.saveUser(name, email, userCredential.user!.uid);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Registration Successful')));
+
+      // Navigate to IntroScreens after successful sign-up
+      Navigator.pushReplacementNamed(context, 'IntroScreens');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -81,6 +84,9 @@ class AuthServices {
 
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('You are Logged in')));
+
+      // Navigate to HomePage after successful sign-in
+      Navigator.pushReplacementNamed(context, 'HomePage');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(

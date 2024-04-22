@@ -883,7 +883,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0, -0.38),
+                                alignment: AlignmentDirectional(-0.93, -0.81),
                                 child: Padding(
                                   padding: EdgeInsets.all(6),
                                   child: Container(
@@ -903,11 +903,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             .pushNamed('Donate');
                                       },
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
-                                            alignment: AlignmentDirectional(
-                                                -0.93, -0.81),
+                                            alignment:
+                                                AlignmentDirectional(-1.0, 0.0),
                                             child: Text(
                                               'Donate',
                                               style: FlutterFlowTheme.of(

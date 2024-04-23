@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0, 0),
-          end: Offset(0, 0),
+          begin: const Offset(0, 0),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             height: 933,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).tertiary,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(0),
                 bottomRight: Radius.circular(0),
                 topLeft: Radius.circular(10),
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           'assets/images/img_menubar.png',
                         ).image,
                       ),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(0),
                         bottomRight: Radius.circular(0),
                         topLeft: Radius.circular(10),
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.11, 0),
+                  alignment: const AlignmentDirectional(0.11, 0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).primaryBackground,
                           boxShadow: [
-                            BoxShadow(
+                            const BoxShadow(
                               blurRadius: 0,
                               color: Color(0x33000000),
                               offset: Offset(
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               ),
                             )
                           ],
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(0),
                             bottomRight: Radius.circular(0),
                             topLeft: Radius.circular(10),
@@ -148,27 +148,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(14),
+                                  padding: const EdgeInsets.all(14),
                                   child: Container(
                                     width: 120,
                                     height: 120,
                                     clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
                                     child: Image.asset(
                                       'assets/images/deerlogo.jpg',
                                       fit: BoxFit.cover,
-                                      alignment: Alignment(-1, 0),
+                                      alignment: const Alignment(-1, 0),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1, 0),
+                              alignment: const AlignmentDirectional(-1, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     18, 0, 0, 10),
                                 child: Text(
                                   'User name here',
@@ -196,11 +196,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 .secondaryBackground,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          alignment: AlignmentDirectional(-1, 0),
+                          alignment: const AlignmentDirectional(-1, 0),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -232,7 +233,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: Slidable(
                           endActionPane: ActionPane(
                             motion: const ScrollMotion(),
@@ -272,7 +274,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: ListTile(
                           leading: Icon(
                             Icons.info,
@@ -306,16 +309,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1, 0),
+                        alignment: const AlignmentDirectional(-1, 0),
                         child: Padding(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           child: Container(
                             width: 87,
                             height: 50,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context).lineColor,
                               boxShadow: [
-                                BoxShadow(
+                                const BoxShadow(
                                   blurRadius: 8,
                                   color: Colors.black,
                                   offset: Offset(
@@ -332,18 +335,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(2),
+                              padding: const EdgeInsets.all(2),
                               child: Stack(
-                                alignment: AlignmentDirectional(0, 0),
+                                alignment: const AlignmentDirectional(0, 0),
                                 children: [
                                   if (Theme.of(context).brightness ==
                                       Brightness.light)
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(-0.74, -0.2),
+                                      alignment: const AlignmentDirectional(
+                                          -0.74, -0.2),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 6, 0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0, 0, 6, 0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -367,11 +370,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   if (Theme.of(context).brightness ==
                                       Brightness.dark)
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(0.70, 0.25),
+                                      alignment: const AlignmentDirectional(
+                                          0.70, 0.25),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            5, 0, 0, 0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(5, 0, 0, 0),
                                         child: InkWell(
                                           splashColor: Colors.transparent,
                                           focusColor: Colors.transparent,
@@ -593,7 +596,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1, 0),
+            alignment: const AlignmentDirectional(-1, 0),
             child: Text(
               'KindMap',
               textAlign: TextAlign.start,
@@ -616,13 +619,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: AlignmentDirectional(0, 0),
+                alignment: const AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                   child: Container(
                     decoration: BoxDecoration(
                       boxShadow: [
-                        BoxShadow(
+                        const BoxShadow(
                           blurRadius: 0,
                           color: Color(0x33000000),
                           offset: Offset(
@@ -639,7 +642,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                        'assets/images/Screenshot_2024-02-25_111208.png',
+                        'assets/images/map.png',
                         width: 311,
                         height: 228,
                         fit: BoxFit.cover,
@@ -651,15 +654,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0, 0),
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Container(
                         height: 60,
                         decoration: BoxDecoration(
                           color: FlutterFlowTheme.of(context).error,
                           boxShadow: [
-                            BoxShadow(
+                            const BoxShadow(
                               blurRadius: 0,
                               color: Color(0x33000000),
                               offset: Offset(
@@ -681,9 +684,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Padding(
-                                    padding: EdgeInsets.all(14),
+                                    padding: const EdgeInsets.all(14),
                                     child: Text(
                                       'Spot people nearby',
                                       style: FlutterFlowTheme.of(context)
@@ -700,10 +703,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0, 0),
+                                  alignment: const AlignmentDirectional(0, 0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 9),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 9),
                                     child: Icon(
                                       Icons.share_location,
                                       color: FlutterFlowTheme.of(context)
@@ -738,16 +742,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(-1, 0),
+                alignment: const AlignmentDirectional(-1, 0),
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Container(
                     width: 425,
                     height: 285,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       boxShadow: [
-                        BoxShadow(
+                        const BoxShadow(
                           blurRadius: 0,
                           color: Color(0x33000000),
                           offset: Offset(
@@ -758,200 +762,230 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ],
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Align(
-                                alignment: AlignmentDirectional(0, -1.3),
-                                child: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Container(
-                                    width: 376,
-                                    height: 79,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Align(
-                                          alignment: AlignmentDirectional(
-                                              -0.93, -0.81),
-                                          child: Text(
-                                            'Spot an area',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 25,
-                                                  letterSpacing: 0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: AlignmentDirectional(
-                                              -0.15, -0.55),
-                                          child: Text(
-                                            'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: Color(0xFF404647),
-                                                  fontSize: 11,
-                                                  letterSpacing: 0,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(0, -0.38),
-                                child: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Container(
-                                    width: 376,
-                                    height: 88,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        Navigator.of(context)
-                                            .pushNamed('NotifyMe');
-                                      },
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Align(
-                                            alignment: AlignmentDirectional(
-                                                -0.93, -0.81),
-                                            child: Text(
-                                              'Notify Me',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 25,
-                                                    letterSpacing: 0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                    child: SingleChildScrollView(
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            decoration: const BoxDecoration(),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Align(
+                                  alignment:
+                                      const AlignmentDirectional(0, -1.3),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6),
+                                    child: Container(
+                                      width: 376,
+                                      height: 79,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: const Text(
+                                                      'spot an area')));
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Align(
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      -0.93, -0.81),
+                                              child: Text(
+                                                'Spot an area',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 25,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                              ),
                                             ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentDirectional(
-                                                -0.15, -0.55),
-                                            child: Text(
-                                              'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Color(0xFF404647),
-                                                    fontSize: 12,
-                                                    letterSpacing: 0,
-                                                  ),
+                                            Align(
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      -0.15, -0.55),
+                                              child: Text(
+                                                'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: const Color(
+                                                              0xFF404647),
+                                                          fontSize: 11,
+                                                          letterSpacing: 0,
+                                                        ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(-0.93, -0.81),
-                                child: Padding(
-                                  padding: EdgeInsets.all(6),
-                                  child: Container(
-                                    width: 376,
-                                    height: 88,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                    ),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        Navigator.of(context)
-                                            .pushNamed('Donate');
-                                      },
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(-1.0, 0.0),
-                                            child: Text(
-                                              'Donate',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 25,
-                                                    letterSpacing: 0,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                Align(
+                                  alignment:
+                                      const AlignmentDirectional(0, -0.38),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6),
+                                    child: Container(
+                                      width: 376,
+                                      height: 88,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          Navigator.of(context)
+                                              .pushNamed('NotifyMe');
+                                        },
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Align(
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      -0.93, -0.81),
+                                              child: Text(
+                                                'Notify Me',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 25,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                              ),
                                             ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentDirectional(
-                                                -0.15, -0.55),
-                                            child: Text(
-                                              'You can also donate',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Color(0xFF404647),
-                                                    fontSize: 12,
-                                                    letterSpacing: 0,
-                                                  ),
+                                            Align(
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      -0.15, -0.55),
+                                              child: Text(
+                                                'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: const Color(
+                                                              0xFF404647),
+                                                          fontSize: 12,
+                                                          letterSpacing: 0,
+                                                        ),
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                Align(
+                                  alignment:
+                                      const AlignmentDirectional(-0.93, -0.81),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6),
+                                    child: Container(
+                                      width: 376,
+                                      height: 88,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          Navigator.of(context)
+                                              .pushNamed('Donate');
+                                        },
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Align(
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      -1.0, 0.0),
+                                              child: Text(
+                                                'Donate',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 25,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment:
+                                                  const AlignmentDirectional(
+                                                      -0.15, -0.55),
+                                              child: Text(
+                                                'You can also donate',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: const Color(
+                                                              0xFF404647),
+                                                          fontSize: 12,
+                                                          letterSpacing: 0,
+                                                        ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -23,7 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-    options: FirebaseOptions(
+    options: const FirebaseOptions(
       apiKey: 'AIzaSyBBIuwNrITwg_fmeIkMGz2CZbkoNVKvP4g',
       appId: '1:403643543889:android:d9f0b2bf35c12e2d3ae370',
       messagingSenderId: '403643543889',
@@ -33,7 +33,7 @@ void main() async {
 
   runApp(ChangeNotifierProvider(
     create: (_) => ThemeProvider(),
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'KindMap',
+      debugShowCheckedModeBanner: false,
       // home: (FirebaseAuth.instance.currentUser != null)
       //     ? HomePage()
       //     : AuthenticationPage(),
@@ -69,10 +70,10 @@ class _MyAppState extends State<MyApp> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             // User is logged in, navigate to the home page or another screen.
-            return HomePage();
+            return const HomePage();
           } else {
             // User is not logged in, show the login form or onboarding screen.
-            return LoginForm();
+            return const LoginForm();
           }
         },
       ),
@@ -85,13 +86,13 @@ class _MyAppState extends State<MyApp> {
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
 
       routes: {
-        'Auth': (context) => AuthenticationPage(),
-        'Home': (context) => HomePage(),
+        'Auth': (context) => const AuthenticationPage(),
+        'Home': (context) => const HomePage(),
         //'Pin': (context) => PinPage(imageData: ,),
         'Camera': (context) => CameraPage(),
-        'Settings': (context) => SettingsPage(),
-        'Profile': (context) => ProfilePage(),
-        'IntroScreens': (context) => IntroScreens(),
+        'Settings': (context) => const SettingsPage(),
+        'Profile': (context) => const ProfilePage(),
+        'IntroScreens': (context) => const IntroScreens(),
       },
     );
   }

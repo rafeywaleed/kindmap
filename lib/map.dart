@@ -60,7 +60,8 @@ class _MapsState extends State<Maps> {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition();
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
   }
 
   Future getLocation() async {

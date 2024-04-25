@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,7 +63,7 @@ class _LoginFormState extends State<LoginForm> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Row(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Align(
                           alignment: AlignmentDirectional(-1, 0),
@@ -72,7 +73,7 @@ class _LoginFormState extends State<LoginForm> {
                               borderRadius: BorderRadius.circular(8),
                               child: Image.asset(
                                 'assets/images/KindMap-logo-f.png',
-                                width: 144,
+                                width: 100,
                                 height: 110,
                                 fit: BoxFit.cover,
                               ),
@@ -82,8 +83,8 @@ class _LoginFormState extends State<LoginForm> {
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            // mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Align(
@@ -406,11 +407,13 @@ class _LoginFormState extends State<LoginForm> {
                               },
                             ),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0,
+                              ),
                           minLines: null,
                           validator: (value) {
                             if (value!.length < 6) {
@@ -526,27 +529,33 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
                           ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.google,
-                                  size: 20,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  'Continue with Google',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        letterSpacing: 0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                ),
-                              ],
+                          child: GestureDetector(
+                            onTap: () {
+                              final auth = FirebaseAuth.instance;
+                              auth.signInWithRedirect(GoogleAuthProvider());
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.google,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    'Continue with Google',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyLarge
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

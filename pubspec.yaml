@@ -1,3 +1,4 @@
+
 name: kindmap
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
@@ -30,7 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  collection: ^1.18.0
+  collection: ^1.17.2
 
   flutterflow_ui: ^0.2.0+1
   auto_size_text: 3.0.0
@@ -104,6 +105,10 @@ dependencies:
   flutter_slidable: ^3.1.0
   map_launcher: ^3.2.0
   camera: ^0.10.5+9
+  geolocator: ^11.0.0
+  flutter_map: ^4.0.0
+  latlong2: ^0.8.2
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   change_app_package_name: ^1.1.0

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
 import 'package:kindmap/map.dart';
 import 'package:kindmap/new_Auth/nAuth.dart';

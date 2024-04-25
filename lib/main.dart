@@ -1,4 +1,5 @@
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
+import 'package:kindmap/map.dart';
 import 'package:kindmap/new_Auth/nAuth.dart';
 import 'package:kindmap/new_Auth/user.dart';
 import 'package:kindmap/themes/kmTheme.dart';
@@ -86,13 +87,14 @@ class _MyAppState extends State<MyApp> {
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
 
       routes: {
-        'Auth': (context) => const AuthenticationPage(),
-        'Home': (context) => const HomePage(),
+        '/auth': (context) => const AuthenticationPage(),
+        '/home': (context) => const HomePage(),
         //'Pin': (context) => PinPage(imageData: ,),
-        'Camera': (context) => CameraPage(),
-        'Settings': (context) => const SettingsPage(),
-        'Profile': (context) => const ProfilePage(),
-        'IntroScreens': (context) => const IntroScreens(),
+        '/camera': (context) => CameraPage(),
+        '/settings': (context) => const SettingsPage(),
+        '/profile': (context) => const ProfilePage(),
+        '/map': (context) => const Maps(),
+        '/introScreens': (context) => const IntroScreens(),
       },
     );
   }

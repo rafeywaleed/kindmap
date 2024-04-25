@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
             child: Text(
               'Settings Page',
               style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -77,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
             child: Text(
               'Please evaluate your options below.',
               style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -92,20 +94,20 @@ class _SettingsPageState extends State<SettingsPage> {
             scrollDirection: Axis.vertical,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    Navigator.of(context).pushNamed('Profile');
+                    Navigator.of(context).pushNamed('/profile');
                   },
                   child: Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,12 +133,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,12 +162,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -189,12 +191,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -218,12 +220,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
                 child: Container(
                   width: double.infinity,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -249,7 +251,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 4, 0, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 0, 8),
             child: Text(
               'Follow us on',
               style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -259,7 +261,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -308,12 +310,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     print('IconButton pressed ...');
                   },
                 ),
-              ].divide(SizedBox(width: 8)),
+              ].divide(const SizedBox(width: 8)),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
             child: Text(
               'App Versions',
               style: FlutterFlowTheme.of(context).titleLarge.override(
@@ -323,7 +325,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
             child: Text(
               'v0.0.1',
               style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -333,7 +335,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 0, 0),
             child: FFButtonWidget(
               onPressed: () {
                 logout();
@@ -341,8 +343,8 @@ class _SettingsPageState extends State<SettingsPage> {
               text: 'Log Out',
               options: FFButtonOptions(
                 height: 40,
-                padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 color: FlutterFlowTheme.of(context).error,
                 textStyle: FlutterFlowTheme.of(context).labelMedium.override(
                       fontFamily: 'Readex Pro',
@@ -358,7 +360,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
-        ].addToEnd(SizedBox(height: 64)),
+        ].addToEnd(const SizedBox(height: 64)),
       ),
     );
   }
@@ -368,8 +370,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void logout() async {
     await FirebaseAuth.instance.signOut();
-    Navigator.popUntil(context as BuildContext, (route) => route.isFirst);
-    Navigator.pushReplacement(context as BuildContext,
-        MaterialPageRoute(builder: (context) => LoginForm()));
+    Navigator.popUntil(context, (route) => route.isFirst);
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const LoginForm()));
   }
 }

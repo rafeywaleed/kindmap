@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            Navigator.of(context).pushNamed('Settings');
+                            Navigator.of(context).pushNamed('/settings');
                           },
                           child: ListTile(
                             leading: Icon(
@@ -639,13 +639,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         color: FlutterFlowTheme.of(context).secondaryText,
                       ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        'assets/images/map.png',
-                        width: 311,
-                        height: 228,
-                        fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: () => Navigator.pushNamed(context, '/map'),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          'assets/images/map.png',
+                          width: 311,
+                          height: 228,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -675,7 +678,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         child: GestureDetector(
                           onTap: () async {
-                            Navigator.of(context).pushNamed('Camera');
+                            Navigator.of(context).pushNamed('/camera');
                           },
                           child: Container(
                             child: Row(
@@ -787,8 +790,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         onTap: () {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(const SnackBar(
-                                                  content: const Text(
-                                                      'spot an area')));
+                                                  content:
+                                                      Text('spot an area')));
                                         },
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -857,8 +860,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content:
+                                                      Text('spot an area')));
+
                                           Navigator.of(context)
-                                              .pushNamed('NotifyMe');
+                                              .pushNamed('/notifyMe');
                                         },
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
@@ -928,7 +936,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
                                           Navigator.of(context)
-                                              .pushNamed('Donate');
+                                              .pushNamed('/donate');
                                         },
                                         child: Column(
                                           crossAxisAlignment:

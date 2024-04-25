@@ -575,7 +575,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                     padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        Navigator.of(context).pushNamed('null');
+                        // Navigator.of(context).pushNamed('null');
                       },
                       text: 'PIN',
                       icon: Icon(

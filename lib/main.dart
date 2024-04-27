@@ -1,4 +1,7 @@
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
+import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:kindmap/components/DetailBox.dart';
+import 'package:kindmap/components/PinBox.dart';
 import 'package:kindmap/map.dart';
 import 'package:kindmap/new_Auth/nAuth.dart';
 import 'package:kindmap/new_Auth/user.dart';
@@ -70,10 +73,9 @@ class _MyAppState extends State<MyApp> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            // User is logged in, navigate to the home page or another screen.
-            return const HomePage();
+            return HomePage();
+            //BoxEx();
           } else {
-            // User is not logged in, show the login form or onboarding screen.
             return const LoginForm();
           }
         },
@@ -95,7 +97,55 @@ class _MyAppState extends State<MyApp> {
         '/profile': (context) => const ProfilePage(),
         '/map': (context) => const Maps(),
         '/introScreens': (context) => const IntroScreens(),
+        '/try': (context) => BoxEx(),
       },
+    );
+  }
+}
+
+class BoxEx extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Trying Components'),
+      ),
+      body: Center(
+        child: Row(
+          children: [
+            Align(
+              alignment: Alignment.center,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Show PinBox as a modal bottom sheet when button is pressed
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return PinBox();
+                    },
+                  );
+                },
+                child: Text('Show PinBox'),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Show PinBox as a modal bottom sheet when button is pressed
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return DetailBox();
+                  },
+                );
+              },
+              child: Text('Show DetailBox'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

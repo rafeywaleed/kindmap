@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 // import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:mapbox_search/mapbox_search.dart';
 
 class Maps extends StatefulWidget {
   const Maps({super.key});
@@ -61,7 +62,7 @@ class _MapsState extends State<Maps> {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   Future getLocation() async {
@@ -80,44 +81,52 @@ class _MapsState extends State<Maps> {
       appBar: AppBar(
         title: const Text('Map'),
       ),
-      body: FutureBuilder<void>(
-        future: _determinePosition(),
-        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return FlutterMap(
-              options: MapOptions(
-                minZoom: 0,
-                maxZoom: 18,
-                center: location ?? LatLng(0, 0), // Fallback to (0, 0)
-                zoom: 15,
-                interactiveFlags: InteractiveFlag.all,
-              ),
-              children: [
-                openStreetMapTileLayer,
-                if (location != null)
-                  MarkerLayer(
-                    markers: [
-                      Marker(
-                        point: location!,
-                        width: 60,
-                        height: 60,
-                        rotateAlignment: Alignment.centerLeft,
-                        builder: (_) => const Icon(
-                          Icons.location_pin,
-                          size: 60,
-                          color: Colors.red,
-                        ),
+      body: Stack(
+        children: [
+          FutureBuilder<void>(
+            future: _determinePosition(),
+            builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return FlutterMap(
+                  options: MapOptions(
+                    minZoom: 0,
+                    maxZoom: 18,
+                    center: location ?? LatLng(0, 0), // Fallback to (0, 0)
+                    zoom: 15,
+                    onTap: (tapPosition, point) {
+                      setState(() {
+                        location = point;
+                      });
+                    },
+                  ),
+                  children: [
+                    openStreetMapTileLayer,
+                    if (location != null)
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: location!,
+                            width: 60,
+                            height: 60,
+                            rotateAlignment: Alignment.centerLeft,
+                            builder: (_) => const Icon(
+                              Icons.location_pin,
+                              size: 60,
+                              color: Colors.red,
+                            ),
+                          )
+                        ],
                       )
-                    ],
-                  )
-              ],
-            );
-          }
-        },
+                  ],
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

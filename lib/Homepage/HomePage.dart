@@ -862,8 +862,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         onTap: () async {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(const SnackBar(
-                                                  content:
-                                                      Text('spot an area')));
+                                                  content: Text('Notify Me')));
 
                                           Navigator.of(context)
                                               .pushNamed('/notifyMe');
@@ -935,6 +934,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text('Donate')));
                                           Navigator.of(context)
                                               .pushNamed('/donate');
                                         },

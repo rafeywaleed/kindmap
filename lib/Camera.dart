@@ -1,9 +1,12 @@
+import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:kindmap/Pin/PinPage.dart';
+import 'package:image/image.dart' as img;
+import 'package:kindmap/themes/kmTheme.dart';
 
 class CameraPage extends StatefulWidget {
   @override
@@ -46,33 +49,45 @@ class _CameraPageState extends State<CameraPage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 final size = MediaQuery.of(context).size;
-                final deviceRatio = size.width / size.height;
-                final previewSize = _controller.value.previewSize!;
-                final previewRatio = previewSize.height / previewSize.width;
+                // final deviceRatio = size.width / size.height;
+                // final previewSize = _controller.value.previewSize!;
+                // final previewRatio = previewSize.height / previewSize.width;
 
-                double scale = 1;
-                if (deviceRatio < previewRatio) {
-                  scale = previewRatio / deviceRatio;
-                } else {
-                  scale = deviceRatio / previewRatio;
-                }
+                // double scale = 1;
+                // if (deviceRatio < previewRatio) {
+                //   scale = previewRatio / deviceRatio;
+                // } else {
+                //   scale = deviceRatio / previewRatio;
+                // }
 
                 return ClipRect(
                   child: Align(
                     alignment: Alignment.center,
-                    child: SizedBox(
-                      width: size.width,
-                      height: size.width / _controller.value.aspectRatio,
-                      child: Transform.scale(
-                        scale: scale,
-                        child: Center(
-                          child: AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: CameraPreview(_controller),
-                          ),
-                        ),
-                      ),
+                    //child: Padding(
+                    //padding: const EdgeInsets.all(40.0),
+                    child: Container(
+                      width: size.width - 70 % size.width,
+                      height: size.width - 70 % size.width,
+
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            width: 2,
+                            color: KMTheme.colors.success,
+                            style: BorderStyle.solid,
+                          )),
+                      // child: Transform.scale(
+                      //   scale: scale,
+                      //child: Center(
+                      // child: AsrpectRatio(
+                      // aspectRatio: 1,
+                      child: CameraPreview(_controller),
+                      // ),
+                      //),
+                      //),
                     ),
+                    //),
                   ),
                 );
               } else {
@@ -83,7 +98,7 @@ class _CameraPageState extends State<CameraPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
+              padding: EdgeInsets.all(80),
               child: GestureDetector(
                 onTap: () async {
                   try {
@@ -104,10 +119,19 @@ class _CameraPageState extends State<CameraPage> {
                     print('Error taking picture: $e');
                   }
                 },
-                child: Icon(
-                  Icons.camera,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 60,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(80),
+                  ),
+                  child: Icon(
+                    Icons.camera,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 60,
+                  ),
                 ),
               ),
             ),
@@ -116,4 +140,24 @@ class _CameraPageState extends State<CameraPage> {
       ),
     );
   }
+
+  // Future<String> _cropImageToSquare(String imagePath) async {
+  //   final image = img.decodeImage(File(imagePath).readAsBytesSync());
+  //   if (image == null) {
+  //     throw Exception('Failed to load image');
+  //   }
+
+  //   // Calculate the dimensions for the square crop
+  //   final cropSize = image.width < image.height ? image.width : image.height;
+
+  //   // Crop the image
+  //   final croppedImage =
+  //       img.copyCrop(image, x: 0, y: 0, width: cropSize, height: cropSize);
+
+  //   // Save the cropped image
+  //   final croppedImagePath = '${imagePath}_cropped.jpg';
+  //   File(croppedImagePath).writeAsBytesSync(img.encodeJpg(croppedImage));
+
+  //   return croppedImagePath;
+  // }
 }

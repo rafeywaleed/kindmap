@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindmap/themes/kmTheme.dart';
+import 'package:kindmap/themes/old_theme.dart';
 import 'package:provider/provider.dart';
 
 import 'Model_PinPage.dart';
@@ -106,7 +109,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(5, 12, 5, 10),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -162,16 +165,16 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                       Align(
                         alignment: AlignmentDirectional(0, 0),
                         child: Padding(
-                          padding: EdgeInsets.all(20),
+                          padding: EdgeInsets.all(15),
                           child: Container(
-                            width: 300,
-                            height: 300,
+                            width: 200,
+                            height: 200,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               image: DecorationImage(
                                 fit: BoxFit.cover,
-                                image: AssetImage(widget.imagePath),
+                                image: FileImage(File(widget.imagePath)),
                                 // image: Image.asset(
                                 //   'assets/images/Homeless-1.jpg',
                                 // ).image,
@@ -182,10 +185,11 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 10),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
@@ -198,13 +202,13 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                   alignment: AlignmentDirectional(-1, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 0, 5, 10),
+                                        10, 0, 10, 10),
                                     child: Container(
                                       width: double.infinity,
-                                      height: 300,
+                                      //height: 300,
                                       decoration: BoxDecoration(
-                                        color:
-                                            KMTheme.colors.secondaryBackground,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: SingleChildScrollView(
@@ -231,6 +235,10 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         letterSpacing: 0,
                                                         fontWeight:
                                                             FontWeight.bold,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
                                                       ),
                                                 ),
                                               ),
@@ -246,7 +254,6 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                       _model.textController1,
                                                   focusNode: _model
                                                       .textFieldFocusNode1,
-                                                  autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelStyle:
@@ -371,7 +378,6 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                       _model.textController2,
                                                   focusNode: _model
                                                       .textFieldFocusNode2,
-                                                  autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelStyle:

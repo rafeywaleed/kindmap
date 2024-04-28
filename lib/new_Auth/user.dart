@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kindmap/new_Auth/auth_fn.dart';
 
 class LoginForm extends StatefulWidget {
@@ -28,6 +29,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: FlutterFlowTheme.of(context).alternate,
       body: SingleChildScrollView(
@@ -58,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   shape: BoxShape.rectangle,
                 ),
-                alignment: AlignmentDirectional(0, 0),
+                alignment: AlignmentDirectional(-0.5, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -66,15 +68,15 @@ class _LoginFormState extends State<LoginForm> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1, 0),
+                          alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.asset(
                                 'assets/images/KindMap-logo-f.png',
-                                width: 100,
-                                height: 110,
+                                width: 80,
+                                height: 80,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -102,7 +104,7 @@ class _LoginFormState extends State<LoginForm> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0, -1),
+                                alignment: Alignment.centerRight,
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 2, 0, 0),
@@ -229,26 +231,6 @@ class _LoginFormState extends State<LoginForm> {
                               ),
                             ),
 
-                      // ======== Email ========
-                      // TextFormField(
-                      //   key: ValueKey('email'),
-                      //   decoration: InputDecoration(
-                      //     hintText: 'Enter Email',
-                      //   ),
-                      //   validator: (value) {
-                      //     if (value!.isEmpty || !value.contains('@')) {
-                      //       return 'Please Enter valid Email';
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      //   onSaved: (value) {
-                      //     setState(() {
-                      //       email = value!;
-                      //     });
-                      //   },
-                      // ),
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                         child: TextFormField(
@@ -322,27 +304,6 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
 
-                      // ======== Password ========
-                      // TextFormField(
-                      //   key: ValueKey('password'),
-                      //   obscureText: true,
-                      //   decoration: InputDecoration(
-                      //     hintText: 'Enter Password',
-                      //   ),
-                      //   validator: (value) {
-                      //     if (value!.length < 6) {
-                      //       return 'Please Enter Password of min length 6';
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      //   onSaved: (value) {
-                      //     setState(() {
-                      //       password = value!;
-                      //     });
-                      //   },
-                      // ),
-
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                         child: TextFormField(
@@ -392,7 +353,6 @@ class _LoginFormState extends State<LoginForm> {
                             contentPadding: EdgeInsets.all(20),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                // Based on passwordVisible state choose the icon
                                 _passwordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
@@ -400,7 +360,6 @@ class _LoginFormState extends State<LoginForm> {
                                     FlutterFlowTheme.of(context).secondaryText,
                               ),
                               onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
                                 setState(() {
                                   _passwordVisible = !_passwordVisible;
                                 });
@@ -434,22 +393,8 @@ class _LoginFormState extends State<LoginForm> {
                         height: 30,
                       ),
                       Container(
-                        height: 55,
+                        height: size.height * 0.07,
                         width: double.infinity,
-                        // child: ElevatedButton(
-                        //     onPressed: () async {
-                        //       if (_formKey.currentState!.validate()) {
-                        //         _formKey.currentState!.save();
-                        //         login
-                        //             ? AuthServices.signinUser(
-                        //                 email, password, context)
-                        //             : AuthServices.signupUser(
-                        //                 email, password, fullname, context);
-
-                        //       }
-                        //     },
-                        //     child: Text(login ? 'Login' : 'Signup')
-                        //     ),
                         child: ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -514,6 +459,7 @@ class _LoginFormState extends State<LoginForm> {
                         padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 16),
                         child: ElevatedButton(
                           onPressed: () {
+                            AuthServices.signInWithGoogle(context);
                             print('Sign in with Google hogaya ');
                           },
                           style: ElevatedButton.styleFrom(
@@ -614,4 +560,25 @@ class _LoginFormState extends State<LoginForm> {
       ),
     );
   }
+
+  // static signInWithGoogle() async {
+  //   try {
+  //     final FirebaseAuth _auth = FirebaseAuth.instance;
+  //     final GoogleSignIn googleSignIn = GoogleSignIn();
+  //     final GoogleSignInAccount? googleSignInAccount =
+  //         await googleSignIn.signIn();
+  //     final GoogleSignInAuthentication googleSignInAuthentication =
+  //         await googleSignInAccount!.authentication;
+  //     final AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleSignInAuthentication.accessToken,
+  //       idToken: googleSignInAuthentication.idToken,
+  //     );
+  //     final UserCredential authResult =
+  //         await _auth.signInWithCredential(credential);
+  //     final User? user = authResult.user;
+  //     print('User: $user');
+  //   } catch (e) {
+  //     print('Error: $e');
+  //   }
+  // }
 }

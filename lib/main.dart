@@ -9,7 +9,6 @@ import 'package:kindmap/themes/kmTheme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kindmap/Auth/Authentication.dart';
 import 'package:kindmap/Camera.dart';
 import 'package:kindmap/Homepage/HomePage.dart';
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
@@ -89,7 +88,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
 
       routes: {
-        '/auth': (context) => const AuthenticationPage(),
+        '/auth': (context) => const LoginForm(),
         '/home': (context) => const HomePage(),
         //'Pin': (context) => PinPage(imageData: ,),
         '/camera': (context) => CameraPage(),

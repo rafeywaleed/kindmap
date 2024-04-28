@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kindmap/new_Auth/firebase_fn.dart';
 
 // class AuthServices {
@@ -101,6 +102,57 @@ class AuthServices {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),
+        ),
+      );
+    }
+  }
+
+  // static Future<void> signInWithGoogle() async {
+  //   GoogleSignInAccount? googleUser;
+  //   await GoogleSignIn().signIn();
+
+  //   GoogleSignInAuthentication? googleAuth;
+  //   await googleUser?.authentication;
+
+  //   AuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+  //   UserCredential userCredential =
+  //       await FirebaseAuth.instance.signInWithCredential(credential);
+
+  //   //print(UserCredential.user?.displayName);
+  // }
+
+  static Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        // User canceled the Google Sign In flow
+        return;
+      }
+
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Handle sign-in success
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Google Sign-In Successful')),
+      );
+
+      // Navigate to HomePage after successful sign-in
+      Navigator.pushReplacementNamed(context, '/home');
+    } catch (e) {
+      // Handle sign-in failure
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to sign in with Google: $e'),
         ),
       );
     }

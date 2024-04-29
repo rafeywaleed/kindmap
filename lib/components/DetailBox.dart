@@ -109,26 +109,35 @@ class _DetailBoxState extends State<DetailBox> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
-                width: size.width * 0.4,
-                height: size.width * 0.4,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2A2A2A),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('Pins')
-                        .doc(widget.docName)
-                        .snapshots(),
-                    builder: ((context, snapshot) {
-                      if (snapshot.hasData) {
-                        return FittedBox(
-                            child: Image.network(snapshot.data!['url']));
-                      }
-                      return const Center(child: LinearProgressIndicator());
-                    })),
-              ),
+              // Container(
+              //   width: size.width * 0.4,
+              //   height: size.width * 0.4,
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xFF2A2A2A),
+              //     borderRadius: BorderRadius.circular(10),
+              //   ),),
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('Pins')
+                      .doc(widget.docName)
+                      .snapshots(),
+                  builder: ((context, snapshot) {
+                    if (snapshot.hasData) {
+                      return SizedBox(
+                        width: size.width * 0.4,
+                        height: size.width * 0.4,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            snapshot.data!['url'],
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      );
+                    }
+                    return const Center(child: LinearProgressIndicator());
+                  })),
+
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [

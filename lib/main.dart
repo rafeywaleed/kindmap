@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
         '/profile': (context) => const ProfilePage(),
         '/map': (context) => const Maps(),
         '/introScreens': (context) => const IntroScreens(),
-        '/try': (context) => BoxEx(),
+        '/try': (context) => const BoxEx(),
       },
     );
   }

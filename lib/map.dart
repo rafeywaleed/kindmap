@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-// import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kindmap/components/PinBox.dart';
 import 'package:latlong2/latlong.dart';
@@ -40,9 +39,10 @@ class _MapsState extends State<Maps> {
         final longitude = doc['Longitude'];
         return Marker(
           point: LatLng(latitude, longitude),
-          builder: (context) => IconButton(
-            onPressed: () {
+          builder: (context) => GestureDetector(
+            onTap: () {
               showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
                   return PinBox(
@@ -52,7 +52,8 @@ class _MapsState extends State<Maps> {
                     timeleft: doc['Timer'],
                     latitude: doc['Latitude'],
                     longitude: doc['Longitude'],
-                    onServe: () {
+                    location: location,
+                    onServe: () async {
                       // Remove marker from the map
                       setState(() {
                         markers.removeWhere((marker) =>
@@ -60,18 +61,20 @@ class _MapsState extends State<Maps> {
                       });
 
                       // Remove marker from Firestore
-                      FirebaseFirestore.instance
+                      await FirebaseFirestore.instance
                           .collection('Pins')
                           .doc(doc.id)
                           .delete();
+                      Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                   );
                 },
               );
             },
-            icon: const Icon(
+            child: const Icon(
               Icons.location_pin,
-              size: 60,
+              size: 50,
               color: Colors.red,
             ),
           ),

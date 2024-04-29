@@ -241,7 +241,10 @@ class _DetailBoxState extends State<DetailBox> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 20),
                 child: ElevatedButton(
                   onPressed: () async {
-                    Navigator.popUntil(context, ModalRoute.withName('/home'));
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    // Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(

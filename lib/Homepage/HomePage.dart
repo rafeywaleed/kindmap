@@ -592,10 +592,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Align(
-                                      alignment:
-                                          const AlignmentDirectional(-1, 0),
+                                      alignment: Alignment.center,
                                       child: Padding(
-                                        padding: const EdgeInsets.all(14),
+                                        padding: const EdgeInsets.all(10),
                                         child: Text(
                                           'Spot people nearby',
                                           style: FlutterFlowTheme.of(context)
@@ -617,7 +616,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           const AlignmentDirectional(0, 0),
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional
-                                            .fromSTEB(0, 0, 0, 9),
+                                            .fromSTEB(0, 0, 6, 9),
                                         child: Icon(
                                           Icons.share_location,
                                           color: FlutterFlowTheme.of(context)
@@ -680,7 +679,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 width: double.infinity,
                                 decoration: const BoxDecoration(),
                                 child: Column(
-                                  mainAxisSize: MainAxisSize.max,
+                                  // mainAxisSize: MainAxisSize.max,
+
                                   children: [
                                     Align(
                                       alignment: Alignment.centerLeft,
@@ -701,44 +701,57 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
+                                                SizedBox(
+                                                  height: size.height * 0.02,
+                                                ),
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
-                                                          -0.93, -0.81),
-                                                  child: Text(
-                                                    'Spot an area',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 25,
-                                                          letterSpacing: 0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5.0),
+                                                    child: Text(
+                                                      'Spot an area',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            fontSize: 25,
+                                                            letterSpacing: 0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
-                                                          -0.15, -0.55),
-                                                  child: Text(
-                                                    'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: const Color(
-                                                              0xFF404647),
-                                                          fontSize: 11,
-                                                          letterSpacing: 0,
-                                                        ),
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
+                                                    child: Text(
+                                                      'Spot an area where large number of people are seeking help. (NGOs and Organization may look forward to help them)',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            color: const Color(
+                                                                0xFF404647),
+                                                            fontSize: 11,
+                                                            letterSpacing: 0,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -764,8 +777,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             onTap: () async {
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(const SnackBar(
-                                                      content: Text(
-                                                          'Spot an area')));
+                                                      content:
+                                                          Text('Notify Me')));
 
                                               Navigator.of(context)
                                                   .pushNamed('/notifyMe');
@@ -775,41 +788,52 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
-                                                          -0.93, -0.81),
-                                                  child: Text(
-                                                    'Notify Me',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 25,
-                                                          letterSpacing: 0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5.0),
+                                                    child: Text(
+                                                      'Notify Me',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            fontSize: 25,
+                                                            letterSpacing: 0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                                 Align(
                                                   alignment:
                                                       Alignment.centerLeft,
-                                                  child: Text(
-                                                    'A Notification pops up whenever a pin is pointed within a 1 km radius of you',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: const Color(
-                                                              0xFF404647),
-                                                          fontSize: 12,
-                                                          letterSpacing: 0,
-                                                        ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
+                                                    child: Text(
+                                                      'A Notification pops up whenever a pin is pointed within a 1 km radius of you',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            color: const Color(
+                                                                0xFF404647),
+                                                            fontSize: 12,
+                                                            letterSpacing: 0,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -843,23 +867,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
-                                                          -1.0, 0.0),
-                                                  child: Text(
-                                                    'Donate',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                          fontSize: 25,
-                                                          letterSpacing: 0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 5.0),
+                                                    child: Text(
+                                                      'Donate',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryText,
+                                                            fontSize: 25,
+                                                            letterSpacing: 0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                                 Align(
@@ -869,8 +898,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                   //     const AlignmentDirectional(
                                                   //         -0.15, -0.55),
                                                   child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .fromLTRB(0, 0, 0, 25),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
                                                     child: Text(
                                                       'You can also donate',
                                                       style: FlutterFlowTheme
@@ -886,6 +917,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                           ),
                                                     ),
                                                   ),
+                                                ),
+                                                SizedBox(
+                                                  height: size.height * 0.02,
                                                 ),
                                               ],
                                             ),

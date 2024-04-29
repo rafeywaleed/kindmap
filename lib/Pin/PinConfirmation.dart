@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 // import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:kindmap/components/PinBox.dart';
+import 'package:kindmap/components/DetailBox.dart';
 import 'package:latlong2/latlong.dart';
 
-class Maps extends StatefulWidget {
-  const Maps({super.key});
+class PinConfirmation extends StatefulWidget {
+  PinConfirmation({super.key, required this.docName});
+
+  String docName;
 
   @override
-  State<Maps> createState() => _MapsState();
+  State<PinConfirmation> createState() => _PinConfirmationState();
 }
 
-class _MapsState extends State<Maps> {
+class _PinConfirmationState extends State<PinConfirmation> {
   LatLng? location;
 
   @override
@@ -79,62 +81,62 @@ class _MapsState extends State<Maps> {
       appBar: AppBar(
         title: const Text('Map'),
       ),
-      body: Stack(
-        children: [
-          FutureBuilder<void>(
-            future: _determinePosition(),
-            builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return FlutterMap(
-                  options: MapOptions(
-                    minZoom: 0,
-                    maxZoom: 18,
-                    center: location ?? LatLng(0, 0), // Fallback to (0, 0)
-                    zoom: 15,
-                    // onTap: (tapPosition, point) {
-                    //   setState(() {
-                    //     location = point;
-                    //   });
-                    // },
-                  ),
-                  children: [
-                    openStreetMapTileLayer,
-                    if (location != null)
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: location!,
-                            width: 60,
-                            height: 60,
-                            rotateAlignment: Alignment.centerLeft,
-                            builder: (_) => IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const PinBox();
-                                  },
-                                );
-                              },
-                              icon: const Icon(
+      body: FutureBuilder<void>(
+        future: _determinePosition(),
+        builder: (BuildContext context, AsyncSnapshot<void> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: FlutterMap(
+                    options: MapOptions(
+                      minZoom: 0,
+                      maxZoom: 18,
+                      center: location ?? LatLng(0, 0), // Fallback to (0, 0)
+                      zoom: 17,
+                      interactiveFlags: InteractiveFlag.drag,
+                    ),
+                    children: [
+                      openStreetMapTileLayer,
+                      if (location != null)
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              point: location!,
+                              width: 60,
+                              height: 60,
+                              rotateAlignment: Alignment.centerLeft,
+                              builder: (_) => const Icon(
                                 Icons.location_pin,
                                 size: 60,
                                 color: Colors.red,
                               ),
                             ),
-                          )
-                        ],
-                      )
-                  ],
-                );
-              }
-            },
-          ),
-        ],
+                          ],
+                        ),
+                      Expanded(
+                        flex: 5,
+                        child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: SizedBox(
+                                // height: MediaQuery.of(context).size.height / 3,
+                                child: DetailBox(
+                              docName: widget.docName,
+                              location: location!,
+                            ))),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
+        },
       ),
     );
   }

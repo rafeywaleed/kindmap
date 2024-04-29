@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -173,17 +175,45 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       18, 0, 0, 10),
-                                  child: Text(
-                                    'User name here',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          fontSize: 22.5,
-                                          letterSpacing: 0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
+                                  child: StreamBuilder(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('users')
+                                          .doc(FirebaseAuth
+                                              .instance.currentUser?.uid)
+                                          .snapshots(),
+                                      builder: ((context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return FittedBox(
+                                            child: Text(
+                                              snapshot.data!['name'],
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Plus Jakarta Sans',
+                                                        fontSize: 22.5,
+                                                        letterSpacing: 0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                            ),
+                                          );
+                                        }
+                                        return const Center(
+                                            child: LinearProgressIndicator());
+                                      })),
+                                  // Text(
+                                  //   'User name here',
+                                  //   style: FlutterFlowTheme.of(context)
+                                  //       .bodyMedium
+                                  //       .override(
+                                  //         fontFamily: 'Plus Jakarta Sans',
+                                  //         fontSize: 22.5,
+                                  //         letterSpacing: 0,
+                                  //         fontWeight: FontWeight.bold,
+                                  //       ),
+                                  // ),
                                 ),
                               ),
                             ],

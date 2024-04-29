@@ -31,6 +31,7 @@ void main() async {
       appId: '1:403643543889:android:d9f0b2bf35c12e2d3ae370',
       messagingSenderId: '403643543889',
       projectId: 'kindmap-999d3',
+      storageBucket: 'gs://kindmap-999d3.appspot.com',
     ),
   );
 
@@ -72,7 +73,7 @@ class _MyAppState extends State<MyApp> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomePage();
+            return const HomePage();
             //BoxEx();
           } else {
             return const LoginForm();
@@ -103,16 +104,18 @@ class _MyAppState extends State<MyApp> {
 }
 
 class BoxEx extends StatelessWidget {
+  const BoxEx({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trying Components'),
+        title: const Text('Trying Components'),
       ),
       body: Center(
         child: Row(
           children: [
-            Align(
+            const Align(
               alignment: Alignment.center,
             ),
             Padding(
@@ -123,24 +126,24 @@ class BoxEx extends StatelessWidget {
                   showModalBottomSheet(
                     context: context,
                     builder: (BuildContext context) {
-                      return PinBox();
+                      return const PinBox();
                     },
                   );
                 },
-                child: Text('Show PinBox'),
+                child: const Text('Show PinBox'),
               ),
             ),
             ElevatedButton(
               onPressed: () {
                 // Show PinBox as a modal bottom sheet when button is pressed
-                showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return DetailBox();
-                  },
-                );
+                // showModalBottomSheet(
+                //   context: context,
+                //   builder: (BuildContext context) {
+                //     return DetailBox();
+                //   },
+                // );
               },
-              child: Text('Show DetailBox'),
+              child: const Text('Show DetailBox'),
             ),
           ],
         ),

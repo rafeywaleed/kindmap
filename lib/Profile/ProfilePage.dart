@@ -1,11 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kindmap/Profile/Model_ProfilePage.dart';
-import 'package:provider/provider.dart';
 
-import 'Model_ProfilePage.dart';
 export 'Model_ProfilePage.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -94,12 +93,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Container(
                         width: 120,
                         height: 120,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
@@ -109,39 +108,86 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1, 0),
+                      alignment: const AlignmentDirectional(-1, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(-1, 0),
+                            alignment: const AlignmentDirectional(-1, 0),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
-                              child: Text(
-                                'Username Goes here',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 20,
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                              ),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8, 8, 8, 4),
+                              child: StreamBuilder(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser?.uid)
+                                      .snapshots(),
+                                  builder: ((context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return FittedBox(
+                                        child: Text(
+                                          snapshot.data!['name'],
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontSize: 20,
+                                                letterSpacing: 0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                      );
+                                    }
+                                    return const Center(
+                                        child: LinearProgressIndicator());
+                                  })),
+                              // Text(
+                              //   'Username Goes here',
+                              //   style: FlutterFlowTheme.of(context)
+                              //       .bodyMedium
+                              //       .override(
+                              //         fontFamily: 'Readex Pro',
+                              //         fontSize: 20,
+                              //         letterSpacing: 0,
+                              //         fontWeight: FontWeight.w600,
+                              //       ),
+                              // ),
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1, 0),
-                            child: Text(
-                              'Mail Id goes here',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
-                            ),
+                            alignment: const AlignmentDirectional(-1, 0),
+                            child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return FittedBox(
+                                      child: Text(
+                                        snapshot.data!['email'],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0,
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                })),
+                            // Text(
+                            //   'Mail Id goes here',
+                            //   style: FlutterFlowTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //         fontFamily: 'Readex Pro',
+                            //         letterSpacing: 0,
+                            //       ),
+                            // ),
                           ),
                         ],
                       ),
@@ -156,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 //   ),
                 // ),
                 Align(
-                  alignment: AlignmentDirectional(-1, 0),
+                  alignment: const AlignmentDirectional(-1, 0),
                   // child: Container(
                   //   width: 378,
                   //   height: 122,
@@ -167,7 +213,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(12),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
@@ -182,8 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: Text(
                               'Number of people you helped :',
                               style: FlutterFlowTheme.of(context)
@@ -206,7 +252,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0, 0),
+                            alignment: const AlignmentDirectional(0, 0),
                             child: Text(
                               'These many people are thankful \nfor you',
                               textAlign: TextAlign.center,
@@ -227,7 +273,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1, 0),
+                  alignment: const AlignmentDirectional(-1, 0),
                   child: Container(
                     width: 428,
                     height: 100,
@@ -238,9 +284,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1, 0),
+                          alignment: const AlignmentDirectional(-1, 0),
                           child: Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(8),
                             child: Text(
                               'Change name : ',
                               style: FlutterFlowTheme.of(context)
@@ -253,7 +299,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                           child: TextFormField(
                             controller: _model.textController1,
                             focusNode: _model.textFieldFocusNode1,
@@ -312,6 +359,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             minLines: null,
                             validator: _model.textController1Validator
                                 .asValidator(context),
+                            onFieldSubmitted: (newValue) {
+                              _model.textController1!.clear();
+                              FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(FirebaseAuth.instance.currentUser?.uid)
+                                  .update({'name': newValue});
+                            },
                           ),
                         ),
                       ],
@@ -319,9 +373,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1, 0),
+                  alignment: const AlignmentDirectional(-1, 0),
                   child: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Container(
                       width: 403,
                       height: 266,
@@ -336,10 +390,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(-1, 0),
+                            alignment: const AlignmentDirectional(-1, 0),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 6, 6, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8, 6, 6, 0),
                               child: Text(
                                 'Change Password :',
                                 style: FlutterFlowTheme.of(context)
@@ -352,7 +406,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: TextFormField(
                               controller: _model.textController2,
                               focusNode: _model.textFieldFocusNode2,
@@ -414,7 +468,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: TextFormField(
                               controller: _model.textController3,
                               focusNode: _model.textFieldFocusNode3,
@@ -495,10 +549,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             text: 'Change Password',
                             options: FFButtonOptions(
                               height: 40,
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                              iconPadding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24, 0, 24, 0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 0, 0, 0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
@@ -509,7 +563,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     letterSpacing: 0,
                                   ),
                               elevation: 3,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1,
                               ),
@@ -522,14 +576,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0, 1),
+                  alignment: const AlignmentDirectional(0, 1),
                   child: Padding(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     child: AutoSizeText(
                       'Joined KindMap on 00/00/0000',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Open Sans',
-                            color: Color(0xB457636C),
+                            color: const Color(0xB457636C),
                             letterSpacing: 0,
                             fontWeight: FontWeight.bold,
                           ),

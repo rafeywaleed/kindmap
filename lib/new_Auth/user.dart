@@ -38,9 +38,9 @@ class _LoginFormState extends State<LoginForm> {
             Padding(
               padding: const EdgeInsets.fromLTRB(40, 80, 40, 0),
               child: Container(
-                padding: EdgeInsets.fromLTRB(5, 20, 5, 20),
+                padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xFFFAC6C3),
                   boxShadow: [
                     BoxShadow(
@@ -60,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                   shape: BoxShape.rectangle,
                 ),
-                alignment: AlignmentDirectional(-0.5, 0),
+                alignment: const AlignmentDirectional(-0.5, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -70,7 +70,8 @@ class _LoginFormState extends State<LoginForm> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(2, 0, 2, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                2, 0, 2, 0),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
                               child: Image.asset(
@@ -83,14 +84,14 @@ class _LoginFormState extends State<LoginForm> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0, 0),
+                          alignment: const AlignmentDirectional(0, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             // mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0, 0),
+                                alignment: const AlignmentDirectional(0, 0),
                                 child: Text(
                                   'KindMap',
                                   style: FlutterFlowTheme.of(context)
@@ -106,7 +107,7 @@ class _LoginFormState extends State<LoginForm> {
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 2, 0, 0),
                                   child: Text(
                                     'Connecting Hearts, Changing Life',
@@ -131,12 +132,12 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
+              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
                 borderRadius: BorderRadius.circular(20.0),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Color(0x33000000),
                     blurRadius: 10.0,
@@ -148,7 +149,7 @@ class _LoginFormState extends State<LoginForm> {
                 key: _formKey,
                 child: Container(
                   color: FlutterFlowTheme.of(context).primaryBackground,
-                  padding: EdgeInsets.all(14),
+                  padding: const EdgeInsets.all(14),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -158,7 +159,7 @@ class _LoginFormState extends State<LoginForm> {
                           : Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                               child: TextFormField(
-                                key: ValueKey('Full Name'),
+                                key: const ValueKey('Full Name'),
                                 // autofillHints: [AutofillHints.email],
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -204,7 +205,7 @@ class _LoginFormState extends State<LoginForm> {
                                   filled: true,
                                   fillColor: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  contentPadding: EdgeInsets.all(20),
+                                  contentPadding: const EdgeInsets.all(20),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .titleMedium
@@ -234,8 +235,8 @@ class _LoginFormState extends State<LoginForm> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                         child: TextFormField(
-                          key: ValueKey('email'),
-                          autofillHints: [AutofillHints.email],
+                          key: const ValueKey('email'),
+                          autofillHints: const [AutofillHints.email],
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'Email',
@@ -278,7 +279,7 @@ class _LoginFormState extends State<LoginForm> {
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .titleMedium
@@ -307,7 +308,7 @@ class _LoginFormState extends State<LoginForm> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                         child: TextFormField(
-                          key: ValueKey('password'),
+                          key: const ValueKey('password'),
                           obscureText: !_passwordVisible,
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -350,7 +351,7 @@ class _LoginFormState extends State<LoginForm> {
                             filled: true,
                             fillColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _passwordVisible
@@ -389,7 +390,7 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Container(
@@ -434,7 +435,7 @@ class _LoginFormState extends State<LoginForm> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextButton(
@@ -456,16 +457,19 @@ class _LoginFormState extends State<LoginForm> {
                             ),
                           )),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 16),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(14, 0, 14, 16),
                         child: ElevatedButton(
                           onPressed: () {
                             AuthServices.signInWithGoogle(context);
                             print('Sign in with Google hogaya ');
+                            // final auth = FirebaseAuth.instance;
+                            // auth.signInWithRedirect(GoogleAuthProvider());
                           },
                           style: ElevatedButton.styleFrom(
                             primary: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
@@ -485,11 +489,11 @@ class _LoginFormState extends State<LoginForm> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  FaIcon(
+                                  const FaIcon(
                                     FontAwesomeIcons.google,
                                     size: 20,
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Text(
                                     'Continue with Google',
                                     style: FlutterFlowTheme.of(context)
@@ -507,7 +511,8 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(14, 0, 14, 16),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(14, 0, 14, 16),
                         child: ElevatedButton(
                           onPressed: () {
                             print('Sign in with Apple hogaya ');
@@ -515,7 +520,7 @@ class _LoginFormState extends State<LoginForm> {
                           style: ElevatedButton.styleFrom(
                             primary: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
@@ -530,11 +535,11 @@ class _LoginFormState extends State<LoginForm> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                FaIcon(
+                                const FaIcon(
                                   FontAwesomeIcons.apple,
                                   size: 22,
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Text(
                                   'Continue with Apple',
                                   style: FlutterFlowTheme.of(context)

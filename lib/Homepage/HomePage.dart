@@ -129,8 +129,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           decoration: BoxDecoration(
                             color:
                                 FlutterFlowTheme.of(context).primaryBackground,
-                            boxShadow: [
-                              const BoxShadow(
+                            boxShadow: const [
+                              BoxShadow(
                                 blurRadius: 0,
                                 color: Color(0x33000000),
                                 offset: Offset(
@@ -515,363 +515,290 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Align(
-                  alignment: const AlignmentDirectional(0, 0),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          const BoxShadow(
-                            blurRadius: 0,
-                            color: Color(0x33000000),
-                            offset: Offset(
-                              4,
-                              4,
-                            ),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).secondaryText,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(0, 0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            const BoxShadow(
+                              blurRadius: 0,
+                              color: Color(0x33000000),
+                              offset: Offset(
+                                4,
+                                4,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
                         ),
-                      ),
-                      child: GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, '/map'),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'assets/images/map.png',
-                            width: 311,
-                            height: 228,
-                            fit: BoxFit.cover,
+                        child: GestureDetector(
+                          onTap: () => Navigator.pushNamed(context, '/map'),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset(
+                              'assets/images/map.png',
+                              width: 311,
+                              height: 228,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Stack(
-                  children: [
-                    Align(
-                      alignment: const AlignmentDirectional(0, 0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).error,
-                            boxShadow: [
-                              const BoxShadow(
-                                blurRadius: 0,
-                                color: Color(0x33000000),
-                                offset: Offset(
-                                  4,
-                                  4,
+                  Stack(
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(0, 0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).error,
+                              boxShadow: [
+                                const BoxShadow(
+                                  blurRadius: 0,
+                                  color: Color(0x33000000),
+                                  offset: Offset(
+                                    4,
+                                    4,
+                                  ),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: GestureDetector(
+                              onTap: () async {
+                                Navigator.of(context).pushNamed('/camera');
+                              },
+                              child: Container(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(-1, 0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(14),
+                                        child: Text(
+                                          'Spot people nearby',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Plus Jakarta Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                fontSize: 22,
+                                                letterSpacing: 0,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment:
+                                          const AlignmentDirectional(0, 0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0, 0, 0, 9),
+                                        child: Icon(
+                                          Icons.share_location,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          size: 60,
+                                        ),
+                                        // child: FlutterFlowIconButton(
+                                        //   borderColor: Color(0x004B39EF),
+                                        //   borderRadius: 20,
+                                        //   borderWidth: 1,
+                                        //   buttonSize: 60,
+                                        //   fillColor: Color(0x0057636C),
+                                        //   icon: Icon(
+                                        //     Icons.share_location,
+                                        //     color: FlutterFlowTheme.of(context)
+                                        //         .primaryBackground,
+                                        //     size: 50,
+                                        //   ),
+                                        //   onPressed: () async {
+                                        //     Navigator.of(context).pushNamed('Pin');
+                                        //   },
+                                        // ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: GestureDetector(
-                            onTap: () async {
-                              Navigator.of(context).pushNamed('/camera');
-                            },
-                            child: Container(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Align(
-                                    alignment:
-                                        const AlignmentDirectional(-1, 0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(14),
-                                      child: Text(
-                                        'Spot people nearby',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              fontSize: 22,
-                                              letterSpacing: 0,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(0, 0),
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0, 0, 0, 9),
-                                      child: Icon(
-                                        Icons.share_location,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        size: 60,
-                                      ),
-                                      // child: FlutterFlowIconButton(
-                                      //   borderColor: Color(0x004B39EF),
-                                      //   borderRadius: 20,
-                                      //   borderWidth: 1,
-                                      //   buttonSize: 60,
-                                      //   fillColor: Color(0x0057636C),
-                                      //   icon: Icon(
-                                      //     Icons.share_location,
-                                      //     color: FlutterFlowTheme.of(context)
-                                      //         .primaryBackground,
-                                      //     size: 50,
-                                      //   ),
-                                      //   onPressed: () async {
-                                      //     Navigator.of(context).pushNamed('Pin');
-                                      //   },
-                                      // ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(-1, 0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      // width: 425,
-                      // height: 285,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          const BoxShadow(
-                            blurRadius: 0,
-                            color: Color(0x33000000),
-                            offset: Offset(
-                              4,
-                              4,
-                            ),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: SingleChildScrollView(
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: double.infinity,
-                              decoration: const BoxDecoration(),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(6),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    content:
-                                                        Text('spot an area')));
-                                          },
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Align(
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        -0.93, -0.81),
-                                                child: Text(
-                                                  'Spot an area',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 25,
-                                                        letterSpacing: 0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        -0.15, -0.55),
-                                                child: Text(
-                                                  'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color: const Color(
-                                                            0xFF404647),
-                                                        fontSize: 11,
-                                                        letterSpacing: 0,
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
+                    ],
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(-1, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        // width: 425,
+                        // height: 285,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: [
+                            const BoxShadow(
+                              blurRadius: 0,
+                              color: Color(0x33000000),
+                              offset: Offset(
+                                4,
+                                4,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Stack(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                decoration: const BoxDecoration(),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(6),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    content:
-                                                        Text('Spot an area')));
-
-                                            Navigator.of(context)
-                                                .pushNamed('/notifyMe');
-                                          },
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Align(
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        -0.93, -0.81),
-                                                child: Text(
-                                                  'Notify Me',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 25,
-                                                        letterSpacing: 0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  'A Notification pops up whenever a pin is pointed within a 1 km radius of you',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color: const Color(
-                                                            0xFF404647),
-                                                        fontSize: 12,
-                                                        letterSpacing: 0,
-                                                      ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(6),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            Navigator.of(context)
-                                                .pushNamed('/donate');
-                                          },
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Align(
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        -1.0, 0.0),
-                                                child: Text(
-                                                  'Donate',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontSize: 25,
-                                                        letterSpacing: 0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                // alignment:
-                                                //     const AlignmentDirectional(
-                                                //         -0.15, -0.55),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          0, 0, 0, 25),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                      content: Text(
+                                                          'spot an area')));
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          -0.93, -0.81),
                                                   child: Text(
-                                                    'You can also donate',
+                                                    'Spot an area',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 25,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          -0.15, -0.55),
+                                                  child: Text(
+                                                    'Spot an area where large number of people are seeking\nhelp. (NGOs and Organization may look forward to help them)',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: const Color(
+                                                              0xFF404647),
+                                                          fontSize: 11,
+                                                          letterSpacing: 0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                      content: Text(
+                                                          'Spot an area')));
+
+                                              Navigator.of(context)
+                                                  .pushNamed('/notifyMe');
+                                            },
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          -0.93, -0.81),
+                                                  child: Text(
+                                                    'Notify Me',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 25,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                    'A Notification pops up whenever a pin is pointed within a 1 km radius of you',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -885,23 +812,98 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                         ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(6),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              Navigator.of(context)
+                                                  .pushNamed('/donate');
+                                            },
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          -1.0, 0.0),
+                                                  child: Text(
+                                                    'Donate',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 25,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  // alignment:
+                                                  //     const AlignmentDirectional(
+                                                  //         -0.15, -0.55),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(0, 0, 0, 25),
+                                                    child: Text(
+                                                      'You can also donate',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            color: const Color(
+                                                                0xFF404647),
+                                                            fontSize: 12,
+                                                            letterSpacing: 0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

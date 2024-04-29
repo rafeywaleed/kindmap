@@ -579,16 +579,38 @@ class _ProfilePageState extends State<ProfilePage> {
                   alignment: const AlignmentDirectional(0, 1),
                   child: Padding(
                     padding: const EdgeInsets.all(12),
-                    child: AutoSizeText(
-                      'Joined KindMap on 00/00/0000',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Open Sans',
-                            color: const Color(0xB457636C),
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                      minFontSize: 10,
-                    ),
+                    child: StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(FirebaseAuth.instance.currentUser?.uid)
+                            .snapshots(),
+                        builder: ((context, snapshot) {
+                          if (snapshot.hasData) {
+                            return AutoSizeText(
+                              'Joined KindMap on ${snapshot.data!['joined']}',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: const Color(0xB457636C),
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              minFontSize: 10,
+                            );
+                          }
+                          return const Center(child: LinearProgressIndicator());
+                        })),
+                    // AutoSizeText(
+                    //   'Joined KindMap on 00/00/0000',
+                    //   style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    //         fontFamily: 'Open Sans',
+                    //         color: const Color(0xB457636C),
+                    //         letterSpacing: 0,
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //   minFontSize: 10,
+                    // ),
                   ),
                 ),
               ],

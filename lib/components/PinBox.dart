@@ -18,7 +18,7 @@ class PinBox extends StatelessWidget {
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               blurRadius: 5,
               color: Color(0x3B1D2429),
               offset: Offset(
@@ -27,15 +27,15 @@ class PinBox extends StatelessWidget {
               ),
             )
           ],
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(0),
-            bottomRight: Radius.circular(0),
+            bottomRight: const Radius.circular(0),
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -43,7 +43,7 @@ class PinBox extends StatelessWidget {
                 width: size.width * 0.4,
                 height: size.width * 0.4,
                 decoration: BoxDecoration(
-                  color: Color(0xFF2A2A2A),
+                  color: const Color(0xFF2A2A2A),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -51,9 +51,10 @@ class PinBox extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0, 0),
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 10, 0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 0),
                       child: Text(
                         '5ms away',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -66,9 +67,10 @@ class PinBox extends StatelessWidget {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0, 0),
+                    alignment: const AlignmentDirectional(0, 0),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
                       child: Text(
                         '3 hrs left',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -88,7 +90,7 @@ class PinBox extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Text(
                     'Note: An elderly man seeking for Food\n\nLocation Detail: Beside MJCET Gate',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -102,15 +104,15 @@ class PinBox extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10, 12, 10, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(10, 12, 10, 0),
                 child: ElevatedButton(
                   onPressed: () {
                     print('Button pressed ...');
                   },
                   style: ElevatedButton.styleFrom(
                       primary: FlutterFlowTheme.of(context).primaryBackground,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 30),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 30),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
                   child: Text(
@@ -125,7 +127,7 @@ class PinBox extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                 child: ElevatedButton(
                   onPressed: () async {
                     Navigator.of(context).pop();
@@ -134,7 +136,8 @@ class PinBox extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     primary: FlutterFlowTheme.of(context).primary,
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 80),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 80),
                   ),
                   child: Text(
                     'SERVED',

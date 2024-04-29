@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 // import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -73,8 +74,68 @@ class _MapsState extends State<Maps> {
     });
   }
 
+  List<Marker> markers_list = [];
+  List pins = [];
+
   @override
   Widget build(BuildContext context) {
+    StreamBuilder(
+        stream: FirebaseFirestore.instance.collection('Pins').snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: ((context, index) {
+                  final DocumentSnapshot docSnap = snapshot.data!.docs[index];
+                  markers_list!.add(Marker(
+                    point: LatLng(
+                      docSnap['Latitude'],
+                      docSnap['Longitude'],
+                    ),
+                    builder: (context) => IconButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const PinBox();
+                          },
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.location_pin,
+                        size: 60,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ));
+                  return null;
+                }));
+          } else {
+            markers_list.add(Marker(
+              point: location!,
+              width: 60,
+              height: 60,
+              rotateAlignment: Alignment.centerLeft,
+              builder: (_) => IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return const PinBox();
+                    },
+                  );
+                },
+                icon: const Icon(
+                  Icons.location_pin,
+                  size: 60,
+                  color: Colors.red,
+                ),
+              ),
+            ));
+          }
+          return const Center(child: CircularProgressIndicator());
+        });
     return Scaffold(
       appBar: AppBar(
         title: const Text('Map'),
@@ -96,39 +157,20 @@ class _MapsState extends State<Maps> {
                     center: location ?? LatLng(0, 0), // Fallback to (0, 0)
                     zoom: 15,
                     // onTap: (tapPosition, point) {
-                    //   setState(() {
-                    //     location = point;
-                    //   });
+                    //   showModalBottomSheet(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return const PinBox();
+                    //     },
+                    //   );
                     // },
                   ),
                   children: [
                     openStreetMapTileLayer,
                     if (location != null)
                       MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: location!,
-                            width: 60,
-                            height: 60,
-                            rotateAlignment: Alignment.centerLeft,
-                            builder: (_) => IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return const PinBox();
-                                  },
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.location_pin,
-                                size: 60,
-                                color: Colors.red,
-                              ),
-                            ),
-                          )
-                        ],
-                      )
+                          // markers: markers_list,
+                          markers: markers_list!)
                   ],
                 );
               }

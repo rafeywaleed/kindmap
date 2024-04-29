@@ -1,10 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kindmap/Pin/PinConfirmation.dart';
 import 'package:kindmap/themes/kmTheme.dart';
 import 'package:kindmap/themes/old_theme.dart';
 import 'package:provider/provider.dart';
@@ -15,13 +21,95 @@ export 'Model_PinPage.dart';
 class PinPage extends StatefulWidget {
   final String imagePath;
 
-  PinPage({required this.imagePath});
+  const PinPage({super.key, required this.imagePath});
 
   @override
   State<PinPage> createState() => _PinPageState();
 }
 
 class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
+  LatLng? location;
+  final db = FirebaseFirestore.instance;
+  String? url;
+  String? docName;
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // Permissions are denied, next time you could try
+        // requesting permissions again (this is also where
+        // Android's shouldShowRequestPermissionRationale
+        // returned true. According to Android guidelines
+        // your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+  }
+
+  Future getLocation() async {
+    await Geolocator.checkPermission();
+    await Geolocator.requestPermission();
+
+    Position temp = await _determinePosition();
+    setState(() {
+      location = LatLng(temp.latitude, temp.longitude);
+    });
+  }
+
+  Future uploadImage() async {
+    try {
+      final path =
+          'Images/${DateTime.now().millisecondsSinceEpoch}.${widget.imagePath.split('.').last}';
+      final fbs = FirebaseStorage.instance.ref().child(path);
+
+      UploadTask uploadTask = fbs.putFile(File(widget.imagePath));
+      final snapshot = await uploadTask.whenComplete(() {});
+      var temp = await snapshot.ref.getDownloadURL().whenComplete(() {});
+      setState(() {
+        url = temp;
+        docName =
+            '${location!.latitude}-${location!.latitude}-${TimeOfDay.now().hour}:${TimeOfDay.now().minute}';
+        db.collection('Pins').doc(docName).set({
+          'Note': _model.textController1.text,
+          'Details': _model.textController2.text,
+          'Timer': _model.dropDownValue ?? '3 hr',
+          'Latitude': location!.latitude,
+          'Longitude': location!.longitude,
+          'url': url!
+        });
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text('Upload Complete')));
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
   late PinModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -41,8 +129,8 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0, -250),
-          end: Offset(0, 0),
+          begin: const Offset(0, -250),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -60,8 +148,8 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0, 90),
-          end: Offset(0, 0),
+          begin: const Offset(0, 90),
+          end: const Offset(0, 0),
         ),
       ],
     ),
@@ -70,6 +158,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    getLocation();
     _model = createModel(context, () => PinModel());
 
     _model.textController1 ??= TextEditingController();
@@ -109,14 +198,15 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5, 12, 5, 10),
+                padding: const EdgeInsetsDirectional.fromSTEB(5, 12, 5, 10),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(14, 14, 14, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(14, 14, 14, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,9 +253,9 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0, 0),
+                        alignment: const AlignmentDirectional(0, 0),
                         child: Padding(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: Container(
                             width: 200,
                             height: 200,
@@ -185,7 +275,8 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 10),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 10),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -199,10 +290,11 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(-1, 0),
+                                  alignment: const AlignmentDirectional(-1, 0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 10, 10),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            10, 0, 10, 10),
                                     child: Container(
                                       width: double.infinity,
                                       //height: 300,
@@ -212,17 +304,19 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: SingleChildScrollView(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            5, 0, 5, 10),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(5, 0, 5, 10),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Align(
                                               alignment:
-                                                  AlignmentDirectional(-1, 0),
+                                                  const AlignmentDirectional(
+                                                      -1, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(15, 0, 0, 0),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Add a note: ',
                                                   style: FlutterFlowTheme.of(
@@ -245,10 +339,12 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                             ),
                                             Align(
                                               alignment:
-                                                  AlignmentDirectional(0, 0),
+                                                  const AlignmentDirectional(
+                                                      0, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 0, 8, 8),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(8, 0, 8, 8),
                                                 child: TextFormField(
                                                   controller:
                                                       _model.textController1,
@@ -347,10 +443,12 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                             ),
                                             Align(
                                               alignment:
-                                                  AlignmentDirectional(-1, 0),
+                                                  const AlignmentDirectional(
+                                                      -1, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(15, 0, 0, 0),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Location details:',
                                                   style: FlutterFlowTheme.of(
@@ -369,10 +467,12 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                             ),
                                             Align(
                                               alignment:
-                                                  AlignmentDirectional(0, 0),
+                                                  const AlignmentDirectional(
+                                                      0, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 0, 8, 8),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(8, 0, 8, 8),
                                                 child: TextFormField(
                                                   controller:
                                                       _model.textController2,
@@ -469,10 +569,12 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                             ),
                                             Align(
                                               alignment:
-                                                  AlignmentDirectional(-1, 0),
+                                                  const AlignmentDirectional(
+                                                      -1, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(15, 0, 0, 0),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Timer:',
                                                   style: FlutterFlowTheme.of(
@@ -491,10 +593,12 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                             ),
                                             Align(
                                               alignment:
-                                                  AlignmentDirectional(-1, 0),
+                                                  const AlignmentDirectional(
+                                                      -1, 0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(15, 0, 0, 0),
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Set the time, when the location you pinned\nshould disappear from the map',
                                                   style: FlutterFlowTheme.of(
@@ -541,8 +645,9 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                   );
                                                 }).toList(),
                                                 // style: FlutterFlowTheme.of(context).typography.bodyText1,
-                                                hint: Text('Default (3 hrs)'),
-                                                icon: Icon(
+                                                hint: const Text(
+                                                    'Default (3 hrs)'),
+                                                icon: const Icon(
                                                   Icons
                                                       .keyboard_arrow_down_rounded,
                                                   // color: FlutterFlowTheme.of(context).colorScheme.secondary,
@@ -573,26 +678,32 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
               ),
-              alignment: AlignmentDirectional(0, 0),
+              alignment: const AlignmentDirectional(0, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        // Navigator.of(context).pushNamed('null');
+                        await uploadImage();
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                PinConfirmation(docName: docName!)));
                       },
                       text: 'PIN',
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.pin_drop,
                         size: 15,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 50,
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        iconPadding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -601,7 +712,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                   letterSpacing: 0,
                                   fontWeight: FontWeight.bold,
                                 ),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         ),

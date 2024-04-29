@@ -123,12 +123,12 @@ class BoxEx extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // Show PinBox as a modal bottom sheet when button is pressed
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return const PinBox();
-                    },
-                  );
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   builder: (BuildContext context) {
+                  //     return const PinBox();
+                  //   },
+                  // );
                 },
                 child: const Text('Show PinBox'),
               ),

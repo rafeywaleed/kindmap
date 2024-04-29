@@ -39,14 +39,33 @@ class _MapsState extends State<Maps> {
         final latitude = doc['Latitude'];
         final longitude = doc['Longitude'];
         return Marker(
-          rotate: false,
           point: LatLng(latitude, longitude),
-          builder: (_) => IconButton(
+          builder: (context) => IconButton(
             onPressed: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return const PinBox();
+                  return PinBox(
+                    note: doc['Note'],
+                    detail: doc['Details'],
+                    image: doc['url'],
+                    timeleft: doc['Timer'],
+                    latitude: doc['Latitude'],
+                    longitude: doc['Longitude'],
+                    onServe: () {
+                      // Remove marker from the map
+                      setState(() {
+                        markers.removeWhere((marker) =>
+                            marker.point == LatLng(latitude, longitude));
+                      });
+
+                      // Remove marker from Firestore
+                      FirebaseFirestore.instance
+                          .collection('Pins')
+                          .doc(doc.id)
+                          .delete();
+                    },
+                  );
                 },
               );
             },
@@ -72,7 +91,7 @@ class _MapsState extends State<Maps> {
           if (location != null)
             FlutterMap(
               options: MapOptions(
-                minZoom: 8,
+                minZoom: 0,
                 maxZoom: 18,
                 center: location ?? LatLng(0, 0),
                 zoom: 15,

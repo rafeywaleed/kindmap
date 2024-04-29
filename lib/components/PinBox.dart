@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,9 +7,31 @@ import 'package:provider/provider.dart';
 import 'Model_PinBox.dart';
 export 'Model_PinBox.dart';
 
-class PinBox extends StatelessWidget {
-  const PinBox({Key? key}) : super(key: key);
+class PinBox extends StatefulWidget {
+  String timeleft;
+  double latitude;
+  double longitude;
+  String note;
+  String image;
+  String detail;
+  var onServe;
 
+  PinBox({
+    super.key,
+    required this.timeleft,
+    required this.latitude,
+    required this.longitude,
+    required this.note,
+    required this.image,
+    required this.detail,
+    required this.onServe,
+  });
+
+  @override
+  State<PinBox> createState() => _PinBoxState();
+}
+
+class _PinBoxState extends State<PinBox> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -17,8 +40,8 @@ class PinBox extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               blurRadius: 5,
               color: Color(0x3B1D2429),
               offset: Offset(
@@ -92,7 +115,7 @@ class PinBox extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
-                    'Note: An elderly man seeking for Food\n\nLocation Detail: Beside MJCET Gate',
+                    'Note: ${widget.note}\n\nLocation Detail: ${widget.detail}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Poppins',
                           color: FlutterFlowTheme.of(context).lineColor,
@@ -129,9 +152,7 @@ class PinBox extends StatelessWidget {
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                 child: ElevatedButton(
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: widget.onServe,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),

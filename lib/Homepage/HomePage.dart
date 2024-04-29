@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               // width: 407,
               // height: 933,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).tertiary,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(0),
                   bottomRight: Radius.circular(0),

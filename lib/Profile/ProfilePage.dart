@@ -92,68 +92,67 @@ class _ProfilePageState extends State<ProfilePage> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/images/deerlogo.jpg',
-                          fit: BoxFit.cover,
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Container(
+                          width: 120,
+                          height: 120,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset(
+                            'assets/images/deerlogo.jpg',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: const AlignmentDirectional(-1, 0),
+                    Expanded(
+                      flex: 3,
                       child: Column(
-                        mainAxisSize: MainAxisSize.max,
+                        // mainAxisSize: MainAxisSize.min,
                         children: [
-                          Align(
-                            alignment: const AlignmentDirectional(-1, 0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  8, 8, 8, 4),
-                              child: StreamBuilder(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('users')
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid)
-                                      .snapshots(),
-                                  builder: ((context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return FittedBox(
-                                        child: Text(
-                                          snapshot.data!['name'],
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                fontSize: 20,
-                                                letterSpacing: 0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                        ),
-                                      );
-                                    }
-                                    return const Center(
-                                        child: LinearProgressIndicator());
-                                  })),
-                              // Text(
-                              //   'Username Goes here',
-                              //   style: FlutterFlowTheme.of(context)
-                              //       .bodyMedium
-                              //       .override(
-                              //         fontFamily: 'Readex Pro',
-                              //         fontSize: 20,
-                              //         letterSpacing: 0,
-                              //         fontWeight: FontWeight.w600,
-                              //       ),
-                              // ),
-                            ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8, 8, 8, 4),
+                            child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return FittedBox(
+                                      child: Text(
+                                        snapshot.data!['name'],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 20,
+                                              letterSpacing: 0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                  return const Center(
+                                      child: LinearProgressIndicator());
+                                })),
+                            // Text(
+                            //   'Username Goes here',
+                            //   style: FlutterFlowTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //         fontFamily: 'Readex Pro',
+                            //         fontSize: 20,
+                            //         letterSpacing: 0,
+                            //         fontWeight: FontWeight.w600,
+                            //       ),
+                            // ),
                           ),
                           Align(
                             alignment: const AlignmentDirectional(-1, 0),
@@ -164,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     .snapshots(),
                                 builder: ((context, snapshot) {
                                   if (snapshot.hasData) {
-                                    return FittedBox(
+                                    return Center(
                                       child: Text(
                                         snapshot.data!['email'],
                                         style: FlutterFlowTheme.of(context)
@@ -210,14 +209,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   //     color: FlutterFlowTheme.of(context).secondaryBackground,
                   //   ),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
+                    // mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(12),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
-                            'assets/images/Homeless-1.jpg',
+                            'assets/images/trophy.jpg',
                             width: 101,
                             height: 200,
                             fit: BoxFit.cover,
@@ -225,7 +224,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       Column(
-                        mainAxisSize: MainAxisSize.max,
+                        // mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
@@ -240,17 +239,42 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                             ),
                           ),
-                          Text(
-                            '5 ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 35,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.w800,
-                                ),
+                          Align(
+                            alignment: const AlignmentDirectional(-1, 0),
+                            child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!['helped'].toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 35,
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                    );
+                                  }
+                                  return const Center(
+                                      child: LinearProgressIndicator());
+                                })),
                           ),
+                          // Text(
+                          //   '5 ',
+                          //   style: FlutterFlowTheme.of(context)
+                          //       .bodyMedium
+                          //       .override(
+                          //         fontFamily: 'Readex Pro',
+                          //         fontSize: 35,
+                          //         letterSpacing: 0,
+                          //         fontWeight: FontWeight.w800,
+                          //       ),
+                          // ),
                           Align(
                             alignment: const AlignmentDirectional(0, 0),
                             child: Text(
@@ -304,7 +328,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: TextFormField(
                             controller: _model.textController1,
                             focusNode: _model.textFieldFocusNode1,
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelStyle: FlutterFlowTheme.of(context)
@@ -361,6 +385,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 .asValidator(context),
                             onFieldSubmitted: (newValue) {
                               _model.textController1!.clear();
+                              if (newValue == '') return;
                               FirebaseFirestore.instance
                                   .collection('users')
                                   .doc(FirebaseAuth.instance.currentUser?.uid)

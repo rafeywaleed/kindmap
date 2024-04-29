@@ -111,16 +111,15 @@ class _PinConfirmationState extends State<PinConfirmation> {
                           MarkerLayer(
                             markers: [
                               Marker(
-                                point: location!,
-                                width: 60,
-                                height: 60,
-                                rotateAlignment: Alignment.centerLeft,
-                                builder: (_) => const Icon(
-                                  Icons.location_pin,
-                                  size: 60,
-                                  color: Colors.red,
-                                ),
-                              ),
+                                  point: location!,
+                                  width: 30,
+                                  height: 30,
+                                  rotateAlignment: Alignment.centerLeft,
+                                  builder: (_) => Image.asset(
+                                        'assets/images/MapMarker.png', // Replace with your image path
+                                        width: 50,
+                                        height: 50,
+                                      )),
                             ],
                           ),
                       ],

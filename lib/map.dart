@@ -72,10 +72,10 @@ class _MapsState extends State<Maps> {
                 },
               );
             },
-            child: const Icon(
-              Icons.location_pin,
-              size: 50,
-              color: Colors.red,
+            child: Image.asset(
+              'assets/images/MapMarker.png', // Replace with your image path
+              width: 50,
+              height: 50,
             ),
           ),
         );

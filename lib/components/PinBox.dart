@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'Model_PinBox.dart';
 export 'Model_PinBox.dart';
 
@@ -146,7 +147,8 @@ class _PinBoxState extends State<PinBox> {
                 padding: const EdgeInsetsDirectional.fromSTEB(10, 12, 10, 0),
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Button pressed ...');
+                    NavigateToLocation(widget.latitude, widget.longitude);
+                    // print('Button pressed ...');
                   },
                   style: ElevatedButton.styleFrom(
                       primary:
@@ -195,5 +197,15 @@ class _PinBoxState extends State<PinBox> {
         ),
       ),
     );
+  }
+
+  void NavigateToLocation(double latitude, double longitude) async {
+    final url =
+        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

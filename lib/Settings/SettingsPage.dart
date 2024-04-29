@@ -77,16 +77,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
-            child: Text(
-              'Please evaluate your options below.',
-              style: FlutterFlowTheme.of(context).labelMedium.override(
-                    fontFamily: 'Readex Pro',
-                    letterSpacing: 0,
-                  ),
-            ),
-          ),
           ListView(
             padding: EdgeInsets.zero,
             shrinkWrap: true,

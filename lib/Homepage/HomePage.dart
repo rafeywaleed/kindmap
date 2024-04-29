@@ -231,38 +231,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             alignment: const AlignmentDirectional(-1, 0),
                           ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              Navigator.of(context).pushNamed('/try');
-                            },
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.settings_sharp,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                              title: Text(
-                                'Trying Boxes',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .override(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              tileColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              dense: false,
-                            ),
-                          ),
+                        SizedBox(
+                          height: size.height * 0.03,
                         ),
                         Padding(
                           padding:

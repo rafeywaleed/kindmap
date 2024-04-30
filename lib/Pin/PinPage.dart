@@ -92,14 +92,19 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
       setState(() {
         url = temp;
         docName =
-            '${location!.latitude}-${location!.latitude}-${TimeOfDay.now().hour}:${TimeOfDay.now().minute}';
+            '${location!.latitude}-${location!.longitude}-${TimeOfDay.now().hour}:${TimeOfDay.now().minute}';
         db.collection('Pins').doc(docName).set({
-          'Note': _model.textController1.text,
-          'Details': _model.textController2.text,
+          'Note': _model.textController1.text == ""
+              ? '(none)'
+              : _model.textController1.text,
+          'Details': _model.textController2.text == ""
+              ? '(none)'
+              : _model.textController2.text,
           'Timer': _model.dropDownValue ?? '3 hr',
           'Latitude': location!.latitude,
           'Longitude': location!.longitude,
-          'url': url!
+          'url': url!,
+          'UploadTime': DateTime.now()
         });
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text('Upload Complete')));
@@ -599,23 +604,24 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                 padding:
                                                     const EdgeInsetsDirectional
                                                         .fromSTEB(15, 0, 0, 0),
-                                                child: Text(
-                                                  'Set the time, when the location you pinned\nshould disappear from the map',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        fontSize: 15,
-                                                        letterSpacing: 0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                                child: FittedBox(
+                                                  child: Text(
+                                                    'Set the time, when the location you pinned\nshould disappear from the map',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Plus Jakarta Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 15,
+                                                          letterSpacing: 0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                             ),

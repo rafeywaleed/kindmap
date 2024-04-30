@@ -5,6 +5,7 @@ class FirestoreServices {
     await FirebaseFirestore.instance.collection('users').doc(uid).set({
       'email': email,
       'name': name,
+      'helped': 0,
       'joined':
           '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}'
     });

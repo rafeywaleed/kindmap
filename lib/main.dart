@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/auth': (context) => const LoginForm(),
         '/home': (context) => const HomePage(),
-        //'Pin': (context) => PinPage(imageData: ,),
+        //'/pin': (context) => PinPage(imageData: ,),
         '/camera': (context) => CameraPage(),
         '/settings': (context) => const SettingsPage(),
         '/profile': (context) => const ProfilePage(),

@@ -1,5 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
     super.dispose();
   }
 
+  String? selectedTeamMember;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -284,20 +285,44 @@ class _SettingsPageState extends State<SettingsPage> {
                     print('IconButton pressed ...');
                   },
                 ),
-                FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).alternate,
-                  borderRadius: 12,
-                  borderWidth: 1,
-                  buttonSize: 48,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  icon: FaIcon(
-                    FontAwesomeIcons.linkedinIn,
-                    color: FlutterFlowTheme.of(context).secondaryText,
-                    size: 24,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: PopupMenuButton<String>(
+                    icon: FaIcon(
+                      FontAwesomeIcons.linkedin,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 24,
+                    ),
+                    itemBuilder: (BuildContext context) => [
+                      PopupMenuItem(
+                        value:
+                            'https://www.linkedin.com/in/team-member-1-profile',
+                        child: ListTile(
+                          leading: Icon(FontAwesomeIcons.linkedin),
+                          title: Text('Team Member 1'),
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value:
+                            'https://www.linkedin.com/in/team-member-2-profile',
+                        child: ListTile(
+                          leading: Icon(FontAwesomeIcons.linkedin),
+                          title: Text('Team Member 2'),
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value:
+                            'https://www.linkedin.com/in/team-member-3-profile',
+                        child: ListTile(
+                          leading: Icon(FontAwesomeIcons.linkedin),
+                          title: Text('Team Member 3'),
+                        ),
+                      ),
+                    ],
+                    onSelected: (String value) {
+                      launch(value);
+                    },
                   ),
-                  onPressed: () {
-                    print('IconButton pressed ...');
-                  },
                 ),
               ].divide(const SizedBox(width: 8)),
             ),

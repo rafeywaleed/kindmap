@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
@@ -52,6 +54,8 @@ class _MapsState extends State<Maps> {
                     timeleft: doc['Timer'],
                     latitude: doc['Latitude'],
                     longitude: doc['Longitude'],
+                    // if (location ==
+                    //     LatLng(doc['Latitude'], doc['Longitude'])) {
                     location: location,
                     onServe: () async {
                       // Remove marker from the map
@@ -59,14 +63,24 @@ class _MapsState extends State<Maps> {
                         markers.removeWhere((marker) =>
                             marker.point == LatLng(latitude, longitude));
                       });
-
                       // Remove marker from Firestore
-                      await FirebaseFirestore.instance
+
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Thank You for helping!')));
+                      FirebaseFirestore.instance
                           .collection('Pins')
                           .doc(doc.id)
                           .delete();
+                      var helped = await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .get();
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .update({'helped': helped.data()!['helped'] + 1});
                       Navigator.pop(context);
-                      Navigator.pop(context);
+                      // }
                     },
                   );
                 },
@@ -85,6 +99,13 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+    // markers.add(Marker(
+    //     point: location!,
+    //     builder: (context) => const Icon(
+    //           Icons.my_location,
+    //           color: Colors.blue,
+    //           size: 30,
+    //         )));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Map'),

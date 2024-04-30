@@ -4,6 +4,7 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kindmap/Profile/Model_ProfilePage.dart';
+import 'package:kindmap/themes/kmTheme.dart';
 
 export 'Model_ProfilePage.dart';
 
@@ -51,9 +52,9 @@ class _ProfilePageState extends State<ProfilePage> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: KMTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: KMTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -63,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
             fillColor: Colors.transparent,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: KMTheme.of(context).primaryText,
               size: 24,
             ),
             onPressed: () async {
@@ -72,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           title: Text(
             'Profile',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
+            style: KMTheme.of(context).bodyMedium.override(
                   fontFamily: 'Plus Jakarta Sans',
                   fontSize: 22,
                   letterSpacing: 0,
@@ -128,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     return FittedBox(
                                       child: Text(
                                         snapshot.data!['name'],
-                                        style: FlutterFlowTheme.of(context)
+                                        style: KMTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
@@ -144,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 })),
                             // Text(
                             //   'Username Goes here',
-                            //   style: FlutterFlowTheme.of(context)
+                            //   style: KMTheme.of(context)
                             //       .bodyMedium
                             //       .override(
                             //         fontFamily: 'Readex Pro',
@@ -166,7 +167,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     return Center(
                                       child: Text(
                                         snapshot.data!['email'],
-                                        style: FlutterFlowTheme.of(context)
+                                        style: KMTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
@@ -180,7 +181,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 })),
                             // Text(
                             //   'Mail Id goes here',
-                            //   style: FlutterFlowTheme.of(context)
+                            //   style: KMTheme.of(context)
                             //       .bodyMedium
                             //       .override(
                             //         fontFamily: 'Readex Pro',
@@ -197,7 +198,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 //   width: 100,
                 //   height: 28,
                 //   decoration: BoxDecoration(
-                //     color: FlutterFlowTheme.of(context).secondaryBackground,
+                //     color: KMTheme.of(context).secondaryBackground,
                 //   ),
                 // ),
                 Align(
@@ -206,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   //   width: 378,
                   //   height: 122,
                   //   decoration: BoxDecoration(
-                  //     color: FlutterFlowTheme.of(context).secondaryBackground,
+                  //     color: KMTheme.of(context).secondaryBackground,
                   //   ),
                   child: Row(
                     // mainAxisSize: MainAxisSize.max,
@@ -231,9 +232,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 0, 10, 0, 0),
                             child: Text(
                               'Number of people you helped :',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -250,7 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   if (snapshot.hasData) {
                                     return Text(
                                       snapshot.data!['helped'].toString(),
-                                      style: FlutterFlowTheme.of(context)
+                                      style: KMTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Readex Pro',
@@ -266,7 +265,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           // Text(
                           //   '5 ',
-                          //   style: FlutterFlowTheme.of(context)
+                          //   style: KMTheme.of(context)
                           //       .bodyMedium
                           //       .override(
                           //         fontFamily: 'Readex Pro',
@@ -281,12 +280,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               'These many people are thankful \nfor you',
                               textAlign: TextAlign.center,
                               maxLines: 3,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                    color: KMTheme.of(context).secondaryText,
                                     letterSpacing: 0,
                                   ),
                             ),
@@ -302,7 +298,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 428,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: KMTheme.of(context).secondaryBackground,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -313,9 +309,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsets.all(8),
                             child: Text(
                               'Change name : ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -331,52 +325,47 @@ class _ProfilePageState extends State<ProfilePage> {
                             autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
+                              labelStyle:
+                                  KMTheme.of(context).labelMedium.override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0,
+                                      ),
                               hintText: 'New Name',
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
+                              hintStyle:
+                                  KMTheme.of(context).labelMedium.override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0,
+                                      ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  color: KMTheme.of(context).primaryText,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  color: KMTheme.of(context).primary,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
+                                  color: KMTheme.of(context).error,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
+                                  color: KMTheme.of(context).error,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
+                            style: KMTheme.of(context).bodyMedium.override(
                                   fontFamily: 'Readex Pro',
                                   letterSpacing: 0,
                                 ),
@@ -405,10 +394,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       width: 403,
                       height: 266,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).accent4,
+                        color: KMTheme.of(context).accent4,
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryText,
+                          color: KMTheme.of(context).primaryText,
                         ),
                       ),
                       child: Column(
@@ -421,9 +410,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   8, 6, 6, 0),
                               child: Text(
                                 'Change Password :',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
+                                style: KMTheme.of(context).bodyMedium.override(
                                       fontFamily: 'Readex Pro',
                                       letterSpacing: 0,
                                     ),
@@ -439,51 +426,46 @@ class _ProfilePageState extends State<ProfilePage> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'New Password',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
+                                labelStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                hintStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                    color: KMTheme.of(context).tertiary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: KMTheme.of(context).primary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -501,43 +483,40 @@ class _ProfilePageState extends State<ProfilePage> {
                               obscureText: !_model.passwordVisibility,
                               decoration: InputDecoration(
                                 labelText: 'Confirm Password',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
+                                labelStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                hintStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                    color: KMTheme.of(context).tertiary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: KMTheme.of(context).primary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -556,9 +535,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -578,15 +555,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   24, 0, 24, 0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0, 0, 0, 0),
-                              color: FlutterFlowTheme.of(context).primary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    letterSpacing: 0,
-                                  ),
+                              color: KMTheme.of(context).primary,
+                              textStyle:
+                                  KMTheme.of(context).titleSmall.override(
+                                        fontFamily: 'Readex Pro',
+                                        color: KMTheme.of(context).secondary,
+                                        letterSpacing: 0,
+                                      ),
                               elevation: 3,
                               borderSide: const BorderSide(
                                 color: Colors.transparent,
@@ -613,9 +588,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           if (snapshot.hasData) {
                             return AutoSizeText(
                               'Joined KindMap on ${snapshot.data!['joined']}',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Open Sans',
                                     color: const Color(0xB457636C),
                                     letterSpacing: 0,
@@ -628,7 +601,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         })),
                     // AutoSizeText(
                     //   'Joined KindMap on 00/00/0000',
-                    //   style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    //   style: KMTheme.of(context).bodyMedium.override(
                     //         fontFamily: 'Open Sans',
                     //         color: const Color(0xB457636C),
                     //         letterSpacing: 0,

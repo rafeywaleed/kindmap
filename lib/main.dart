@@ -84,10 +84,9 @@ class _MyAppState extends State<MyApp> {
       // themeMode: ThemeMode.dark,
       // darkTheme: CustomTheme.darkBase,
       // theme: CustomTheme.lightBase,
-      theme: KMTheme.lightTheme,
-      darkTheme: KMTheme.darkTheme,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       themeMode: Provider.of<ThemeProvider>(context).themeMode,
-
       routes: {
         '/auth': (context) => const LoginForm(),
         '/home': (context) => const HomePage(),
@@ -97,57 +96,19 @@ class _MyAppState extends State<MyApp> {
         '/profile': (context) => const ProfilePage(),
         '/map': (context) => const Maps(),
         '/introScreens': (context) => const IntroScreens(),
-        '/try': (context) => const BoxEx(),
       },
     );
   }
 }
 
-class BoxEx extends StatelessWidget {
-  const BoxEx({super.key});
+class ThemeProvider extends ChangeNotifier {
+  ThemeMode _themeMode = ThemeMode.system;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trying Components'),
-      ),
-      body: Center(
-        child: Row(
-          children: [
-            const Align(
-              alignment: Alignment.center,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Show PinBox as a modal bottom sheet when button is pressed
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   builder: (BuildContext context) {
-                  //     return const PinBox();
-                  //   },
-                  // );
-                },
-                child: const Text('Show PinBox'),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Show PinBox as a modal bottom sheet when button is pressed
-                // showModalBottomSheet(
-                //   context: context,
-                //   builder: (BuildContext context) {
-                //     return DetailBox();
-                //   },
-                // );
-              },
-              child: const Text('Show DetailBox'),
-            ),
-          ],
-        ),
-      ),
-    );
+  ThemeMode get themeMode => _themeMode;
+
+  void toggleTheme() {
+    _themeMode =
+        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
   }
 }

@@ -197,7 +197,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).accent4,
+        backgroundColor: KMTheme.of(context).accent4,
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -221,11 +221,11 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                               borderRadius: 30,
                               borderWidth: 1,
                               buttonSize: 40,
-                              fillColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              fillColor:
+                                  KMTheme.of(context).secondaryBackground,
                               icon: Icon(
                                 Icons.arrow_back_ios_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color: KMTheme.of(context).primaryText,
                                 size: 20,
                               ),
                               onPressed: () async {
@@ -240,12 +240,11 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                   borderRadius: 30,
                                   borderWidth: 1,
                                   buttonSize: 40,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  fillColor:
+                                      KMTheme.of(context).secondaryBackground,
                                   icon: Icon(
                                     Icons.keyboard_control_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                                    color: KMTheme.of(context).primaryText,
                                     size: 20,
                                   ),
                                   onPressed: () {
@@ -265,8 +264,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                             width: 200,
                             height: 200,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: KMTheme.of(context).secondaryBackground,
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: FileImage(File(widget.imagePath)),
@@ -286,8 +284,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color: KMTheme.of(context).secondaryBackground,
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -304,7 +301,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                       width: double.infinity,
                                       //height: 300,
                                       decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
+                                        color: KMTheme.of(context)
                                             .secondaryBackground,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
@@ -324,8 +321,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Add a note: ',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                                  style: KMTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
@@ -335,8 +331,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .primaryText,
                                                       ),
                                                 ),
@@ -358,8 +353,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
+                                                        KMTheme.of(context)
                                                             .labelMedium
                                                             .override(
                                                               fontFamily:
@@ -369,8 +363,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                     hintText:
                                                         'ex: Food, Money\n(optional)',
                                                     hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
+                                                        KMTheme.of(context)
                                                             .labelMedium
                                                             .override(
                                                               fontFamily:
@@ -381,8 +374,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .secondaryText,
                                                         width: 2,
                                                       ),
@@ -394,8 +386,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .primary,
                                                         width: 2,
                                                       ),
@@ -407,8 +398,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .error,
                                                         width: 2,
                                                       ),
@@ -420,8 +410,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .error,
                                                         width: 2,
                                                       ),
@@ -430,8 +419,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                               22),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                                  style: KMTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
@@ -456,8 +444,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Location details:',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                                  style: KMTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
@@ -486,8 +473,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
+                                                        KMTheme.of(context)
                                                             .labelMedium
                                                             .override(
                                                               fontFamily:
@@ -496,8 +482,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                             ),
                                                     hintText: '(optional)',
                                                     hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
+                                                        KMTheme.of(context)
                                                             .labelMedium
                                                             .override(
                                                               fontFamily:
@@ -508,8 +493,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .secondaryText,
                                                         width: 2,
                                                       ),
@@ -521,8 +505,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .primary,
                                                         width: 2,
                                                       ),
@@ -534,8 +517,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .error,
                                                         width: 2,
                                                       ),
@@ -547,8 +529,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         OutlineInputBorder(
                                                       borderSide: BorderSide(
                                                         color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            KMTheme.of(context)
                                                                 .error,
                                                         width: 2,
                                                       ),
@@ -557,8 +538,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                               22),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                                  style: KMTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
@@ -582,8 +562,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                         .fromSTEB(15, 0, 0, 0),
                                                 child: Text(
                                                   'Timer:',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
+                                                  style: KMTheme.of(context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
@@ -607,14 +586,13 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                 child: FittedBox(
                                                   child: Text(
                                                     'Set the time, when the location you pinned\nshould disappear from the map',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
+                                                    style: KMTheme.of(context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
                                                               'Plus Jakarta Sans',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
+                                                          color: KMTheme.of(
+                                                                  context)
                                                               .secondaryText,
                                                           fontSize: 15,
                                                           letterSpacing: 0,
@@ -650,13 +628,13 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                                                     child: Text(value),
                                                   );
                                                 }).toList(),
-                                                // style: FlutterFlowTheme.of(context).typography.bodyText1,
+                                                // style: KMTheme.of(context).typography.bodyText1,
                                                 hint: const Text(
                                                     'Default (3 hrs)'),
                                                 icon: const Icon(
                                                   Icons
                                                       .keyboard_arrow_down_rounded,
-                                                  // color: FlutterFlowTheme.of(context).colorScheme.secondary,
+                                                  // color: KMTheme.of(context).colorScheme.secondary,
                                                   size: 24,
                                                 ),
                                                 isExpanded: true,
@@ -682,7 +660,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
               width: double.infinity,
               height: 100,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
+                color: KMTheme.of(context).primaryBackground,
               ),
               alignment: const AlignmentDirectional(0, 0),
               child: Column(
@@ -710,14 +688,13 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context).secondary,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        color: KMTheme.of(context).primary,
+                        textStyle: KMTheme.of(context).titleSmall.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: KMTheme.of(context).secondary,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.bold,
+                            ),
                         borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,

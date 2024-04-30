@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kindmap/main.dart';
 import 'package:kindmap/themes/kmTheme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).alternate,
+        backgroundColor: KMTheme.of(context).alternate,
         endDrawer: Drawer(
           elevation: 16,
           child: SizedBox(
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               // width: 407,
               // height: 933,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
+                color: KMTheme.of(context).tertiary,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(0),
                   bottomRight: Radius.circular(0),
@@ -99,12 +100,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: Stack(
                 children: [
                   Opacity(
-                    opacity: 0.2,
+                    opacity: Theme.of(context).brightness == Brightness.light
+                        ? 0.2
+                        : 0.7,
                     child: Container(
-                      width: 355,
-                      height: 957,
+                      // width: 355,
+                      // height: 957,
+                      width: size.width * 1.3,
+                      height: size.height * 1.3,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBackgroundColor,
+                        color: KMTheme.of(context).tertiary,
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: Image.asset(
@@ -127,8 +132,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: KMTheme.of(context).primaryBackground,
                             boxShadow: const [
                               BoxShadow(
                                 blurRadius: 0,
@@ -155,8 +159,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   Padding(
                                     padding: const EdgeInsets.all(14),
                                     child: Container(
-                                      width: 120,
-                                      height: 120,
+                                      width: size.width * 0.3,
+                                      height: size.width * 0.3,
                                       clipBehavior: Clip.antiAlias,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
@@ -186,17 +190,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           return FittedBox(
                                             child: Text(
                                               snapshot.data!['name'],
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Plus Jakarta Sans',
-                                                        fontSize: 22.5,
-                                                        letterSpacing: 0,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
+                                              style: KMTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily:
+                                                        'Plus Jakarta Sans',
+                                                    fontSize: 22.5,
+                                                    letterSpacing: 0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                             ),
                                           );
                                         }
@@ -205,7 +207,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       })),
                                   // Text(
                                   //   'User name here',
-                                  //   style: FlutterFlowTheme.of(context)
+                                  //   style: KMTheme.of(context)
                                   //       .bodyMedium
                                   //       .override(
                                   //         fontFamily: 'Plus Jakarta Sans',
@@ -219,20 +221,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ],
                           ),
                         ),
-                        Opacity(
-                          opacity: 0,
-                          child: Container(
-                            height: 70 % size.height,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            alignment: const AlignmentDirectional(-1, 0),
-                          ),
-                        ),
+                        // Opacity(
+                        //   opacity: 0,
+                        //   child: Container(
+                        //     height: 70 % size.height,
+                        //     decoration: BoxDecoration(
+                        //       color: KMTheme.of(context).secondaryBackground,
+                        //       borderRadius: BorderRadius.circular(8),
+                        //     ),
+                        //     alignment: const AlignmentDirectional(-1, 0),
+                        //   ),
+                        // ),
                         SizedBox(
-                          height: size.height * 0.03,
+                          height: size.height * 0.2,
                         ),
                         Padding(
                           padding:
@@ -248,62 +249,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             child: ListTile(
                               leading: Icon(
                                 Icons.settings_sharp,
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color: KMTheme.of(context).primaryText,
                               ),
                               title: Text(
                                 'Settings',
                                 textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .override(
+                                style: KMTheme.of(context).titleLarge.override(
                                       fontFamily: 'Plus Jakarta Sans',
                                       letterSpacing: 0,
-                                      fontWeight: FontWeight.bold,
+                                      fontWeight: FontWeight.w600,
                                     ),
                               ),
-                              tileColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              dense: false,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                          child: Slidable(
-                            endActionPane: ActionPane(
-                              motion: const ScrollMotion(),
-                              extentRatio: 0.25,
-                              children: [
-                                SlidableAction(
-                                  label: 'Share',
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).info,
-                                  icon: Icons.share,
-                                  onPressed: (_) {
-                                    print('SlidableActionWidget pressed ...');
-                                  },
-                                ),
-                              ],
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.contacts_rounded,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                              title: Text(
-                                'Contact',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .override(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              tileColor: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              tileColor:
+                                  KMTheme.of(context).secondaryBackground,
                               dense: false,
                             ),
                           ),
@@ -314,21 +272,77 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           child: ListTile(
                             leading: Icon(
                               Icons.info,
-                              color: FlutterFlowTheme.of(context).primaryText,
+                              color: KMTheme.of(context).primaryText,
+                            ),
+                            title: Text(
+                              'Contact',
+                              textAlign: TextAlign.start,
+                              style: KMTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            ),
+                            tileColor: KMTheme.of(context).secondaryBackground,
+                            dense: false,
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                          child: Slidable(
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              //extentRatio: 0.25,
+                              children: [
+                                SlidableAction(
+                                  label: 'Share',
+                                  backgroundColor: KMTheme.of(context).info,
+                                  icon: Icons.share,
+                                  onPressed: (_) {
+                                    print('SlidableActionWidget pressed ...');
+                                  },
+                                ),
+                              ],
+                            ),
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.share,
+                                color: KMTheme.of(context).primaryText,
+                              ),
+                              title: Text(
+                                'Share',
+                                textAlign: TextAlign.start,
+                                style: KMTheme.of(context).titleLarge.override(
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      letterSpacing: 0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                              tileColor:
+                                  KMTheme.of(context).secondaryBackground,
+                              dense: false,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.info,
+                              color: KMTheme.of(context).primaryText,
                             ),
                             title: Text(
                               'About',
                               textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
+                              style: KMTheme.of(context).titleLarge.override(
                                     fontFamily: 'Plus Jakarta Sans',
                                     letterSpacing: 0,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w600,
                                   ),
                             ),
-                            tileColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            tileColor: KMTheme.of(context).secondaryBackground,
                             dense: false,
                           ),
                         ),
@@ -337,8 +351,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           child: Container(
                             height: 50 % size.height,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
+                              color: KMTheme.of(context).secondaryBackground,
                             ),
                           ),
                         ),
@@ -347,24 +360,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           child: Padding(
                             padding: const EdgeInsets.all(8),
                             child: Container(
-                              width: 80 % size.width,
-                              // height: 50,
+                              width: 0.2 * size.width,
+                              height: 0.1 * size.width,
                               decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).lineColor,
-                                boxShadow: [
-                                  const BoxShadow(
+                                color: KMTheme.of(context).lineColor,
+                                boxShadow: const [
+                                  BoxShadow(
                                     blurRadius: 8,
                                     color: Colors.black,
-                                    offset: Offset(
-                                      2,
-                                      3,
-                                    ),
+                                    offset: Offset(2, 3),
                                     spreadRadius: 1,
                                   )
                                 ],
                                 borderRadius: BorderRadius.circular(24),
                                 border: Border.all(
-                                  color: FlutterFlowTheme.of(context).accent1,
+                                  color: KMTheme.of(context).accent1,
                                   width: 4,
                                 ),
                               ),
@@ -391,13 +401,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                       context,
                                                       listen: false)
                                                   .toggleTheme();
-                                              ;
                                             },
                                             child: Icon(
                                               Icons.nights_stay,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                              color: KMTheme.of(context)
+                                                  .primaryText,
                                               size: 30,
                                             ),
                                           ),
@@ -424,9 +432,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             },
                                             child: Icon(
                                               Icons.wb_sunny_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
+                                              color: KMTheme.of(context)
+                                                  .primaryText,
                                               size: 30,
                                             ),
                                           ),
@@ -438,6 +445,103 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
+
+                        // Align(
+                        //   alignment: const AlignmentDirectional(-1, 0),
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(8),
+                        //     child: Container(
+                        //       width: 80 % size.width,
+                        //       // height: 50,
+                        //       decoration: BoxDecoration(
+                        //         color: KMTheme.of(context).lineColor,
+                        //         boxShadow: [
+                        //           const BoxShadow(
+                        //             blurRadius: 8,
+                        //             color: Colors.black,
+                        //             offset: Offset(
+                        //               2,
+                        //               3,
+                        //             ),
+                        //             spreadRadius: 1,
+                        //           )
+                        //         ],
+                        //         borderRadius: BorderRadius.circular(24),
+                        //         border: Border.all(
+                        //           color: KMTheme.of(context).accent1,
+                        //           width: 4,
+                        //         ),
+                        //       ),
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.all(2),
+                        //         child: Stack(
+                        //           alignment: const AlignmentDirectional(0, 0),
+                        //           children: [
+                        //             if (Theme.of(context).brightness ==
+                        //                 Brightness.light)
+                        //               Align(
+                        //                 alignment: const AlignmentDirectional(
+                        //                     -0.74, -0.2),
+                        //                 child: Padding(
+                        //                   padding: const EdgeInsetsDirectional
+                        //                       .fromSTEB(0, 0, 6, 0),
+                        //                   child: InkWell(
+                        //                     splashColor: Colors.transparent,
+                        //                     focusColor: Colors.transparent,
+                        //                     hoverColor: Colors.transparent,
+                        //                     highlightColor: Colors.transparent,
+                        //                     onTap: () async {
+                        //                       Provider.of<ThemeProvider>(
+                        //                               context,
+                        //                               listen: false)
+                        //                           .toggleTheme();
+                        //                       ;
+                        //                     },
+                        //                     child: Icon(
+                        //                       Icons.nights_stay,
+                        //                       color:
+                        //                           KMTheme.of(context)
+                        //                               .primaryText,
+                        //                       size: 30,
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //             if (Theme.of(context).brightness ==
+                        //                 Brightness.dark)
+                        //               Align(
+                        //                 alignment: const AlignmentDirectional(
+                        //                     0.70, 0.25),
+                        //                 child: Padding(
+                        //                   padding: const EdgeInsetsDirectional
+                        //                       .fromSTEB(5, 0, 0, 0),
+                        //                   child: InkWell(
+                        //                     splashColor: Colors.transparent,
+                        //                     focusColor: Colors.transparent,
+                        //                     hoverColor: Colors.transparent,
+                        //                     highlightColor: Colors.transparent,
+                        //                     onTap: () async {
+                        //                       Provider.of<ThemeProvider>(
+                        //                               context,
+                        //                               listen: false)
+                        //                           .toggleTheme();
+                        //                     },
+                        //                     child: Icon(
+                        //                       Icons.wb_sunny_rounded,
+                        //                       color:
+                        //                           KMTheme.of(context)
+                        //                               .primaryText,
+                        //                       size: 30,
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -449,9 +553,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           animationsMap['endDrawerOnActionTriggerAnimation']!,
         ),
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          iconTheme:
-              IconThemeData(color: FlutterFlowTheme.of(context).primaryText),
+          backgroundColor: KMTheme.of(context).secondaryBackground,
+          iconTheme: IconThemeData(color: KMTheme.of(context).primaryText),
           automaticallyImplyLeading: true,
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(8),
@@ -470,9 +573,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: Text(
               'KindMap',
               textAlign: TextAlign.start,
-              style: FlutterFlowTheme.of(context).titleMedium.override(
+              style: KMTheme.of(context).titleMedium.override(
                     fontFamily: 'Plus Jakarta Sans',
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    color: KMTheme.of(context).primaryText,
                     fontSize: 24,
                     letterSpacing: 0,
                     fontWeight: FontWeight.w800,
@@ -510,7 +613,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           ],
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: KMTheme.of(context).secondaryText,
                           ),
                         ),
                         child: GestureDetector(
@@ -537,7 +640,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           child: Container(
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).error,
+                              color: KMTheme.of(context).error,
                               boxShadow: [
                                 const BoxShadow(
                                   blurRadius: 0,
@@ -566,14 +669,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       child: Padding(
                                         padding: const EdgeInsets.all(10),
                                         child: Text(
-                                          'Spot people nearby',
-                                          style: FlutterFlowTheme.of(context)
+                                          'Pin Someone',
+                                          style: KMTheme.of(context)
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
+                                                color: KMTheme.of(context)
+                                                    .primaryBackground,
                                                 fontSize: 22,
                                                 letterSpacing: 0,
                                                 fontWeight: FontWeight.w500,
@@ -589,7 +691,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             .fromSTEB(0, 0, 6, 9),
                                         child: Icon(
                                           Icons.share_location,
-                                          color: FlutterFlowTheme.of(context)
+                                          color: KMTheme.of(context)
                                               .primaryBackground,
                                           size: 60,
                                         ),
@@ -601,7 +703,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         //   fillColor: Color(0x0057636C),
                                         //   icon: Icon(
                                         //     Icons.share_location,
-                                        //     color: FlutterFlowTheme.of(context)
+                                        //     color: KMTheme.of(context)
                                         //         .primaryBackground,
                                         //     size: 50,
                                         //   ),
@@ -628,8 +730,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         // width: 425,
                         // height: 285,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: KMTheme.of(context).secondaryBackground,
                           boxShadow: [
                             const BoxShadow(
                               blurRadius: 0,
@@ -658,7 +759,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.all(6),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: KMTheme.of(context)
                                                 .secondaryBackground,
                                           ),
                                           child: GestureDetector(
@@ -683,14 +784,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             left: 5.0),
                                                     child: Text(
                                                       'Spot an area',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
+                                                      style: KMTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily:
                                                                 'Poppins',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
+                                                            color: KMTheme.of(
+                                                                    context)
                                                                 .primaryText,
                                                             fontSize: 25,
                                                             letterSpacing: 0,
@@ -710,8 +810,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             right: 10),
                                                     child: Text(
                                                       'Spot an area where large number of people are seeking help. (NGOs and Organization may look forward to help them)',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
+                                                      style: KMTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily:
@@ -736,7 +835,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.all(6),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: KMTheme.of(context)
                                                 .secondaryBackground,
                                           ),
                                           child: InkWell(
@@ -765,14 +864,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             left: 5.0),
                                                     child: Text(
                                                       'Notify Me',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
+                                                      style: KMTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily:
                                                                 'Poppins',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
+                                                            color: KMTheme.of(
+                                                                    context)
                                                                 .primaryText,
                                                             fontSize: 25,
                                                             letterSpacing: 0,
@@ -792,8 +890,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             right: 10),
                                                     child: Text(
                                                       'A Notification pops up whenever a pin is pointed within a 1 km radius of you',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
+                                                      style: KMTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily:
@@ -818,7 +915,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         padding: const EdgeInsets.all(6),
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
+                                            color: KMTheme.of(context)
                                                 .secondaryBackground,
                                           ),
                                           child: InkWell(
@@ -844,14 +941,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             left: 5.0),
                                                     child: Text(
                                                       'Donate',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
+                                                      style: KMTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily:
                                                                 'Poppins',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
+                                                            color: KMTheme.of(
+                                                                    context)
                                                                 .primaryText,
                                                             fontSize: 25,
                                                             letterSpacing: 0,
@@ -874,8 +970,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             right: 10),
                                                     child: Text(
                                                       'You can also donate',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
+                                                      style: KMTheme.of(context)
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily:

@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kindmap/new_Auth/auth_fn.dart';
+import 'package:kindmap/themes/kmTheme.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -31,7 +32,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: FlutterFlowTheme.of(context).alternate,
+      backgroundColor: KMTheme.of(context).alternate,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -94,14 +95,13 @@ class _LoginFormState extends State<LoginForm> {
                                 alignment: const AlignmentDirectional(0, 0),
                                 child: Text(
                                   'KindMap',
-                                  style: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .override(
-                                        fontFamily: 'Plus Jakarta Sans',
-                                        color: Colors.black,
-                                        letterSpacing: 0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  style:
+                                      KMTheme.of(context).displaySmall.override(
+                                            fontFamily: 'Plus Jakarta Sans',
+                                            color: Colors.black,
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                 ),
                               ),
                               Align(
@@ -111,14 +111,13 @@ class _LoginFormState extends State<LoginForm> {
                                       0, 2, 0, 0),
                                   child: Text(
                                     'Connecting Hearts, Changing Life',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: Colors.black,
-                                          fontSize: 10,
-                                          letterSpacing: 0,
-                                        ),
+                                    style:
+                                        KMTheme.of(context).bodyMedium.override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.black,
+                                              fontSize: 10,
+                                              letterSpacing: 0,
+                                            ),
                                   ),
                                 ),
                               ),
@@ -135,7 +134,7 @@ class _LoginFormState extends State<LoginForm> {
               margin: const EdgeInsets.all(20),
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).primaryBackground,
+                color: KMTheme.of(context).primaryBackground,
                 borderRadius: BorderRadius.circular(20.0),
                 boxShadow: const [
                   BoxShadow(
@@ -148,7 +147,7 @@ class _LoginFormState extends State<LoginForm> {
               child: Form(
                 key: _formKey,
                 child: Container(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  color: KMTheme.of(context).primaryBackground,
                   padding: const EdgeInsets.all(14),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -164,55 +163,50 @@ class _LoginFormState extends State<LoginForm> {
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Full Name',
-                                  labelStyle: FlutterFlowTheme.of(context)
+                                  labelStyle: KMTheme.of(context)
                                       .titleMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
+                                        color:
+                                            KMTheme.of(context).secondaryText,
                                         letterSpacing: 0,
                                       ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
+                                      color: KMTheme.of(context).alternate,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(40),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: KMTheme.of(context).primary,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(40),
                                   ),
                                   errorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
+                                      color: KMTheme.of(context).error,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(40),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
+                                      color: KMTheme.of(context).error,
                                       width: 2,
                                     ),
                                     borderRadius: BorderRadius.circular(40),
                                   ),
                                   filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
+                                  fillColor:
+                                      KMTheme.of(context).secondaryBackground,
                                   contentPadding: const EdgeInsets.all(20),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .titleMedium
-                                    .override(
+                                style: KMTheme.of(context).titleMedium.override(
                                       fontFamily: 'Readex Pro',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
+                                      color: KMTheme.of(context).primaryText,
                                       letterSpacing: 0,
                                     ),
                                 minLines: null,
@@ -240,52 +234,47 @@ class _LoginFormState extends State<LoginForm> {
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'Email',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  letterSpacing: 0,
-                                ),
+                            labelStyle:
+                                KMTheme.of(context).titleMedium.override(
+                                      fontFamily: 'Readex Pro',
+                                      color: KMTheme.of(context).secondaryText,
+                                      letterSpacing: 0,
+                                    ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: KMTheme.of(context).alternate,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: KMTheme.of(context).primary,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
+                                color: KMTheme.of(context).error,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             focusedErrorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
+                                color: KMTheme.of(context).error,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            fillColor: KMTheme.of(context).secondaryBackground,
                             contentPadding: const EdgeInsets.all(20),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .titleMedium
-                              .override(
+                          style: KMTheme.of(context).titleMedium.override(
                                 fontFamily: 'Readex Pro',
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color: KMTheme.of(context).primaryText,
                                 letterSpacing: 0,
                               ),
                           minLines: null,
@@ -312,53 +301,49 @@ class _LoginFormState extends State<LoginForm> {
                           obscureText: !_passwordVisible,
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  letterSpacing: 0,
-                                ),
+                            labelStyle:
+                                KMTheme.of(context).titleMedium.override(
+                                      fontFamily: 'Readex Pro',
+                                      color: KMTheme.of(context).secondaryText,
+                                      letterSpacing: 0,
+                                    ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: KMTheme.of(context).alternate,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
+                                color: KMTheme.of(context).primary,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             errorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
+                                color: KMTheme.of(context).error,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             focusedErrorBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
+                                color: KMTheme.of(context).error,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(40),
                             ),
                             filled: true,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            fillColor: KMTheme.of(context).secondaryBackground,
                             contentPadding: const EdgeInsets.all(20),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _passwordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
+                                color: KMTheme.of(context).secondaryText,
                               ),
                               onPressed: () {
                                 setState(() {
@@ -367,11 +352,9 @@ class _LoginFormState extends State<LoginForm> {
                               },
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .titleMedium
-                              .override(
+                          style: KMTheme.of(context).titleMedium.override(
                                 fontFamily: 'Readex Pro',
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color: KMTheme.of(context).primaryText,
                                 letterSpacing: 0,
                               ),
                           minLines: null,
@@ -408,7 +391,7 @@ class _LoginFormState extends State<LoginForm> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: FlutterFlowTheme.of(context).primary,
+                            primary: KMTheme.of(context).primary,
                             padding: EdgeInsets.zero,
                             elevation: 3,
                             shape: RoundedRectangleBorder(
@@ -422,12 +405,9 @@ class _LoginFormState extends State<LoginForm> {
                             ),
                             child: Text(
                               login ? 'Login' : 'Signup',
-                              style: FlutterFlowTheme.of(context)
-                                  .titleMedium
-                                  .override(
+                              style: KMTheme.of(context).titleMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
+                                    color: KMTheme.of(context).secondary,
                                     letterSpacing: 1,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -452,8 +432,7 @@ class _LoginFormState extends State<LoginForm> {
                                   : "Already have an account? Login",
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText),
+                                  color: KMTheme.of(context).secondaryText),
                             ),
                           )),
                       Padding(
@@ -467,14 +446,13 @@ class _LoginFormState extends State<LoginForm> {
                             // auth.signInWithRedirect(GoogleAuthProvider());
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            primary: KMTheme.of(context).secondaryBackground,
                             padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                               side: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: KMTheme.of(context).alternate,
                                 width: 2,
                               ),
                             ),
@@ -496,13 +474,12 @@ class _LoginFormState extends State<LoginForm> {
                                   const SizedBox(width: 10),
                                   Text(
                                     'Continue with Google',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          letterSpacing: 0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    style:
+                                        KMTheme.of(context).bodyLarge.override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                   ),
                                 ],
                               ),
@@ -518,14 +495,13 @@ class _LoginFormState extends State<LoginForm> {
                             print('Sign in with Apple hogaya ');
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            primary: KMTheme.of(context).secondaryBackground,
                             padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                               side: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
+                                color: KMTheme.of(context).alternate,
                                 width: 2,
                               ),
                             ),
@@ -542,9 +518,7 @@ class _LoginFormState extends State<LoginForm> {
                                 const SizedBox(width: 10),
                                 Text(
                                   'Continue with Apple',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
+                                  style: KMTheme.of(context).bodyLarge.override(
                                         fontFamily: 'Readex Pro',
                                         letterSpacing: 0,
                                         fontWeight: FontWeight.bold,

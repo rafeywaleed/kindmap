@@ -74,7 +74,7 @@ class _CameraPageState extends State<CameraPage> {
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                             width: 2,
-                            color: KMTheme.colors.success,
+                            color: KMTheme.of(context).success,
                             style: BorderStyle.solid,
                           )),
                       // child: Transform.scale(
@@ -122,14 +122,14 @@ class _CameraPageState extends State<CameraPage> {
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: FlutterFlowTheme.of(context).primaryText,
+                      color: KMTheme.of(context).primaryText,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(80),
                   ),
                   child: Icon(
                     Icons.camera,
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    color: KMTheme.of(context).primaryText,
                     size: 60,
                   ),
                 ),

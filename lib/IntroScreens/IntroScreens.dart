@@ -1,4 +1,5 @@
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:kindmap/themes/kmTheme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -248,13 +249,12 @@ class _IntroScreensState extends State<IntroScreens> {
                                       iconPadding:
                                           EdgeInsetsDirectional.fromSTEB(
                                               0, 0, 0, 0),
-                                      color: FlutterFlowTheme.of(context).info,
-                                      textStyle: FlutterFlowTheme.of(context)
+                                      color: KMTheme.of(context).info,
+                                      textStyle: KMTheme.of(context)
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .error,
+                                            color: KMTheme.of(context).error,
                                             letterSpacing: 0,
                                           ),
                                       elevation: 3,
@@ -293,9 +293,8 @@ class _IntroScreensState extends State<IntroScreens> {
                               radius: 16,
                               dotWidth: 16,
                               dotHeight: 8,
-                              dotColor: FlutterFlowTheme.of(context).accent1,
-                              activeDotColor:
-                                  FlutterFlowTheme.of(context).error,
+                              dotColor: KMTheme.of(context).accent1,
+                              activeDotColor: KMTheme.of(context).error,
                               paintStyle: PaintingStyle.fill,
                             ),
                           ),

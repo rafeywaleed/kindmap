@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
+import 'package:kindmap/themes/kmTheme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -43,9 +44,9 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      backgroundColor: KMTheme.of(context).secondaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: KMTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -53,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
           buttonSize: 46,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
+            color: KMTheme.of(context).primaryText,
             size: 25,
           ),
           onPressed: () async {
@@ -72,7 +73,7 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
             child: Text(
               'Settings Page',
-              style: FlutterFlowTheme.of(context).headlineSmall.override(
+              style: KMTheme.of(context).headlineSmall.override(
                     fontFamily: 'Outfit',
                     letterSpacing: 0,
                   ),
@@ -104,16 +105,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Text(
                             'Profile',
-                            style: FlutterFlowTheme.of(context)
-                                .titleLarge
-                                .override(
+                            style: KMTheme.of(context).titleLarge.override(
                                   fontFamily: 'Outfit',
                                   letterSpacing: 0,
                                 ),
                           ),
                           Icon(
                             Icons.chevron_right_rounded,
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: KMTheme.of(context).secondaryText,
                             size: 24,
                           ),
                         ],
@@ -135,15 +134,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [
                         Text(
                           'Notifications',
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0,
-                                  ),
+                          style: KMTheme.of(context).titleLarge.override(
+                                fontFamily: 'Outfit',
+                                letterSpacing: 0,
+                              ),
                         ),
                         Icon(
                           Icons.chevron_right_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                          color: KMTheme.of(context).secondaryText,
                           size: 24,
                         ),
                       ],
@@ -164,15 +162,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [
                         Text(
                           'Help',
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0,
-                                  ),
+                          style: KMTheme.of(context).titleLarge.override(
+                                fontFamily: 'Outfit',
+                                letterSpacing: 0,
+                              ),
                         ),
                         Icon(
                           Icons.chevron_right_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                          color: KMTheme.of(context).secondaryText,
                           size: 24,
                         ),
                       ],
@@ -193,15 +190,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [
                         Text(
                           'Privacy Policy',
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0,
-                                  ),
+                          style: KMTheme.of(context).titleLarge.override(
+                                fontFamily: 'Outfit',
+                                letterSpacing: 0,
+                              ),
                         ),
                         Icon(
                           Icons.chevron_right_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                          color: KMTheme.of(context).secondaryText,
                           size: 24,
                         ),
                       ],
@@ -222,15 +218,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [
                         Text(
                           'Permissions',
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Outfit',
-                                    letterSpacing: 0,
-                                  ),
+                          style: KMTheme.of(context).titleLarge.override(
+                                fontFamily: 'Outfit',
+                                letterSpacing: 0,
+                              ),
                         ),
                         Icon(
                           Icons.chevron_right_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
+                          color: KMTheme.of(context).secondaryText,
                           size: 24,
                         ),
                       ],
@@ -244,7 +239,7 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 0, 8),
             child: Text(
               'Follow us on',
-              style: FlutterFlowTheme.of(context).labelMedium.override(
+              style: KMTheme.of(context).labelMedium.override(
                     fontFamily: 'Readex Pro',
                     letterSpacing: 0,
                   ),
@@ -256,14 +251,14 @@ class _SettingsPageState extends State<SettingsPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).alternate,
+                  borderColor: KMTheme.of(context).alternate,
                   borderRadius: 12,
                   borderWidth: 1,
                   buttonSize: 48,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  fillColor: KMTheme.of(context).secondaryBackground,
                   icon: FaIcon(
                     FontAwesomeIcons.instagram,
-                    color: FlutterFlowTheme.of(context).secondaryText,
+                    color: KMTheme.of(context).secondaryText,
                     size: 24,
                   ),
                   onPressed: () {
@@ -271,14 +266,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   },
                 ),
                 FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).alternate,
+                  borderColor: KMTheme.of(context).alternate,
                   borderRadius: 12,
                   borderWidth: 1,
                   buttonSize: 48,
-                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  fillColor: KMTheme.of(context).secondaryBackground,
                   icon: FaIcon(
                     FontAwesomeIcons.facebookF,
-                    color: FlutterFlowTheme.of(context).secondaryText,
+                    color: KMTheme.of(context).secondaryText,
                     size: 24,
                   ),
                   onPressed: () {
@@ -290,32 +285,32 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: PopupMenuButton<String>(
                     icon: FaIcon(
                       FontAwesomeIcons.linkedin,
-                      color: FlutterFlowTheme.of(context).secondaryText,
+                      color: KMTheme.of(context).secondaryText,
                       size: 24,
                     ),
                     itemBuilder: (BuildContext context) => [
                       PopupMenuItem(
                         value:
-                            'https://www.linkedin.com/in/team-member-1-profile',
+                            'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
                         child: ListTile(
                           leading: Icon(FontAwesomeIcons.linkedin),
-                          title: Text('Team Member 1'),
+                          title: Text('Abdul Rafey Waleed'),
                         ),
                       ),
                       PopupMenuItem(
                         value:
-                            'https://www.linkedin.com/in/team-member-2-profile',
+                            'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
                         child: ListTile(
                           leading: Icon(FontAwesomeIcons.linkedin),
-                          title: Text('Team Member 2'),
+                          title: Text('Mohammed Azim Maula'),
                         ),
                       ),
                       PopupMenuItem(
                         value:
-                            'https://www.linkedin.com/in/team-member-3-profile',
+                            'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
                         child: ListTile(
                           leading: Icon(FontAwesomeIcons.linkedin),
-                          title: Text('Team Member 3'),
+                          title: Text('Arriyan Fatima'),
                         ),
                       ),
                     ],
@@ -332,7 +327,7 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
             child: Text(
               'App Versions',
-              style: FlutterFlowTheme.of(context).titleLarge.override(
+              style: KMTheme.of(context).titleLarge.override(
                     fontFamily: 'Outfit',
                     letterSpacing: 0,
                   ),
@@ -342,7 +337,7 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: const EdgeInsetsDirectional.fromSTEB(16, 4, 0, 0),
             child: Text(
               'v0.0.1',
-              style: FlutterFlowTheme.of(context).labelMedium.override(
+              style: KMTheme.of(context).labelMedium.override(
                     fontFamily: 'Readex Pro',
                     letterSpacing: 0,
                   ),
@@ -359,15 +354,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 height: 40,
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                color: FlutterFlowTheme.of(context).error,
-                textStyle: FlutterFlowTheme.of(context).labelMedium.override(
+                color: KMTheme.of(context).error,
+                textStyle: KMTheme.of(context).labelMedium.override(
                       fontFamily: 'Readex Pro',
-                      color: FlutterFlowTheme.of(context).info,
+                      color: KMTheme.of(context).info,
                       letterSpacing: 0,
                     ),
                 elevation: 0,
                 borderSide: BorderSide(
-                  color: FlutterFlowTheme.of(context).error,
+                  color: KMTheme.of(context).error,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(50),

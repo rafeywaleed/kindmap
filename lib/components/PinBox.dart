@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart' as ff;
 import 'package:geolocator/geolocator.dart';
+import 'package:kindmap/themes/kmTheme.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +45,7 @@ class _PinBoxState extends State<PinBox> {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: ff.FlutterFlowTheme.of(context).secondaryBackground,
+          color: KMTheme.of(context).secondaryBackground,
           boxShadow: const [
             BoxShadow(
               blurRadius: 5,
@@ -96,13 +97,12 @@ class _PinBoxState extends State<PinBox> {
                           const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 0),
                       child: Text(
                         '${Geolocator.distanceBetween(widget.latitude, widget.longitude, widget.location!.latitude, widget.location!.longitude).round()}ms away',
-                        style:
-                            ff.FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        style: KMTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 18,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ),
                   ),
@@ -112,14 +112,13 @@ class _PinBoxState extends State<PinBox> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20, 10, 10, 10),
                       child: Text(
-                        '3 hrs left',
-                        style:
-                            ff.FlutterFlowTheme.of(context).bodyMedium.override(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 18,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                        '${widget.timeleft} left',
+                        style: KMTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 18,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ),
                   ),
@@ -127,16 +126,16 @@ class _PinBoxState extends State<PinBox> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: ff.FlutterFlowTheme.of(context).secondaryText,
+                  color: KMTheme.of(context).secondaryText,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     'Note: ${widget.note}\n\nLocation Detail: ${widget.detail}',
-                    style: ff.FlutterFlowTheme.of(context).bodyMedium.override(
+                    style: KMTheme.of(context).bodyMedium.override(
                           fontFamily: 'Poppins',
-                          color: ff.FlutterFlowTheme.of(context).lineColor,
+                          color: KMTheme.of(context).lineColor,
                           fontSize: 15,
                           letterSpacing: 0,
                           fontWeight: FontWeight.w500,
@@ -152,15 +151,14 @@ class _PinBoxState extends State<PinBox> {
                     // print('Button pressed ...');
                   },
                   style: ElevatedButton.styleFrom(
-                      primary:
-                          ff.FlutterFlowTheme.of(context).primaryBackground,
+                      primary: KMTheme.of(context).primaryBackground,
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 30),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
                   child: Text(
                     'Navigate',
-                    style: ff.FlutterFlowTheme.of(context).bodyLarge.override(
+                    style: KMTheme.of(context).bodyLarge.override(
                           fontFamily: 'Open Sans',
                           fontSize: 18,
                           letterSpacing: 0,
@@ -176,16 +174,15 @@ class _PinBoxState extends State<PinBox> {
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    primary: ff.FlutterFlowTheme.of(context).primary,
+                    primary: KMTheme.of(context).primary,
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 80),
                   ),
                   child: Text(
                     'SERVED',
-                    style: ff.FlutterFlowTheme.of(context).titleSmall.override(
+                    style: KMTheme.of(context).titleSmall.override(
                           fontFamily: 'Lexend Deca',
-                          color:
-                              ff.FlutterFlowTheme.of(context).primaryBackground,
+                          color: KMTheme.of(context).primaryBackground,
                           fontSize: 20,
                           letterSpacing: 0,
                           fontWeight: FontWeight.w600,

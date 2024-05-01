@@ -123,112 +123,148 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Notifications',
-                          style: KMTheme.of(context).titleLarge.override(
-                                fontFamily: 'Outfit',
-                                letterSpacing: 0,
-                              ),
-                        ),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: KMTheme.of(context).secondaryText,
-                          size: 24,
-                        ),
-                      ],
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    Navigator.of(context).pushNamed('/notifications');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Notifications',
+                            style: KMTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0,
+                                ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: KMTheme.of(context).secondaryText,
+                            size: 24,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Help',
-                          style: KMTheme.of(context).titleLarge.override(
-                                fontFamily: 'Outfit',
-                                letterSpacing: 0,
-                              ),
-                        ),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: KMTheme.of(context).secondaryText,
-                          size: 24,
-                        ),
-                      ],
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    Navigator.of(context).pushNamed('/help');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Help',
+                            style: KMTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0,
+                                ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: KMTheme.of(context).secondaryText,
+                            size: 24,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Privacy Policy',
-                          style: KMTheme.of(context).titleLarge.override(
-                                fontFamily: 'Outfit',
-                                letterSpacing: 0,
-                              ),
-                        ),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: KMTheme.of(context).secondaryText,
-                          size: 24,
-                        ),
-                      ],
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    Navigator.of(context).pushNamed('/privacypolicy');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Privacy Policy',
+                            style: KMTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0,
+                                ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: KMTheme.of(context).secondaryText,
+                            size: 24,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-                child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Permissions',
-                          style: KMTheme.of(context).titleLarge.override(
-                                fontFamily: 'Outfit',
-                                letterSpacing: 0,
-                              ),
-                        ),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: KMTheme.of(context).secondaryText,
-                          size: 24,
-                        ),
-                      ],
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    Navigator.of(context).pushNamed('/permissions');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Permissions ',
+                            style: KMTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0,
+                                ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: KMTheme.of(context).secondaryText,
+                            size: 24,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

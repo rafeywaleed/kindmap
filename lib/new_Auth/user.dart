@@ -82,8 +82,8 @@ class _LoginFormState extends State<LoginForm> {
                               borderRadius: BorderRadius.circular(8),
                               child: Image.asset(
                                 'assets/images/KindMap-logo-f.png',
-                                width: 80,
-                                height: 80,
+                                width: size.width * 0.3,
+                                height: size.width * 0.3,
                                 fit: BoxFit.cover,
                               ),
                             ),

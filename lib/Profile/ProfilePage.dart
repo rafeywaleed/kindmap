@@ -46,6 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -218,8 +219,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderRadius: BorderRadius.circular(16),
                           child: Image.asset(
                             'assets/images/trophy.png',
-                            width: 100,
-                            height: 100,
+                            width: size.width * 0.2,
+                            height: size.width * 0.2,
                             fit: BoxFit.cover,
                           ),
                         ),

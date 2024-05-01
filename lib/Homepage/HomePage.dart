@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kindmap/main.dart';
+import 'package:flutter/material.dart';
+
 import 'package:kindmap/themes/kmTheme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -302,6 +305,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           padding:
                               const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                           child: ListTile(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/contact');
+                            },
                             leading: Icon(
                               Icons.info,
                               color: KMTheme.of(context).primaryText,
@@ -361,6 +367,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           padding:
                               const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                           child: ListTile(
+                            onTap: () {
+                              Navigator.of(context).pushNamed('/about');
+                            },
                             leading: Icon(
                               Icons.info,
                               color: KMTheme.of(context).primaryText,
@@ -1030,6 +1039,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 SizedBox(
                                                   height: size.height * 0.02,
                                                 ),
+                                                ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pushNamed('/donate');
+                                                    },
+                                                    child: Text("Donate"))
                                               ],
                                             ),
                                           ),

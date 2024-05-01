@@ -1,6 +1,13 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:kindmap/Otherpages/About.dart';
+import 'package:kindmap/Otherpages/Contact.dart';
+import 'package:kindmap/Otherpages/Donate.dart';
+import 'package:kindmap/Otherpages/Help.dart';
+import 'package:kindmap/Otherpages/Notifcations.dart';
+import 'package:kindmap/Otherpages/Permissions.dart';
+import 'package:kindmap/Otherpages/PrivacyPolicy.dart';
 import 'package:kindmap/components/DetailBox.dart';
 import 'package:kindmap/components/PinBox.dart';
 import 'package:kindmap/fcm.dart';
@@ -98,6 +105,13 @@ class _MyAppState extends State<MyApp> {
         '/profile': (context) => const ProfilePage(),
         '/map': (context) => const Maps(),
         '/introScreens': (context) => const IntroScreens(),
+        '/donate': (context) => const Donate(),
+        '/contact': (context) => const Contact(),
+        '/about': (context) => const About(),
+        '/help': (context) => const Help(),
+        '/permissions': (context) => const Permissions(),
+        '/privacypolicy': (context) => const PrivacyPolicy(),
+        '/notifications': (context) => const Notifications(),
       },
     );
   }

@@ -304,9 +304,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(-1, 0),
+                          alignment: const AlignmentDirectional(-0.95, 0),
                           child: Padding(
-                            padding: const EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(3.5),
                             child: Text(
                               'Change name : ',
                               style: KMTheme.of(context).bodyMedium.override(

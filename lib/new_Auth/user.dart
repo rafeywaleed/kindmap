@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,10 +23,14 @@ class _LoginFormState extends State<LoginForm> {
   String fullname = '';
   bool login = false;
   bool _passwordVisible = false;
+  int attempts = 0;
 
   @override
   void initState() {
+    super.initState();
+
     _passwordVisible = false;
+    attempts = 0;
   }
 
   @override
@@ -389,9 +394,12 @@ class _LoginFormState extends State<LoginForm> {
                                   : AuthServices.signupUser(
                                       email, password, fullname, context);
                             }
+                            await FirebaseMessaging.instance
+                                .subscribeToTopic('need_help');
+                            attempts++;
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: KMTheme.of(context).primary,
+                            backgroundColor: KMTheme.of(context).primary,
                             padding: EdgeInsets.zero,
                             elevation: 3,
                             shape: RoundedRectangleBorder(
@@ -418,6 +426,26 @@ class _LoginFormState extends State<LoginForm> {
                       const SizedBox(
                         height: 10,
                       ),
+                      if (login && attempts > 0)
+                        TextButton(
+                            onPressed: () async {
+                              await FirebaseAuth.instance
+                                  .sendPasswordResetEmail(email: email)
+                                  .then((value) => ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                          content: Text(
+                                              'Password Reset email sent'))));
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(10, 15, 10, 28),
+                              child: Text(
+                                'Forgot Password?',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: KMTheme.of(context).secondaryText),
+                              ),
+                            )),
                       TextButton(
                           onPressed: () {
                             setState(() {
@@ -425,14 +453,16 @@ class _LoginFormState extends State<LoginForm> {
                             });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 15, 10, 28),
-                            child: Text(
-                              login
-                                  ? "Don't have an account? Signup"
-                                  : "Already have an account? Login",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: KMTheme.of(context).secondaryText),
+                            padding: const EdgeInsets.fromLTRB(10, 5, 10, 28),
+                            child: FittedBox(
+                              child: Text(
+                                login
+                                    ? "Don't have an account? Signup"
+                                    : "Already have an account? Login",
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: KMTheme.of(context).secondaryText),
+                              ),
                             ),
                           )),
                       Padding(

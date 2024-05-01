@@ -280,45 +280,93 @@ class _SettingsPageState extends State<SettingsPage> {
                     print('IconButton pressed ...');
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: PopupMenuButton<String>(
-                    icon: FaIcon(
-                      FontAwesomeIcons.linkedin,
-                      color: KMTheme.of(context).secondaryText,
-                      size: 24,
-                    ),
-                    itemBuilder: (BuildContext context) => [
-                      PopupMenuItem(
-                        value:
-                            'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
-                        child: ListTile(
-                          leading: Icon(FontAwesomeIcons.linkedin),
-                          title: Text('Abdul Rafey Waleed'),
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value:
-                            'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
-                        child: ListTile(
-                          leading: Icon(FontAwesomeIcons.linkedin),
-                          title: Text('Mohammed Azim Maula'),
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value:
-                            'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
-                        child: ListTile(
-                          leading: Icon(FontAwesomeIcons.linkedin),
-                          title: Text('Arriyan Fatima'),
-                        ),
-                      ),
-                    ],
-                    onSelected: (String value) {
-                      launch(value);
-                    },
+                FlutterFlowIconButton(
+                  borderColor: KMTheme.of(context).alternate,
+                  borderRadius: 12,
+                  borderWidth: 1,
+                  buttonSize: 48,
+                  fillColor: KMTheme.of(context).secondaryBackground,
+                  icon: FaIcon(
+                    FontAwesomeIcons.linkedin,
+                    color: KMTheme.of(context).secondaryText,
+                    size: 24,
                   ),
+                  onPressed: () {
+                    showMenu(
+                        context: context,
+                        position:
+                            const RelativeRect.fromLTRB(275, 500, 550, 700),
+                        items: [
+                          const PopupMenuItem(
+                            value:
+                                'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
+                            child: ListTile(
+                              leading: Icon(FontAwesomeIcons.linkedin),
+                              title: Text('Abdul Rafey Waleed'),
+                            ),
+                          ),
+                          const PopupMenuItem(
+                            value:
+                                'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
+                            child: ListTile(
+                              leading: Icon(FontAwesomeIcons.linkedin),
+                              title: Text('Mohammed Azim Moula'),
+                            ),
+                          ),
+                          const PopupMenuItem(
+                            value:
+                                'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
+                            child: ListTile(
+                              leading: Icon(FontAwesomeIcons.linkedin),
+                              title: Text('Arriyan Fatima'),
+                            ),
+                          ),
+                        ]).then<void>((String? itemSelected) {
+                      if (itemSelected == null) return;
+                      launch(itemSelected);
+                    });
+                    print('IconButton pressed ...');
+                  },
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: PopupMenuButton<String>(
+                //     icon: FaIcon(
+                //       FontAwesomeIcons.linkedin,
+                //       color: KMTheme.of(context).secondaryText,
+                //       size: 24,
+                //     ),
+                //     itemBuilder: (BuildContext context) => [
+                //       const PopupMenuItem(
+                //         value:
+                //             'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
+                //         child: ListTile(
+                //           leading: Icon(FontAwesomeIcons.linkedin),
+                //           title: Text('Abdul Rafey Waleed'),
+                //         ),
+                //       ),
+                //       const PopupMenuItem(
+                //         value:
+                //             'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
+                //         child: ListTile(
+                //           leading: Icon(FontAwesomeIcons.linkedin),
+                //           title: Text('Mohammed Azim Moula'),
+                //         ),
+                //       ),
+                //       const PopupMenuItem(
+                //         value:
+                //             'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
+                //         child: ListTile(
+                //           leading: Icon(FontAwesomeIcons.linkedin),
+                //           title: Text('Arriyan Fatima'),
+                //         ),
+                //       ),
+                //     ],
+                //     onSelected: (String value) {
+                //       launch(value);
+                //     },
+                //   ),
+                // ),
               ].divide(const SizedBox(width: 8)),
             ),
           ),

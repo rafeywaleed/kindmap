@@ -1,5 +1,8 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -21,6 +24,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late HomePageModel _model;
+
+  Future<void> sendNotification(String topic) async {
+    final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
+    final serverKey =
+        'AAAAXfsHsVE:APA91bGiEJp1y1T2h9VEHr0y-u0LoGIty04jFaHea0xtvwsUXOutSi2F5lRkwhEQmHV4MmQs2kEtoHhkxX1LDAeSGeHuk5ZzYZ5Gkec2oTUmqaktuf3Gv3Q4KuMsjpG2M6w76VHaxxbh'; // Replace with your FCM server key
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=$serverKey',
+    };
+    final body = {
+      'notification': {
+        'title': 'KindMap',
+        'body': 'Someone nearby needs help.',
+      },
+      'priority': 'high',
+      'to': '/topics/$topic', // Specify the topic here
+    };
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+    if (response.statusCode == 200) {
+      print('Notification sent successfully to topic: $topic');
+    } else {
+      print(
+          'Failed to send notification to topic: $topic. Error: ${response.reasonPhrase}');
+    }
+  }
 
   // ThemeData _currentTheme = LightModeTheme() as ThemeData;
 
@@ -178,7 +210,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      18, 0, 0, 10),
+                                      10, 0, 10, 10),
                                   child: StreamBuilder(
                                       stream: FirebaseFirestore.instance
                                           .collection('users')
@@ -844,13 +876,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              await sendNotification(
+                                                  'need_help');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(const SnackBar(
                                                       content:
                                                           Text('Notify Me')));
 
-                                              Navigator.of(context)
-                                                  .pushNamed('/notifyMe');
+                                              // Navigator.of(context)
+                                              //     .pushNamed('/notifyMe');
                                             },
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
@@ -924,8 +958,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              Navigator.of(context)
-                                                  .pushNamed('/donate');
+                                              await FirebaseMessaging.instance
+                                                  .requestPermission();
+                                              String? token =
+                                                  await FirebaseMessaging
+                                                      .instance
+                                                      .getToken();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(token!)));
+                                              print(token);
+                                              // Navigator.of(context)
+                                              //     .pushNamed('/donate');
                                             },
                                             child: Column(
                                               crossAxisAlignment:

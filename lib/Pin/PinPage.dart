@@ -1,7 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
-
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
@@ -112,6 +113,35 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  Future<void> sendNotification(String topic) async {
+    final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
+    final serverKey =
+        'AAAAXfsHsVE:APA91bGiEJp1y1T2h9VEHr0y-u0LoGIty04jFaHea0xtvwsUXOutSi2F5lRkwhEQmHV4MmQs2kEtoHhkxX1LDAeSGeHuk5ZzYZ5Gkec2oTUmqaktuf3Gv3Q4KuMsjpG2M6w76VHaxxbh'; // Replace with your FCM server key
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=$serverKey',
+    };
+    final body = {
+      'notification': {
+        'title': 'Someone nearby needs help.',
+        'body': _model.textController1.text,
+      },
+      'priority': 'high',
+      'to': '/topics/$topic', // Specify the topic here
+    };
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body),
+    );
+    if (response.statusCode == 200) {
+      print('Notification sent successfully to topic: $topic');
+    } else {
+      print(
+          'Failed to send notification to topic: $topic. Error: ${response.reasonPhrase}');
     }
   }
 
@@ -672,6 +702,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                     child: FFButtonWidget(
                       onPressed: () async {
                         await uploadImage();
+                        await sendNotification('need_help');
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
                                 PinConfirmation(docName: docName!)));

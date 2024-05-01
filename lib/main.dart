@@ -1,7 +1,9 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:kindmap/components/DetailBox.dart';
 import 'package:kindmap/components/PinBox.dart';
+import 'package:kindmap/fcm.dart';
 import 'package:kindmap/map.dart';
 import 'package:kindmap/new_Auth/nAuth.dart';
 import 'package:kindmap/new_Auth/user.dart';
@@ -22,9 +24,9 @@ import 'package:provider/provider.dart';
 
 //import 'package:km/IntroScreens/Introscreen.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: 'AIzaSyBBIuwNrITwg_fmeIkMGz2CZbkoNVKvP4g',
@@ -34,7 +36,7 @@ void main() async {
       storageBucket: 'gs://kindmap-999d3.appspot.com',
     ),
   );
-
+  await FCM().initNotifications();
   runApp(ChangeNotifierProvider(
     create: (_) => ThemeProvider(),
     child: const MyApp(),
@@ -68,7 +70,7 @@ class _MyAppState extends State<MyApp> {
       //     : AuthenticationPage(),
 
       // home: AuthenticationPage(),
-
+      navigatorKey: navigatorKey,
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {

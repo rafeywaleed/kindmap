@@ -202,7 +202,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
       );
       double distanceInKm = distanceInMeters / 1000;
 
-      if (distanceInKm <= 3) {
+      if (distanceInKm <= 1) {
         // Send notification
         await sendNotification(topic);
       }

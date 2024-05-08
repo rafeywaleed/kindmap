@@ -71,14 +71,39 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
         desiredAccuracy: LocationAccuracy.high);
   }
 
-  Future getLocation() async {
-    await Geolocator.checkPermission();
-    await Geolocator.requestPermission();
+  // Future getLocation() async {
+  //   await Geolocator.checkPermission();
+  //   await Geolocator.requestPermission();
 
-    Position temp = await _determinePosition();
-    setState(() {
-      location = LatLng(temp.latitude, temp.longitude);
-    });
+  //   Position temp = await _determinePosition();
+  //   setState(() {
+  //     location = LatLng(temp.latitude, temp.longitude);
+  //   });
+  // }
+
+  Future<void> getLocation() async {
+    try {
+      // Check and request location permissions
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw 'Location permissions are denied';
+        }
+      }
+
+      // Get current position
+      Position temp = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+      setState(() {
+        location = LatLng(temp.latitude, temp.longitude);
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Failed to get location: $e'),
+      ));
+    }
   }
 
   Future uploadImage() async {
@@ -116,32 +141,106 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
     }
   }
 
+  // Future<void> sendNotification(String topic) async {
+  //   final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
+  //   final serverKey =
+  //       'AAAAXfsHsVE:APA91bGiEJp1y1T2h9VEHr0y-u0LoGIty04jFaHea0xtvwsUXOutSi2F5lRkwhEQmHV4MmQs2kEtoHhkxX1LDAeSGeHuk5ZzYZ5Gkec2oTUmqaktuf3Gv3Q4KuMsjpG2M6w76VHaxxbh'; // Replace with your FCM server key
+  //   final headers = {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'key=$serverKey',
+  //   };
+  //   final body = {
+  //     'notification': {
+  //       'title': 'Someone nearby needs help.',
+  //       'body': _model.textController1.text,
+  //     },
+  //     'priority': 'high',
+  //     'to': '/topics/$topic', // Specify the topic here
+  //   };
+  //   final response = await http.post(
+  //     url,
+  //     headers: headers,
+  //     body: jsonEncode(body),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     print('Notification sent successfully to topic: $topic');
+  //   } else {
+  //     print(
+  //         'Failed to send notification to topic: $topic. Error: ${response.reasonPhrase}');
+  //   }
+  // }
+
+  // Future<void> sendNotificationsWithinRadius(
+  //     String topic, double markerLat, double markerLng) async {
+  //   Position currentPosition = await Geolocator.getCurrentPosition();
+
+  //   double distanceInMeters = Geolocator.distanceBetween(
+  //       currentPosition.latitude,
+  //       currentPosition.longitude,
+  //       markerLat,markerLng);
+
+  //   double distanceInKm = distanceInMeters / 1000;
+
+  //   if (distanceInKm <= 3) {
+  //     await sendNotification(topic);
+  //   }
+  // }
+
+  Future<void> sendNotificationsWithinRadius(
+      String topic, double markerLat, double markerLng) async {
+    try {
+      if (location == null) {
+        throw 'Location not available';
+      }
+
+      // Calculate distance between current location and marker
+      double distanceInMeters = Geolocator.distanceBetween(
+        location!.latitude,
+        location!.longitude,
+        markerLat,
+        markerLng,
+      );
+      double distanceInKm = distanceInMeters / 1000;
+
+      if (distanceInKm <= 3) {
+        // Send notification
+        await sendNotification(topic);
+      }
+    } catch (e) {
+      print('Error sending notification: $e');
+    }
+  }
+
   Future<void> sendNotification(String topic) async {
-    final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
-    final serverKey =
-        'AAAAXfsHsVE:APA91bGiEJp1y1T2h9VEHr0y-u0LoGIty04jFaHea0xtvwsUXOutSi2F5lRkwhEQmHV4MmQs2kEtoHhkxX1LDAeSGeHuk5ZzYZ5Gkec2oTUmqaktuf3Gv3Q4KuMsjpG2M6w76VHaxxbh'; // Replace with your FCM server key
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'key=$serverKey',
-    };
-    final body = {
-      'notification': {
-        'title': 'Someone nearby needs help.',
-        'body': _model.textController1.text,
-      },
-      'priority': 'high',
-      'to': '/topics/$topic', // Specify the topic here
-    };
-    final response = await http.post(
-      url,
-      headers: headers,
-      body: jsonEncode(body),
-    );
-    if (response.statusCode == 200) {
-      print('Notification sent successfully to topic: $topic');
-    } else {
-      print(
-          'Failed to send notification to topic: $topic. Error: ${response.reasonPhrase}');
+    try {
+      final url = Uri.parse('https://fcm.googleapis.com/fcm/send');
+      final serverKey =
+          'AAAAXfsHsVE:APA91bGiEJp1y1T2h9VEHr0y-u0LoGIty04jFaHea0xtvwsUXOutSi2F5lRkwhEQmHV4MmQs2kEtoHhkxX1LDAeSGeHuk5ZzYZ5Gkec2oTUmqaktuf3Gv3Q4KuMsjpG2M6w76VHaxxbh'; // Replace with your FCM server key
+      final headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'key=$serverKey',
+      };
+      final body = {
+        'notification': {
+          'title': 'Someone nearby needs help.',
+          'body': _model.textController1.text,
+        },
+        'priority': 'high',
+        'to': '/topics/$topic', // Specify the topic here
+      };
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(body),
+      );
+      if (response.statusCode == 200) {
+        print('Notification sent successfully to topic: $topic');
+      } else {
+        print(
+            'Failed to send notification to topic: $topic. Error: ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      print('Error sending notification: $e');
     }
   }
 
@@ -209,7 +308,7 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
       this,
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance?.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -703,6 +802,8 @@ class _PinPageState extends State<PinPage> with TickerProviderStateMixin {
                       onPressed: () async {
                         await uploadImage();
                         await sendNotification('need_help');
+                        await sendNotificationsWithinRadius('need_help',
+                            location!.latitude, location!.longitude);
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) =>
                                 PinConfirmation(docName: docName!)));

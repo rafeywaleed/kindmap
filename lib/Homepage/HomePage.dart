@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -658,17 +659,36 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           ),
                         ),
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/map'),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/images/map.png',
-                              width: 311,
-                              height: 228,
-                              fit: BoxFit.cover,
+                            onTap: () => Navigator.pushNamed(context, '/map'),
+                            child: AbsorbPointer(
+                              child: Container(
+                                height: size.height * 0.3,
+                                child: FlutterMap(
+                                  options: MapOptions(
+                                    // interactiveFlags: InteractiveFlag.none,
+                                    // center: LatLng(0, 0), // Set the initial center of the map
+                                    zoom: 10, // Set the initial zoom level
+                                  ),
+                                  children: [
+                                    TileLayer(
+                                      urlTemplate:
+                                          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                      subdomains: ['a', 'b', 'c'],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                            //  ClipRRect(
+                            //   borderRadius: BorderRadius.circular(8),
+                            //   child: Image.asset(
+                            //     'assets/images/map.png',
+                            //     width: 311,
+                            //     height: 228,
+                            //     fit: BoxFit.cover,
+                            //   ),
+                            // ),
                             ),
-                          ),
-                        ),
                       ),
                     ),
                   ),

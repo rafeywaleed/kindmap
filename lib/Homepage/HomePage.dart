@@ -202,7 +202,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.asset(
-                                        'assets/images/deerlogo.jpg',
+                                        'assets/images/avatar1.png',
                                         fit: BoxFit.cover,
                                         alignment: Alignment.centerLeft,
                                       ),
@@ -645,7 +645,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           boxShadow: [
                             const BoxShadow(
-                              blurRadius: 0,
+                              blurRadius: 2,
                               color: Color(0x33000000),
                               offset: Offset(
                                 4,
@@ -699,7 +699,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         child: Padding(
                           padding: const EdgeInsets.all(8),
                           child: Container(
-                            height: 60,
+                            height: size.height * 0.075,
                             decoration: BoxDecoration(
                               color: KMTheme.of(context).error,
                               boxShadow: [
@@ -712,7 +712,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   ),
                                 )
                               ],
-                              borderRadius: BorderRadius.circular(24),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: GestureDetector(
                               onTap: () async {
@@ -1060,11 +1060,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                   height: size.height * 0.02,
                                                 ),
                                                 ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pushNamed('/donate');
-                                                    },
-                                                    child: Text("Donate"))
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pushNamed('/donate');
+                                                  },
+                                                  child: Text("Donate"),
+                                                ),
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .pushNamed('/avatars');
+                                                  },
+                                                  child: Text("Avatars"),
+                                                ),
                                               ],
                                             ),
                                           ),

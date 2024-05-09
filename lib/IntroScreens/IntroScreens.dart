@@ -239,7 +239,8 @@ class _IntroScreensState extends State<IntroScreens> {
                                   alignment: AlignmentDirectional(1, 1),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      Navigator.of(context).pushNamed('/home');
+                                      Navigator.of(context)
+                                          .pushNamed('/avatars');
                                     },
                                     text: 'Done',
                                     options: FFButtonOptions(

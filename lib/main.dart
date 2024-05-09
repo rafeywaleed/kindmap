@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:kindmap/IntroScreens/IntroScreens.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:kindmap/IntroScreens/avatars.dart';
 import 'package:kindmap/Otherpages/About.dart';
 import 'package:kindmap/Otherpages/Contact.dart';
 import 'package:kindmap/Otherpages/Donate.dart';
@@ -112,6 +113,7 @@ class _MyAppState extends State<MyApp> {
         '/permissions': (context) => const Permissions(),
         '/privacypolicy': (context) => const PrivacyPolicy(),
         '/notifications': (context) => const Notifications(),
+        '/avatars': (context) => const Avatars(),
       },
     );
   }

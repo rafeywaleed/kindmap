@@ -1,3 +1,5 @@
+import "package:cloud_firestore/cloud_firestore.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 
 class Avatars extends StatefulWidget {
@@ -52,13 +54,27 @@ class _AvatarsState extends State<Avatars> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Handle avatar selection, e.g., save the selected index to a database
-          // For now, let's just print the selected index
+          uploadindex();
+          Navigator.of(context).pushNamed('/home');
           print('Selected Avatar Index: $selectedAvatarIndex');
         },
         child: Icon(Icons.check, size: 30, color: Colors.white),
         backgroundColor: Colors.blue,
       ),
     );
+  }
+
+  Future<void> uploadindex() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user.uid)
+            .update({'avatarIndex': selectedAvatarIndex + 1});
+      }
+    } catch (e) {
+      print('Error uploading avatar index: $e');
+    }
   }
 }

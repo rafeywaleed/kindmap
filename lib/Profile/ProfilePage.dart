@@ -4,6 +4,7 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:kindmap/Profile/Model_ProfilePage.dart';
+import 'package:kindmap/avtarser.dart';
 import 'package:kindmap/themes/kmTheme.dart';
 
 export 'Model_ProfilePage.dart';
@@ -17,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late ProfilePageModel _model;
-
+  // int? avatarIndex = 0;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -43,6 +44,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
     super.dispose();
   }
+
+  // Future<void> _fetchAvatarIndex() async {
+  //   AvatarService avatarService = AvatarService();
+  //   int? fetchedIndex =
+  //       await avatarService.getAvatarIndex(); // Use a different name here
+  //   setState(() {
+  //     avatarIndex = fetchedIndex; // Assign to the correct class-level variable
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -95,23 +105,70 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Container(
-                          width: 120,
-                          height: 120,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: GestureDetector(
+                            onDoubleTap: () async {
+                              bool? confirm = await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Change Avatar?'),
+                                    content: Text(
+                                        'Do you want to change your avatar?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: Text('No'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        child: Text('Yes'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+
+                              if (confirm == true) {
+                                // Navigate to the avatars page
+                                Navigator.of(context).pushNamed('/avatars');
+                              }
+                            },
+                            child: Container(
+                              width: size.width * 0.4,
+                              height: size.width * 0.4,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    int? avatarIndex =
+                                        snapshot.data?['avatarIndex'];
+                                    return FittedBox(
+                                        child: Image.asset(
+                                            'assets/images/avatar${avatarIndex}.png'));
+                                  }
+                                  return const Center(
+                                      child: LinearProgressIndicator());
+                                }),
+                              ),
+                              // child: Image.asset(
+                              //   'assets/images/avatar${avatarIndex ?? 0}.png',
+                              //   fit: BoxFit.cover,
+                              // ),
+                            ),
                           ),
-                          child: Image.asset(
-                            'assets/images/deerlogo.jpg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
+                        )),
                     Expanded(
                       flex: 3,
                       child: Column(
@@ -121,29 +178,30 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 8, 8, 8, 4),
                             child: StreamBuilder(
-                                stream: FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .snapshots(),
-                                builder: ((context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return FittedBox(
-                                      child: Text(
-                                        snapshot.data!['name'],
-                                        style: KMTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 20,
-                                              letterSpacing: 0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                      ),
-                                    );
-                                  }
-                                  return const Center(
-                                      child: LinearProgressIndicator());
-                                })),
+                              stream: FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(FirebaseAuth.instance.currentUser?.uid)
+                                  .snapshots(),
+                              builder: ((context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return FittedBox(
+                                    child: Text(
+                                      snapshot.data!['name'],
+                                      style: KMTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 20,
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  );
+                                }
+                                return const Center(
+                                    child: LinearProgressIndicator());
+                              }),
+                            ),
                             // Text(
                             //   'Username Goes here',
                             //   style: KMTheme.of(context)

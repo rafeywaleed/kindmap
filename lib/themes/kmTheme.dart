@@ -146,7 +146,7 @@ class LightModeTheme extends KMTheme {
   late Color accent3 = const Color(0xFF4DEE8B60);
   late Color accent4 = const Color(0xFFCCFFFFFF);
   late Color success = const Color(0xFF249689);
-  late Color error = const Color(0xFFFF5963);
+  late Color error = Color.fromARGB(255, 246, 47, 60);
   late Color warning = const Color(0xFFF9CF58);
   late Color info = const Color(0xFFFFFFFF);
   late Color primaryBtnText = Color(0xFFFFFFFFFF);

@@ -680,9 +680,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   ),
                                 )
                               ],
-                              border: Border.all(
-                                  color: KMTheme.of(context).primaryText,
-                                  width: 3),
+                              border: Border.all(color: Colors.white, width: 3),
                             ),
                             child: GestureDetector(
                                 onTap: () =>
@@ -690,6 +688,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 child: AbsorbPointer(
                                   child: Container(
                                     height: size.height * 0.3,
+                                    width: size.width * 0.9,
                                     child: FlutterMap(
                                       options: MapOptions(
                                         // interactiveFlags: InteractiveFlag.none,

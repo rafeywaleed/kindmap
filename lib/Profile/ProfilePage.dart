@@ -481,7 +481,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: TextFormField(
                               controller: _model.textController2,
                               focusNode: _model.textFieldFocusNode2,
-                              autofocus: true,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'New Password',
@@ -538,7 +538,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: TextFormField(
                               controller: _model.textController3,
                               focusNode: _model.textFieldFocusNode3,
-                              autofocus: true,
+                              autofocus: false,
                               obscureText: !_model.passwordVisibility,
                               decoration: InputDecoration(
                                 labelText: 'Confirm Password',

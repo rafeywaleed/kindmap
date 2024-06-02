@@ -1,11 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:kindmap/Profile/Model_ProfilePage.dart';
-import 'package:provider/provider.dart';
+import 'package:kindmap/avtarser.dart';
+import 'package:kindmap/themes/kmTheme.dart';
 
-import 'Model_ProfilePage.dart';
 export 'Model_ProfilePage.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late ProfilePageModel _model;
-
+  // int? avatarIndex = 0;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -44,17 +45,27 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
+  // Future<void> _fetchAvatarIndex() async {
+  //   AvatarService avatarService = AvatarService();
+  //   int? fetchedIndex =
+  //       await avatarService.getAvatarIndex(); // Use a different name here
+  //   setState(() {
+  //     avatarIndex = fetchedIndex; // Assign to the correct class-level variable
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        backgroundColor: KMTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          backgroundColor: KMTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -64,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
             fillColor: Colors.transparent,
             icon: Icon(
               Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: KMTheme.of(context).primaryText,
               size: 24,
             ),
             onPressed: () async {
@@ -73,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           title: Text(
             'Profile',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
+            style: KMTheme.of(context).bodyMedium.override(
                   fontFamily: 'Plus Jakarta Sans',
                   fontSize: 22,
                   letterSpacing: 0,
@@ -93,55 +104,149 @@ class _ProfilePageState extends State<ProfilePage> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/images/deerlogo.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Align(
-                      alignment: AlignmentDirectional(-1, 0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-1, 0),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
-                              child: Text(
-                                'Username Goes here',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      fontSize: 20,
-                                      letterSpacing: 0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                    Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: GestureDetector(
+                            onDoubleTap: () async {
+                              bool? confirm = await showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Change Avatar?'),
+                                    content: Text(
+                                        'Do you want to change your avatar?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: Text('No'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        child: Text('Yes'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+
+                              if (confirm == true) {
+                                // Navigate to the avatars page
+                                Navigator.of(context).pushNamed('/avatars');
+                              }
+                            },
+                            child: Container(
+                              width: size.width * 0.4,
+                              height: size.width * 0.4,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
                               ),
+                              child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    int? avatarIndex =
+                                        snapshot.data?['avatarIndex'];
+                                    return FittedBox(
+                                        child: Image.asset(
+                                            'assets/images/avatar${avatarIndex}.png'));
+                                  }
+                                  return const Center(
+                                      child: LinearProgressIndicator());
+                                }),
+                              ),
+                              // child: Image.asset(
+                              //   'assets/images/avatar${avatarIndex ?? 0}.png',
+                              //   fit: BoxFit.cover,
+                              // ),
                             ),
                           ),
-                          Align(
-                            alignment: AlignmentDirectional(-1, 0),
-                            child: Text(
-                              'Mail Id goes here',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
+                        )),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        // mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                8, 8, 8, 4),
+                            child: StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(FirebaseAuth.instance.currentUser?.uid)
+                                  .snapshots(),
+                              builder: ((context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return FittedBox(
+                                    child: Text(
+                                      snapshot.data!['name'],
+                                      style: KMTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 20,
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                    ),
+                                  );
+                                }
+                                return const Center(
+                                    child: LinearProgressIndicator());
+                              }),
                             ),
+                            // Text(
+                            //   'Username Goes here',
+                            //   style: KMTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //         fontFamily: 'Readex Pro',
+                            //         fontSize: 20,
+                            //         letterSpacing: 0,
+                            //         fontWeight: FontWeight.w600,
+                            //       ),
+                            // ),
+                          ),
+                          Align(
+                            alignment: const AlignmentDirectional(-1, 0),
+                            child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Center(
+                                      child: Text(
+                                        snapshot.data!['email'],
+                                        style: KMTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0,
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                })),
+                            // Text(
+                            //   'Mail Id goes here',
+                            //   style: KMTheme.of(context)
+                            //       .bodyMedium
+                            //       .override(
+                            //         fontFamily: 'Readex Pro',
+                            //         letterSpacing: 0,
+                            //       ),
+                            // ),
                           ),
                         ],
                       ),
@@ -152,71 +257,91 @@ class _ProfilePageState extends State<ProfilePage> {
                 //   width: 100,
                 //   height: 28,
                 //   decoration: BoxDecoration(
-                //     color: FlutterFlowTheme.of(context).secondaryBackground,
+                //     color: KMTheme.of(context).secondaryBackground,
                 //   ),
                 // ),
                 Align(
-                  alignment: AlignmentDirectional(-1, 0),
+                  alignment: const AlignmentDirectional(-1, 0),
                   // child: Container(
                   //   width: 378,
                   //   height: 122,
                   //   decoration: BoxDecoration(
-                  //     color: FlutterFlowTheme.of(context).secondaryBackground,
+                  //     color: KMTheme.of(context).secondaryBackground,
                   //   ),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
+                    // mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(12),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(16),
                           child: Image.asset(
-                            'assets/images/Homeless-1.jpg',
-                            width: 101,
-                            height: 200,
+                            'assets/images/trophy.png',
+                            width: size.width * 0.2,
+                            height: size.width * 0.2,
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       Column(
-                        mainAxisSize: MainAxisSize.max,
+                        // mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 10, 0, 0),
                             child: Text(
                               'Number of people you helped :',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
                             ),
                           ),
-                          Text(
-                            '5 ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 35,
-                                  letterSpacing: 0,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                          ),
                           Align(
-                            alignment: AlignmentDirectional(0, 0),
+                            alignment: const AlignmentDirectional(-1, 0),
+                            child: StreamBuilder(
+                                stream: FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .snapshots(),
+                                builder: ((context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!['helped'].toString(),
+                                      style: KMTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 35,
+                                            letterSpacing: 0,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                    );
+                                  }
+                                  return const Center(
+                                      child: LinearProgressIndicator());
+                                })),
+                          ),
+                          // Text(
+                          //   '5 ',
+                          //   style: KMTheme.of(context)
+                          //       .bodyMedium
+                          //       .override(
+                          //         fontFamily: 'Readex Pro',
+                          //         fontSize: 35,
+                          //         letterSpacing: 0,
+                          //         fontWeight: FontWeight.w800,
+                          //       ),
+                          // ),
+                          Align(
+                            alignment: const AlignmentDirectional(0, 0),
                             child: Text(
                               'These many people are thankful \nfor you',
                               textAlign: TextAlign.center,
                               maxLines: 3,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
+                                    color: KMTheme.of(context).secondaryText,
                                     letterSpacing: 0,
                                   ),
                             ),
@@ -227,25 +352,23 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1, 0),
+                  alignment: const AlignmentDirectional(-1, 0),
                   child: Container(
                     width: 428,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: KMTheme.of(context).secondaryBackground,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1, 0),
+                          alignment: const AlignmentDirectional(-0.95, 0),
                           child: Padding(
-                            padding: EdgeInsets.all(8),
+                            padding: const EdgeInsets.all(3.5),
                             child: Text(
                               'Change name : ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -253,65 +376,69 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                          padding:
+                              const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                           child: TextFormField(
                             controller: _model.textController1,
                             focusNode: _model.textFieldFocusNode1,
-                            autofocus: true,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
+                              labelStyle:
+                                  KMTheme.of(context).labelMedium.override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0,
+                                      ),
                               hintText: 'New Name',
-                              hintStyle: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0,
-                                  ),
+                              hintStyle:
+                                  KMTheme.of(context).labelMedium.override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0,
+                                      ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
+                                  color: KMTheme.of(context).primaryText,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  color: KMTheme.of(context).primary,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
+                                  color: KMTheme.of(context).error,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: FlutterFlowTheme.of(context).error,
+                                  color: KMTheme.of(context).error,
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
+                            style: KMTheme.of(context).bodyMedium.override(
                                   fontFamily: 'Readex Pro',
                                   letterSpacing: 0,
                                 ),
                             minLines: null,
                             validator: _model.textController1Validator
                                 .asValidator(context),
+                            onFieldSubmitted: (newValue) {
+                              _model.textController1!.clear();
+                              if (newValue == '') return;
+                              FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(FirebaseAuth.instance.currentUser?.uid)
+                                  .update({'name': newValue});
+                            },
                           ),
                         ),
                       ],
@@ -319,32 +446,30 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(-1, 0),
+                  alignment: const AlignmentDirectional(-1, 0),
                   child: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     child: Container(
                       width: 403,
                       height: 266,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).accent4,
+                        color: KMTheme.of(context).accent4,
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).primaryText,
+                          color: KMTheme.of(context).primaryText,
                         ),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(-1, 0),
+                            alignment: const AlignmentDirectional(-1, 0),
                             child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 6, 6, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8, 6, 6, 0),
                               child: Text(
                                 'Change Password :',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
+                                style: KMTheme.of(context).bodyMedium.override(
                                       fontFamily: 'Readex Pro',
                                       letterSpacing: 0,
                                     ),
@@ -352,7 +477,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: TextFormField(
                               controller: _model.textController2,
                               focusNode: _model.textFieldFocusNode2,
@@ -360,51 +485,46 @@ class _ProfilePageState extends State<ProfilePage> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: 'New Password',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
+                                labelStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                hintStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                    color: KMTheme.of(context).tertiary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: KMTheme.of(context).primary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -414,7 +534,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: TextFormField(
                               controller: _model.textController3,
                               focusNode: _model.textFieldFocusNode3,
@@ -422,43 +542,40 @@ class _ProfilePageState extends State<ProfilePage> {
                               obscureText: !_model.passwordVisibility,
                               decoration: InputDecoration(
                                 labelText: 'Confirm Password',
-                                labelStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
-                                hintStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      letterSpacing: 0,
-                                    ),
+                                labelStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
+                                hintStyle:
+                                    KMTheme.of(context).labelMedium.override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0,
+                                        ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                    color: KMTheme.of(context).tertiary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).primary,
+                                    color: KMTheme.of(context).primary,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                    color: KMTheme.of(context).error,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
@@ -477,9 +594,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
+                              style: KMTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0,
                                   ),
@@ -495,21 +610,19 @@ class _ProfilePageState extends State<ProfilePage> {
                             text: 'Change Password',
                             options: FFButtonOptions(
                               height: 40,
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                              iconPadding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                              color: FlutterFlowTheme.of(context).primary,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color:
-                                        FlutterFlowTheme.of(context).secondary,
-                                    letterSpacing: 0,
-                                  ),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24, 0, 24, 0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 0, 0, 0),
+                              color: KMTheme.of(context).primary,
+                              textStyle:
+                                  KMTheme.of(context).titleSmall.override(
+                                        fontFamily: 'Readex Pro',
+                                        color: KMTheme.of(context).secondary,
+                                        letterSpacing: 0,
+                                      ),
                               elevation: 3,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1,
                               ),
@@ -522,19 +635,39 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0, 1),
+                  alignment: const AlignmentDirectional(0, 1),
                   child: Padding(
-                    padding: EdgeInsets.all(12),
-                    child: AutoSizeText(
-                      'Joined KindMap on 00/00/0000',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Open Sans',
-                            color: Color(0xB457636C),
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                      minFontSize: 10,
-                    ),
+                    padding: const EdgeInsets.all(12),
+                    child: StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(FirebaseAuth.instance.currentUser?.uid)
+                            .snapshots(),
+                        builder: ((context, snapshot) {
+                          if (snapshot.hasData) {
+                            return AutoSizeText(
+                              'Joined KindMap on ${snapshot.data!['joined']}',
+                              style: KMTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Open Sans',
+                                    color: const Color(0xB457636C),
+                                    letterSpacing: 0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                              minFontSize: 10,
+                            );
+                          }
+                          return const Center(child: LinearProgressIndicator());
+                        })),
+                    // AutoSizeText(
+                    //   'Joined KindMap on 00/00/0000',
+                    //   style: KMTheme.of(context).bodyMedium.override(
+                    //         fontFamily: 'Open Sans',
+                    //         color: const Color(0xB457636C),
+                    //         letterSpacing: 0,
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //   minFontSize: 10,
+                    // ),
                   ),
                 ),
               ],

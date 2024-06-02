@@ -1,90 +1,25 @@
-// import 'package:flutter/material.dart';
-
-// class CustomColors {
-//   late Color primary;
-//   late Color secondary;
-//   late Color tertiary;
-//   late Color alternate;
-//   late Color primaryText;
-//   late Color secondaryText;
-//   late Color primaryBackground;
-//   late Color secondaryBackground;
-//   late Color accent1;
-//   late Color accent2;
-//   late Color accent3;
-//   late Color accent4;
-//   late Color success;
-//   late Color warning;
-//   late Color error;
-//   late Color info;
-//   late Color primaryBtnText;
-//   late Color lineColor;
-//   late Color backgroundComponents;
-// }
-
-// class KMTheme {
-//   static final lightTheme = ThemeData(
-//     brightness: Brightness.light,
-//   );
-
-//   static final darkTheme = ThemeData(
-//     brightness: Brightness.dark,
-//   );
-
-//   static of(BuildContext context) {}
-// }
-
-// class LightColors extends CustomColors {
-//   LightColors() {
-//     primary = const Color(0xD6E5151E);
-//     secondary = const Color(0xFFFFFFFF);
-//     tertiary = const Color(0xFFFAC6C3);
-//     alternate = const Color(0xFFC28C89);
-//     primaryText = const Color(0xFF14181B);
-//     secondaryText = const Color(0xFF57636C);
-//     primaryBackground = const Color(0xFFF1F4F8);
-//     secondaryBackground = const Color(0xFFFFFFFF);
-//     accent1 = const Color(0xFF4C4B39EF);
-//     accent2 = const Color(0xFF4D39D2C0);
-//     accent3 = const Color(0xFF4DEE8B60);
-//     accent4 = const Color(0xFFCCFFFFFF);
-//     success = const Color(0xFF249689);
-//     error = const Color(0xFFFF5963);
-//     warning = const Color(0xFFF9CF58);
-//     info = const Color(0xFFFFFFFF);
-//     primaryBtnText = const Color(0xFFFFFFFF);
-//     lineColor = const Color(0xFFFFE0E3E7);
-//     backgroundComponents = const Color(0xFF1D2428);
-//   }
-// }
-
-// class DarkColors extends CustomColors {
-//   DarkColors() {
-//     primary = const Color(0xFFFFFFFF);
-//     secondary = const Color(0xD6E5151E);
-//     tertiary = const Color(0xFF5E5E5E);
-//     alternate = const Color(0xFF0A0808);
-//     primaryText = const Color(0xFFFFFFFF);
-//     secondaryText = const Color(0xFF95A1AC);
-//     primaryBackground = const Color(0xFF1D2428);
-//     secondaryBackground = const Color(0xFF14181B);
-//     accent1 = const Color(0xFF4C4B39EF);
-//     accent2 = const Color(0xFF4D39D2C0);
-//     accent3 = const Color(0xFF4DEE8B60);
-//     accent4 = const Color(0xFFB2262D34);
-//     success = const Color(0xFF249689);
-//     warning = const Color(0xFFFF5963);
-//     error = const Color(0xFFF9CF58);
-//     info = const Color(0xFFFFFFFF);
-//     primaryBtnText = const Color(0xFFFFFFFF);
-//     lineColor = const Color(0xFF22282F);
-//     backgroundComponents = const Color(0xFF1B2428);
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class CustomColors {
+const kThemeModeKey = '__theme_mode__';
+
+abstract class KMTheme {
+  ThemeData get lightTheme => LightModeTheme().toThemeData();
+
+  ThemeData get darkTheme => DarkModeTheme().toThemeData();
+  static KMTheme of(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? DarkModeTheme()
+        : LightModeTheme();
+  }
+
+  @Deprecated('Use primary instead')
+  Color get primaryColor => primary;
+  @Deprecated('Use secondary instead')
+  Color get secondaryColor => secondary;
+  @Deprecated('Use tertiary instead')
+  Color get tertiaryColor => tertiary;
+
   late Color primary;
   late Color secondary;
   late Color tertiary;
@@ -105,113 +40,364 @@ class CustomColors {
   late Color lineColor;
   late Color backgroundComponents;
 
-  CustomColors.light() {
-    // primary = Colors.blue; // Define your light theme colors here
-    // secondary = Colors.green;
-    // tertiary = Colors.pink;
-    // // Initialize other colors...
-    primary = const Color(0xD6E5151E);
-    secondary = const Color(0xFFFFFFFF);
-    tertiary = const Color(0xFFFAC6C3);
-    alternate = const Color(0xFFC28C89);
-    primaryText = const Color(0xFF14181B);
-    secondaryText = const Color(0xFF57636C);
-    primaryBackground = const Color(0xFFF1F4F8);
-    secondaryBackground = const Color(0xFFFFFFFF);
-    accent1 = const Color(0xFF4C4B39EF);
-    accent2 = const Color(0xFF4D39D2C0);
-    accent3 = const Color(0xFF4DEE8B60);
-    accent4 = const Color(0xFFCCFFFFFF);
-    success = const Color(0xFF249689);
-    error = const Color(0xFFFF5963);
-    warning = const Color(0xFFF9CF58);
-    info = const Color(0xFFFFFFFF);
-    primaryBtnText = Color(0xFFFFFFFFFF);
-    lineColor = Color(0xFFFFE0E3E7);
-    backgroundComponents = Color(0xFF1D2428);
-  }
+  @Deprecated('Use displaySmallFamily instead')
+  String get title1Family => displaySmallFamily;
+  @Deprecated('Use displaySmall instead')
+  TextStyle get title1 => typography.displaySmall;
+  @Deprecated('Use headlineMediumFamily instead')
+  String get title2Family => typography.headlineMediumFamily;
+  @Deprecated('Use headlineMedium instead')
+  TextStyle get title2 => typography.headlineMedium;
+  @Deprecated('Use headlineSmallFamily instead')
+  String get title3Family => typography.headlineSmallFamily;
+  @Deprecated('Use headlineSmall instead')
+  TextStyle get title3 => typography.headlineSmall;
+  @Deprecated('Use titleMediumFamily instead')
+  String get subtitle1Family => typography.titleMediumFamily;
+  @Deprecated('Use titleMedium instead')
+  TextStyle get subtitle1 => typography.titleMedium;
+  @Deprecated('Use titleSmallFamily instead')
+  String get subtitle2Family => typography.titleSmallFamily;
+  @Deprecated('Use titleSmall instead')
+  TextStyle get subtitle2 => typography.titleSmall;
+  @Deprecated('Use bodyMediumFamily instead')
+  String get bodyText1Family => typography.bodyMediumFamily;
+  @Deprecated('Use bodyMedium instead')
+  TextStyle get bodyText1 => typography.bodyMedium;
+  @Deprecated('Use bodySmallFamily instead')
+  String get bodyText2Family => typography.bodySmallFamily;
+  @Deprecated('Use bodySmall instead')
+  TextStyle get bodyText2 => typography.bodySmall;
 
-  CustomColors.dark() {
-    // primary = Colors.indigo; // Define your dark theme colors here
-    // secondary = Colors.deepPurple;
-    // tertiary = Colors.grey;
-    // // Initialize other colors...
+  String get displayLargeFamily => typography.displayLargeFamily;
+  TextStyle get displayLarge => typography.displayLarge;
+  String get displayMediumFamily => typography.displayMediumFamily;
+  TextStyle get displayMedium => typography.displayMedium;
+  String get displaySmallFamily => typography.displaySmallFamily;
+  TextStyle get displaySmall => typography.displaySmall;
+  String get headlineLargeFamily => typography.headlineLargeFamily;
+  TextStyle get headlineLarge => typography.headlineLarge;
+  String get headlineMediumFamily => typography.headlineMediumFamily;
+  TextStyle get headlineMedium => typography.headlineMedium;
+  String get headlineSmallFamily => typography.headlineSmallFamily;
+  TextStyle get headlineSmall => typography.headlineSmall;
+  String get titleLargeFamily => typography.titleLargeFamily;
+  TextStyle get titleLarge => typography.titleLarge;
+  String get titleMediumFamily => typography.titleMediumFamily;
+  TextStyle get titleMedium => typography.titleMedium;
+  String get titleSmallFamily => typography.titleSmallFamily;
+  TextStyle get titleSmall => typography.titleSmall;
+  String get labelLargeFamily => typography.labelLargeFamily;
+  TextStyle get labelLarge => typography.labelLarge;
+  String get labelMediumFamily => typography.labelMediumFamily;
+  TextStyle get labelMedium => typography.labelMedium;
+  String get labelSmallFamily => typography.labelSmallFamily;
+  TextStyle get labelSmall => typography.labelSmall;
+  String get bodyLargeFamily => typography.bodyLargeFamily;
+  TextStyle get bodyLarge => typography.bodyLarge;
+  String get bodyMediumFamily => typography.bodyMediumFamily;
+  TextStyle get bodyMedium => typography.bodyMedium;
+  String get bodySmallFamily => typography.bodySmallFamily;
+  TextStyle get bodySmall => typography.bodySmall;
 
-    primary = const Color(0xFFFFFFFF);
-    secondary = const Color(0xD6E5151E);
-    tertiary = const Color(0xFF5E5E5E);
-    alternate = const Color(0xFF0A0808);
-    primaryText = const Color(0xFFFFFFFF);
-    secondaryText = const Color(0xFF95A1AC);
-    primaryBackground = const Color(0xFF1D2428);
-    secondaryBackground = const Color(0xFF14181B);
-    accent1 = const Color(0xFF4C4B39EF);
-    accent2 = const Color(0xFF4D39D2C0);
-    accent3 = const Color(0xFF4DEE8B60);
-    accent4 = const Color(0xFFB2262D34);
-    success = const Color(0xFF249689);
-    warning = const Color(0xFFFF5963);
-    error = const Color(0xFFF9CF58);
-    info = const Color(0xFFFFFFFF);
-    primaryBtnText = Color(0xFFFFFFFF);
-    lineColor = Color(0xFF22282F);
-    backgroundComponents = Color(0xFF1B2428);
-  }
+  Typography get typography => ThemeTypography(this);
+
+  ThemeData toThemeData();
 }
 
-class KMTheme {
-  static bool _isDark = false;
+class LightModeTheme extends KMTheme {
+  @Deprecated('Use primary instead')
+  Color get primaryColor => primary;
+  @Deprecated('Use secondary instead')
+  Color get secondaryColor => secondary;
+  @Deprecated('Use tertiary instead')
+  Color get tertiaryColor => tertiary;
 
-  static final _lightColors = CustomColors.light();
-  static final _darkColors = CustomColors.dark();
+  // late Color primary = const Color(0xD6E5151E);
+  // late Color secondary = const Color(0xFFFFFFFF);
+  // late Color tertiary = const Color(0xFFFAC6C3);
+  // late Color alternate = const Color(0xFFC28C89);
+  // late Color primaryText = const Color(0xFF14181B);
+  // late Color secondaryText = const Color(0xFF57636C);
+  // late Color primaryBackground = const Color(0xFFF1F4F8);
+  // late Color secondaryBackground = const Color(0xFFFFFFFF);
+  // late Color accent1 = const Color(0xFF4C4B39EF);
+  // late Color accent2 = const Color(0xFF4D39D2C0);
+  // late Color accent3 = const Color(0xFF4DEE8B60);
+  // late Color accent4 = const Color(0xFFCCFFFFFF);
+  // late Color success = const Color(0xFF249689);
+  // late Color error = const Color(0xD6E5151E);
+  // late Color warning = const Color(0xFFF9CF58);
+  // late Color info = const Color(0xFFFFFFFF);
+  // late Color primaryBtnText = Color(0xFFFFFFFFFF);
+  // late Color lineColor = Color(0xFFFFE0E3E7);
+  // late Color backgroundComponents = Color(0xFF1D2428);
 
-  static Color get _currentColor {
-    final brightness = WidgetsBinding.instance!.window.platformBrightness;
-    return brightness == Brightness.dark
-        ? _darkColors.tertiary
-        : _lightColors.tertiary;
-  }
+  late Color primary = const Color(0xD6E5151E);
+  late Color secondary = const Color(0xFFFFFFFF);
+  late Color tertiary = const Color(0xFFFAC6C3);
+  late Color alternate = const Color(0xFFC28C89);
+  late Color primaryText = const Color(0xFF14181B);
+  late Color secondaryText = const Color(0xFF57636C);
+  late Color primaryBackground = const Color(0xFFF1F4F8);
+  late Color secondaryBackground = const Color(0xFFFFFFFF);
+  late Color accent1 = const Color(0xFF4C4B39EF);
+  late Color accent2 = const Color(0xFF4D39D2C0);
+  late Color accent3 = const Color(0xFF4DEE8B60);
+  late Color accent4 = const Color(0xFFCCFFFFFF);
+  late Color success = const Color(0xFF249689);
+  late Color error = Color.fromARGB(255, 246, 47, 60);
+  late Color warning = const Color(0xFFF9CF58);
+  late Color info = const Color(0xFFFFFFFF);
+  late Color primaryBtnText = Color(0xFFFFFFFFFF);
+  late Color lineColor = Color(0xFFFFE0E3E7);
+  late Color backgroundComponents = Color(0xFF1D2428);
 
-  static CustomColors get colors {
-    final brightness = WidgetsBinding.instance!.window.platformBrightness;
-    return brightness == Brightness.dark ? _darkColors : _lightColors;
-  }
-
-  static ThemeData get lightTheme {
+  @override
+  ThemeData toThemeData() {
     return ThemeData(
+      // Define your ThemeData properties here...
       brightness: Brightness.light,
+      // Other properties...
     );
-  }
-
-  static ThemeData get darkTheme {
-    return ThemeData(
-      brightness: Brightness.dark,
-    );
-  }
-
-  static ThemeData get currentTheme {
-    // final brightness = WidgetsBinding.instance!.window.platformBrightness;
-    // return brightness == Brightness.dark ? darkTheme : lightTheme;
-    return _isDark ? darkTheme : lightTheme;
-  }
-
-  static ThemeMode get currentThemeMode {
-    return _isDark ? ThemeMode.dark : ThemeMode.light;
-  }
-
-  static void toggleTheme() {
-    _isDark = !_isDark;
   }
 }
 
-class ThemeProvider with ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.system;
+abstract class Typography {
+  String get displayLargeFamily;
+  TextStyle get displayLarge;
+  String get displayMediumFamily;
+  TextStyle get displayMedium;
+  String get displaySmallFamily;
+  TextStyle get displaySmall;
+  String get headlineLargeFamily;
+  TextStyle get headlineLarge;
+  String get headlineMediumFamily;
+  TextStyle get headlineMedium;
+  String get headlineSmallFamily;
+  TextStyle get headlineSmall;
+  String get titleLargeFamily;
+  TextStyle get titleLarge;
+  String get titleMediumFamily;
+  TextStyle get titleMedium;
+  String get titleSmallFamily;
+  TextStyle get titleSmall;
+  String get labelLargeFamily;
+  TextStyle get labelLarge;
+  String get labelMediumFamily;
+  TextStyle get labelMedium;
+  String get labelSmallFamily;
+  TextStyle get labelSmall;
+  String get bodyLargeFamily;
+  TextStyle get bodyLarge;
+  String get bodyMediumFamily;
+  TextStyle get bodyMedium;
+  String get bodySmallFamily;
+  TextStyle get bodySmall;
+}
 
-  ThemeMode get themeMode => _themeMode;
+class ThemeTypography extends Typography {
+  ThemeTypography(this.theme);
 
-  void toggleTheme() {
-    _themeMode =
-        _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
+  final KMTheme theme;
+
+  String get displayLargeFamily => 'Outfit';
+  TextStyle get displayLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 64.0,
+      );
+  String get displayMediumFamily => 'Outfit';
+  TextStyle get displayMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 44.0,
+      );
+  String get displaySmallFamily => 'Outfit';
+  TextStyle get displaySmall => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
+        fontSize: 36.0,
+      );
+  String get headlineLargeFamily => 'Outfit';
+  TextStyle get headlineLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w600,
+        fontSize: 32.0,
+      );
+  String get headlineMediumFamily => 'Outfit';
+  TextStyle get headlineMedium => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 24.0,
+      );
+  String get headlineSmallFamily => 'Outfit';
+  TextStyle get headlineSmall => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 24.0,
+      );
+  String get titleLargeFamily => 'Outfit';
+  TextStyle get titleLarge => GoogleFonts.getFont(
+        'Outfit',
+        color: theme.primaryText,
+        fontWeight: FontWeight.w500,
+        fontSize: 22.0,
+      );
+  String get titleMediumFamily => 'Readex Pro';
+  TextStyle get titleMedium => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.info,
+        fontWeight: FontWeight.normal,
+        fontSize: 18.0,
+      );
+  String get titleSmallFamily => 'Readex Pro';
+  TextStyle get titleSmall => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.info,
+        fontWeight: FontWeight.w500,
+        fontSize: 16.0,
+      );
+  String get labelLargeFamily => 'Readex Pro';
+  TextStyle get labelLarge => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
+      );
+  String get labelMediumFamily => 'Readex Pro';
+  TextStyle get labelMedium => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 14.0,
+      );
+  String get labelSmallFamily => 'Readex Pro';
+  TextStyle get labelSmall => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.secondaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 12.0,
+      );
+  String get bodyLargeFamily => 'Readex Pro';
+  TextStyle get bodyLarge => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
+      );
+  String get bodyMediumFamily => 'Readex Pro';
+  TextStyle get bodyMedium => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 14.0,
+      );
+  String get bodySmallFamily => 'Readex Pro';
+  TextStyle get bodySmall => GoogleFonts.getFont(
+        'Readex Pro',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 12.0,
+      );
+}
+
+class DarkModeTheme extends KMTheme {
+  @Deprecated('Use primary instead')
+  Color get primaryColor => primary;
+  @Deprecated('Use secondary instead')
+  Color get secondaryColor => secondary;
+  @Deprecated('Use tertiary instead')
+  Color get tertiaryColor => tertiary;
+
+  // late Color primary = const Color(0xFFFFFFFF);
+  // late Color secondary = const Color(0xD6E5151E);
+  // late Color tertiary = const Color(0xFF5E5E5E);
+  // late Color alternate = const Color(0xFF0A0808);
+  // late Color primaryText = const Color(0xFFFFFFFF);
+  // late Color secondaryText = const Color(0xFF95A1AC);
+  // late Color primaryBackground = const Color(0xFF1D2428);
+  // late Color secondaryBackground = const Color(0xFF14181B);
+  // late Color accent1 = const Color(0xFF4C4B39EF);
+  // late Color accent2 = const Color(0xFF4D39D2C0);
+  // late Color accent3 = const Color(0xFF4DEE8B60);
+  // late Color accent4 = const Color(0xFFB2262D34);
+  // late Color success = const Color(0xFF249689);
+  // late Color warning = const Color(0xFFF9CF58);
+  // late Color error = const Color(0xFFFF5963);
+  // late Color info = const Color(0xFFFFFFFF);
+
+  // late Color primaryBtnText = Color(0xFFFFFFFF);
+  // late Color lineColor = Color(0xFF22282F);
+  // late Color backgroundComponents = Color(0xFF1B2428);
+
+  late Color primary = const Color(0xFFFFFFFF);
+  late Color secondary = const Color(0xD6E5151E);
+  late Color tertiary = const Color(0xFF5E5E5E);
+  late Color alternate = const Color(0xFF0A0808);
+  late Color primaryText = const Color(0xFFFFFFFF);
+  late Color secondaryText = const Color(0xFF95A1AC);
+  late Color primaryBackground = const Color(0xFF1D2428);
+  late Color secondaryBackground = const Color(0xFF14181B);
+  late Color accent1 = const Color(0xFF4C4B39EF);
+  late Color accent2 = const Color(0xFF4D39D2C0);
+  late Color accent3 = const Color(0xFF4DEE8B60);
+  late Color accent4 = const Color(0xFFB2262D34);
+  late Color success = const Color(0xFF249689);
+  late Color warning = const Color(0xFFF9CF58);
+  late Color error = const Color(0xFFFF5963);
+  late Color info = const Color(0xFFFFFFFF);
+  late Color primaryBtnText = Color(0xFFFFFFFF);
+  late Color lineColor = Color(0xFF22282F);
+  late Color backgroundComponents = Color(0xFF1B2428);
+
+  @override
+  ThemeData toThemeData() {
+    return ThemeData(
+      // Define your ThemeData properties here...
+      brightness: Brightness.dark,
+      // Other properties...
+    );
   }
+}
+
+extension TextStyleHelper on TextStyle {
+  TextStyle overrideTextStyle({
+    String? fontFamily,
+    Color? color,
+    double? fontSize,
+    FontWeight? fontWeight,
+    double? letterSpacing,
+    FontStyle? fontStyle,
+    bool useGoogleFonts = true,
+    TextDecoration? decoration,
+    double? lineHeight,
+  }) =>
+      useGoogleFonts
+          ? GoogleFonts.getFont(
+              fontFamily!,
+              color: color ?? this.color,
+              fontSize: fontSize ?? this.fontSize,
+              letterSpacing: letterSpacing ?? this.letterSpacing,
+              fontWeight: fontWeight ?? this.fontWeight,
+              fontStyle: fontStyle ?? this.fontStyle,
+              decoration: decoration,
+              height: lineHeight,
+            )
+          : copyWith(
+              fontFamily: fontFamily,
+              color: color,
+              fontSize: fontSize,
+              letterSpacing: letterSpacing,
+              fontWeight: fontWeight,
+              fontStyle: fontStyle,
+              decoration: decoration,
+              height: lineHeight,
+            );
 }

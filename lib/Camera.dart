@@ -21,7 +21,7 @@ class _CameraPageState extends State<CameraPage> {
   void initState() {
     super.initState();
     _controller = CameraController(
-      CameraDescription(
+      const CameraDescription(
         name: "0",
         lensDirection: CameraLensDirection.back,
         sensorOrientation: 1,

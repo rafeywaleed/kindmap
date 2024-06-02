@@ -304,31 +304,37 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(14),
-                                      child: Container(
-                                        width: size.width * 0.3,
-                                        height: size.width * 0.3,
-                                        clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: StreamBuilder(
-                                          stream: FirebaseFirestore.instance
-                                              .collection('users')
-                                              .doc(FirebaseAuth
-                                                  .instance.currentUser?.uid)
-                                              .snapshots(),
-                                          builder: ((context, snapshot) {
-                                            if (snapshot.hasData) {
-                                              int? avatarIndex =
-                                                  snapshot.data?['avatarIndex'];
-                                              return FittedBox(
-                                                  child: Image.asset(
-                                                      'assets/images/avatar${avatarIndex}.png'));
-                                            }
-                                            return const Center(
-                                                child:
-                                                    LinearProgressIndicator());
-                                          }),
+                                      child: GestureDetector(
+                                        onDoubleTap: () {
+                                          Navigator.of(context)
+                                              .pushNamed('/profile');
+                                        },
+                                        child: Container(
+                                          width: size.width * 0.3,
+                                          height: size.width * 0.3,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: StreamBuilder(
+                                            stream: FirebaseFirestore.instance
+                                                .collection('users')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser?.uid)
+                                                .snapshots(),
+                                            builder: ((context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                int? avatarIndex = snapshot
+                                                    .data?['avatarIndex'];
+                                                return FittedBox(
+                                                    child: Image.asset(
+                                                        'assets/images/avatar${avatarIndex}.png'));
+                                              }
+                                              return const Center(
+                                                  child:
+                                                      LinearProgressIndicator());
+                                            }),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -758,7 +764,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
             actions: const [],
             centerTitle: false,
-            elevation: 5,
+            elevation: 3,
+            shadowColor: Colors.grey,
           ),
           body: SafeArea(
             top: true,
@@ -803,15 +810,43 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           AsyncSnapshot<void> snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.waiting) {
-                                          return const Center(
-                                            child: CircularProgressIndicator(),
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                                color: KMTheme.of(context)
+                                                    .primaryText),
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return Center(
+                                            child: Container(
+                                              width: size.width * 0.7,
+                                              decoration: BoxDecoration(
+                                                color: KMTheme.of(context)
+                                                    .primaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(16),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text(
+                                                  '${snapshot.error}\nPlease turn on your location',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16,
+                                                      color: KMTheme.of(context)
+                                                          .primaryText),
+                                                ),
+                                              ),
+                                            ),
                                           );
                                         } else {
                                           return FlutterMap(
                                             options: MapOptions(
                                                 center:
                                                     location ?? LatLng(0, 0),
-                                                zoom: 13,
+                                                zoom: 16,
                                                 interactiveFlags:
                                                     InteractiveFlag.none),
                                             children: [
@@ -1031,8 +1066,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Readex Pro',
-                                                                  color: const Color(
-                                                                      0xFF404647),
+                                                                  color: KMTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   fontSize: 11,
                                                                   letterSpacing:
                                                                       0,
@@ -1120,8 +1156,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Readex Pro',
-                                                                  color: const Color(
-                                                                      0xFF404647),
+                                                                  color: KMTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   fontSize: 12,
                                                                   letterSpacing:
                                                                       0,
@@ -1150,19 +1187,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                               hoverColor: Colors.transparent,
                                               highlightColor:
                                                   Colors.transparent,
-                                              onTap: () async {
-                                                await FirebaseMessaging.instance
-                                                    .requestPermission();
-                                                String? token =
-                                                    await FirebaseMessaging
-                                                        .instance
-                                                        .getToken();
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                        content: Text(token!)));
-                                                print(token);
-                                                // Navigator.of(context)
-                                                //     .pushNamed('/donate');
+                                              onTap: () {
+                                                Navigator.of(context)
+                                                    .pushNamed('/donate');
                                               },
                                               child: Column(
                                                 crossAxisAlignment:
@@ -1216,8 +1243,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                                 .override(
                                                                   fontFamily:
                                                                       'Readex Pro',
-                                                                  color: const Color(
-                                                                      0xFF404647),
+                                                                  color: KMTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   fontSize: 12,
                                                                   letterSpacing:
                                                                       0,
@@ -1227,22 +1255,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                   ),
                                                   SizedBox(
                                                     height: size.height * 0.02,
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pushNamed('/donate');
-                                                    },
-                                                    child: const Text("Donate"),
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pushNamed(
-                                                              '/avatars');
-                                                    },
-                                                    child:
-                                                        const Text("Avatars"),
                                                   ),
                                                 ],
                                               ),

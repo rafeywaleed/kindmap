@@ -151,7 +151,7 @@ class _PinBoxState extends State<PinBox> {
                     // print('Button pressed ...');
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: KMTheme.of(context).primaryBackground,
+                      backgroundColor: KMTheme.of(context).primaryBackground,
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 30),
                       shape: RoundedRectangleBorder(
@@ -173,8 +173,7 @@ class _PinBoxState extends State<PinBox> {
                   onPressed: widget.onServe,
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    primary: KMTheme.of(context).primary,
+                        borderRadius: BorderRadius.circular(5)), backgroundColor: KMTheme.of(context).primary,
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 80),
                   ),

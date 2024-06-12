@@ -252,8 +252,7 @@ class _DetailBoxState extends State<DetailBox> {
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                    primary: KMTheme.of(context).primary,
+                        borderRadius: BorderRadius.circular(5)), backgroundColor: KMTheme.of(context).primary,
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 80),
                   ),

@@ -19,7 +19,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 40),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 40),
               child: Column(
                 children: [
                   // Text(

@@ -476,7 +476,7 @@ class _LoginFormState extends State<LoginForm> {
                             // auth.signInWithRedirect(GoogleAuthProvider());
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: KMTheme.of(context).secondaryBackground,
+                            backgroundColor: KMTheme.of(context).secondaryBackground,
                             padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
@@ -525,7 +525,7 @@ class _LoginFormState extends State<LoginForm> {
                             print('Sign in with Apple hogaya ');
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: KMTheme.of(context).secondaryBackground,
+                            backgroundColor: KMTheme.of(context).secondaryBackground,
                             padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             elevation: 0,
                             shape: RoundedRectangleBorder(

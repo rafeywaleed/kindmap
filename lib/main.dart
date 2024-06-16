@@ -25,7 +25,7 @@ import 'package:kindmap/IntroScreens/IntroScreens.dart';
 import 'package:kindmap/Pin/PinPage.dart';
 import 'package:kindmap/Profile/ProfilePage.dart';
 import 'package:kindmap/Settings/SettingsPage.dart';
-import 'package:kindmap/themes/kmTheme.dart';
+
 
 import 'package:provider/provider.dart';
 //import 'package:km/themes/old_theme.dart';

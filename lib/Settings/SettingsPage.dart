@@ -1,5 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:kindmap/components/BoxHandle.dart';
+import 'package:kindmap/components/FollowBox.dart';
+import 'package:kindmap/components/SocialTile.dart';
 import 'package:kindmap/themes/kmTheme.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,11 +44,25 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   String? selectedTeamMember;
+  String? selectedMedia;
+  void updateSelectedMedia(String media) {
+    setState(() {
+      selectedMedia = media;
+    });
+  }
+
+  void showFollowBox(String media) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      //backgroundColor: Colors.transparent,
+      builder: (context) => FollowBox(s_media: media),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    int? follow;
 
     return Scaffold(
       key: scaffoldKey,
@@ -291,7 +308,7 @@ class _SettingsPageState extends State<SettingsPage> {
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                FlutterFlowIconButton(
+                SocialMediaIconButton(
                   borderColor: KMTheme.of(context).alternate,
                   borderRadius: 12,
                   borderWidth: 1,
@@ -303,10 +320,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     size: 24,
                   ),
                   onPressed: () {
-                    follow = 0;
+                    showFollowBox("instagram");
                   },
                 ),
-                FlutterFlowIconButton(
+                SocialMediaIconButton(
                   borderColor: KMTheme.of(context).alternate,
                   borderRadius: 12,
                   borderWidth: 1,
@@ -318,10 +335,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     size: 24,
                   ),
                   onPressed: () {
-                    follow = 1;
+                    showFollowBox("facebook");
                   },
                 ),
-                FlutterFlowIconButton(
+                SocialMediaIconButton(
                   borderColor: KMTheme.of(context).alternate,
                   borderRadius: 12,
                   borderWidth: 1,
@@ -333,126 +350,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     size: 24,
                   ),
                   onPressed: () {
-                    follow = 2;
+                    showFollowBox("linkedin");
                   },
                 ),
-                if (follow == 0)
-                  {
-                    showMenu(
-                        context: context,
-                        position:
-                            RelativeRect.fromLTRB(0, 0, 0, size.height - 200),
-                        items: [
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Abdul Rafey Waleed'),
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Mohammed Azim Moula'),
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Arriyan Fatima'),
-                            ),
-                          ),
-                        ]).then<void>((String? itemSelected) {
-                      if (itemSelected == null) return;
-                      launch(itemSelected);
-                    }),
-                    print('IconButton pressed ...'),
-                  }
-                else if (follow == 1)
-                  {
-                    showMenu(
-                        context: context,
-                        position:
-                            RelativeRect.fromLTRB(0, 0, 160, size.height * 0.6),
-                        items: [
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Abdul Rafey Waleed'),
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Mohammed Azim Moula'),
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Arriyan Fatima'),
-                            ),
-                          ),
-                        ]).then<void>((String? itemSelected) {
-                      if (itemSelected == null) return;
-                      launch(itemSelected);
-                    }),
-                    print('IconButton pressed ...'),
-                  }
-                else if (follow == 2)
-                  {
-                    showMenu(
-                        color: KMTheme.of(context).secondaryBackground,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        context: context,
-                        position: RelativeRect.fromLTRB(
-                            size.width * 2,
-                            size.height * 0.99,
-                            size.width * 0.2,
-                            size.height * 0),
-                        items: [
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/abdul-rafey-waleed-516052282/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Abdul Rafey Waleed'),
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/mohammed-azim-moula-7b07b4279/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Mohammed Azim Moula'),
-                            ),
-                          ),
-                          const PopupMenuItem(
-                            value:
-                                'https://www.linkedin.com/in/syeda-arriyan-fatima-a71346301/',
-                            child: ListTile(
-                              leading: Icon(FontAwesomeIcons.linkedin),
-                              title: Text('Arriyan Fatima'),
-                            ),
-                          ),
-                        ]).then<void>((String? itemSelected) {
-                      if (itemSelected == null) return;
-                      launch(itemSelected);
-                    }),
-                    print('IconButton pressed ...'),
-                  }
+
                 // Padding(
                 //   padding: const EdgeInsets.all(8.0),
                 //   child: PopupMenuButton<String>(
